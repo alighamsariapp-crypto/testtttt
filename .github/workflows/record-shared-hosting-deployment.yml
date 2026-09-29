@@ -1,0 +1,57 @@
+name: Record Shared Hosting Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      deployed_commit:
+        description: "Full target commit from DEPLOY_INFO.txt or BUILD_INFO.txt after a successful server test"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: record-shared-hosting-deployment
+  cancel-in-progress: false
+
+jobs:
+  record-deployment:
+    name: Record tested deployment baseline
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out main history
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Validate and record deployed commit
+        env:
+          DEPLOYED_COMMIT: ${{ inputs.deployed_commit }}
+        run: |
+          set -euo pipefail
+          target_commit="$(git rev-parse "${DEPLOYED_COMMIT}^{commit}")"
+          main_commit="$(git rev-parse origin/main)"
+
+          if ! git merge-base --is-ancestor "$target_commit" "$main_commit"; then
+            echo 'The recorded deployment must be a commit on main history.' >&2
+            exit 1
+          fi
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git tag -fa shared-hosting-deployed "$target_commit" -m "Shared hosting deployment confirmed: $target_commit"
+          git push origin refs/tags/shared-hosting-deployed --force
+
+          {
+            echo '## نسخهٔ نصب‌شده ثبت شد'
+            echo
+            echo "Commit ثبت‌شده: \`$target_commit\`"
+            echo
+            echo 'از این پس workflow **Build Shared Hosting Incremental Update** فقط تفاوت بین این commit و نسخهٔ جدید `main` را ZIP می‌کند.'
+            echo
+            echo '> این workflow هیچ فایلی را روی سرور upload نمی‌کند؛ فقط مرجع build بعدی را ثبت می‌کند.'
+          } >> "$GITHUB_STEP_SUMMARY"

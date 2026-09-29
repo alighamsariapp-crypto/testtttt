@@ -1,0 +1,110 @@
+.payment-shipping-editor {
+  padding-bottom: 112px;
+}
+
+.payment-shipping-toggles,
+.payment-shipping-methods {
+  display: grid;
+  gap: 10px;
+}
+
+.settings-switch-field.is-on > i {
+  background: #2563eb;
+}
+
+.settings-switch-field.is-on > i em {
+  transform: translateX(-16px);
+}
+
+.payment-shipping-methods {
+  gap: 14px;
+}
+
+.payment-shipping-methods > article {
+  border: 1px solid #e6ebf1;
+  border-radius: 18px;
+  padding: 16px;
+  background: #fff;
+}
+
+.payment-shipping-methods > article.is-enabled {
+  border-color: #bfdbfe;
+  box-shadow: 0 8px 22px rgba(37, 99, 235, .07);
+}
+
+.payment-shipping-methods > article > header {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.payment-shipping-methods > article > header > div {
+  display: grid;
+  gap: 4px;
+}
+
+.payment-shipping-methods > article > header b {
+  color: #172033;
+  font-size: 14px;
+}
+
+.payment-shipping-methods > article > header small {
+  color: #687588;
+  font-size: 12px;
+}
+
+.payment-shipping-fields {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 14px;
+}
+
+.settings-default-method {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  margin-top: 12px;
+  padding: 0 10px;
+  border: 1px solid #dbe4ee;
+  border-radius: 9px;
+  background: #fff;
+  color: #526276;
+  font-size: 12px;
+  font-weight: 700;
+  transition: border-color .16s ease-out, background-color .16s ease-out, color .16s ease-out, transform .16s ease-out;
+}
+
+.settings-default-method:hover:not(:disabled) {
+  border-color: #93c5fd;
+  color: #1d4ed8;
+}
+
+.settings-default-method:active:not(:disabled) {
+  transform: scale(.97);
+}
+
+.settings-default-method.is-default {
+  border-color: #86efac;
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+.settings-default-method:disabled {
+  cursor: not-allowed;
+  opacity: .52;
+}
+
+@media (max-width: 620px) {
+  .payment-shipping-methods > article > header {
+    display: grid;
+  }
+
+  .payment-shipping-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-shipping-editor {
+    padding-bottom: 118px;
+  }
+}

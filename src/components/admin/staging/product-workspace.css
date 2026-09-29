@@ -1,0 +1,1004 @@
+/* Product Creator - Native Admin Styling Pass
+   Strictly adheres to Novinet Staging Admin visual language, typography, borders, and components.
+*/
+
+.staging-admin-replica .product-workspace-root {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  font-family: Vazirmatn, Tahoma, sans-serif;
+  color: #172033;
+}
+
+/* ─── Top Section Navigation Tabs ─── */
+.staging-admin-replica .product-section-nav-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #dfe6ee;
+  background: #ffffff;
+  border: 1px solid #e5eaf0;
+  border-radius: 8px;
+  padding: 4px 8px;
+  overflow: hidden;
+}
+
+.staging-admin-replica .product-section-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
+
+.staging-admin-replica .product-section-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.staging-admin-replica .product-nav-tab {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: #64748b;
+  padding: 0 12px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex: 0 0 auto;
+}
+
+.staging-admin-replica .product-nav-tab:hover {
+  background: #f8fafc;
+  color: #334155;
+}
+
+.staging-admin-replica .product-nav-tab.active {
+  border-color: #bfdbfe;
+  background: #eff6ff;
+  color: #2563eb;
+  font-weight: 800;
+}
+
+.staging-admin-replica .tab-status-icon {
+  width: 17px;
+  height: 17px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.staging-admin-replica .tab-status-icon.complete {
+  background: #ecfdf5;
+  color: #15803d;
+  border: 1px solid #a7f3d0;
+}
+
+.staging-admin-replica .tab-status-icon.alert {
+  background: #fffbeb;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+.staging-admin-replica .tab-status-icon.neutral {
+  background: #f1f5f9;
+  color: #94a3b8;
+  border: 1px solid #e2e8f0;
+}
+
+/* ─── Active Section Panel ─── */
+.staging-admin-replica .product-active-panel {
+  border: 1px solid #e5eaf0;
+  border-radius: 8px;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.staging-admin-replica .product-panel-header {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e8edf2;
+  padding: 12px 18px;
+  background: #ffffff;
+}
+
+.staging-admin-replica .product-panel-header-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.staging-admin-replica .product-panel-header-title h2 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.staging-admin-replica .product-panel-header-title small {
+  color: #8491a2;
+  font-size: 10px;
+}
+
+.staging-admin-replica .product-panel-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ─── Form Controls & Grids (Matches Admin Scale) ─── */
+.staging-admin-replica .product-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.staging-admin-replica .product-form-grid.single-col {
+  grid-template-columns: 1fr;
+}
+
+.staging-admin-replica .product-form-grid .full-span {
+  grid-column: 1 / -1;
+}
+
+.staging-admin-replica .admin-field {
+  display: grid;
+  gap: 6px;
+}
+
+.staging-admin-replica .admin-field-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #475569;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.staging-admin-replica .admin-field-label b {
+  color: #e11d48;
+  margin-right: 2px;
+}
+
+.staging-admin-replica .admin-field-label small {
+  color: #8b98a9;
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.staging-admin-replica .admin-input,
+.staging-admin-replica .admin-select,
+.staging-admin-replica .admin-textarea {
+  width: 100%;
+  min-height: 38px;
+  border: 1px solid #dfe6ee;
+  border-radius: 6px;
+  outline: none;
+  background: #ffffff;
+  color: #1f2937;
+  padding: 0 10px;
+  font-size: 11px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.staging-admin-replica .admin-input:focus,
+.staging-admin-replica .admin-select:focus,
+.staging-admin-replica .admin-textarea:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 2px #dbeafe;
+}
+
+.staging-admin-replica .admin-input:disabled,
+.staging-admin-replica .admin-select:disabled,
+.staging-admin-replica .admin-textarea:disabled {
+  background: #f8fafc;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.staging-admin-replica .admin-textarea {
+  min-height: 90px;
+  padding: 8px 10px;
+  resize: vertical;
+  line-height: 1.8;
+}
+
+/* ─── Product Type Switcher Segmented ─── */
+.staging-admin-replica .product-type-segmented {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.staging-admin-replica .product-type-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid #dfe6ee;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #475569;
+  text-align: right;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.staging-admin-replica .product-type-btn:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+.staging-admin-replica .product-type-btn.active {
+  border-color: #2563eb;
+  background: #eff6ff;
+  color: #1e40af;
+}
+
+.staging-admin-replica .product-type-icon {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: #64748b;
+  flex: 0 0 auto;
+}
+
+.staging-admin-replica .product-type-btn.active .product-type-icon {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.staging-admin-replica .product-type-btn b {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.staging-admin-replica .product-type-btn small {
+  display: block;
+  margin-top: 3px;
+  color: #64748b;
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+/* ─── Simple Product Empty State Notice ─── */
+.staging-admin-replica .simple-product-notice-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 36px 20px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  background: #f8fafc;
+  gap: 8px;
+}
+
+.staging-admin-replica .simple-product-notice-box .notice-icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: #eff6ff;
+  color: #2563eb;
+  margin-bottom: 4px;
+}
+
+.staging-admin-replica .simple-product-notice-box h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.staging-admin-replica .simple-product-notice-box p {
+  margin: 0;
+  max-width: 480px;
+  font-size: 11px;
+  color: #64748b;
+  line-height: 1.8;
+}
+
+/* ─── Section Footer Navigation ─── */
+.staging-admin-replica .section-footer-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #edf1f5;
+  padding: 14px 18px;
+  background: #fafcff;
+}
+
+.staging-admin-replica .section-footer-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ─── Pricing Section Insights ─── */
+.staging-admin-replica .price-summary-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 7px;
+  background: #f8fafc;
+  padding: 12px;
+}
+
+.staging-admin-replica .price-summary-strip > div {
+  display: grid;
+  gap: 3px;
+}
+
+.staging-admin-replica .price-summary-strip small {
+  color: #8491a2;
+  font-size: 9px;
+}
+
+.staging-admin-replica .price-summary-strip b {
+  color: #1e293b;
+  font-size: 12px;
+}
+
+.staging-admin-replica .price-badge-saving {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 99px;
+  background: #ecfdf5;
+  color: #15803d;
+  padding: 3px 8px;
+  font-size: 9px;
+  font-weight: 700;
+  border: 1px solid #a7f3d0;
+}
+
+/* ─── Images Section Dropzone & Gallery ─── */
+.staging-admin-replica .product-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 2px dashed #bfdbfe;
+  border-radius: 10px;
+  background: #f8fbff;
+  padding: 24px 16px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.staging-admin-replica .product-dropzone:hover {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.staging-admin-replica .product-dropzone.dragging {
+  border-color: #2563eb;
+  background: #dbeafe;
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
+}
+
+.staging-admin-replica .product-dropzone.disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.staging-admin-replica .product-dropzone b {
+  color: #1e3a8a;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.staging-admin-replica .product-dropzone small {
+  color: #64748b;
+  font-size: 11px;
+}
+
+/* Upload State Machine Banners */
+.staging-admin-replica .upload-banner {
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+  font-size: 12px;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.staging-admin-replica .upload-banner.uploading {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+}
+
+.staging-admin-replica .upload-banner.success {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+}
+
+.staging-admin-replica .upload-banner.error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+.staging-admin-replica .pulse-loader {
+  width: 100%;
+  height: 3px;
+  background: #dbeafe;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.staging-admin-replica .pulse-loader::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 40%;
+  background: #2563eb;
+  animation: indeterminatePulse 1.2s infinite ease-in-out;
+  border-radius: 2px;
+}
+
+@keyframes indeterminatePulse {
+  0% { left: -40%; width: 40%; }
+  50% { left: 30%; width: 50%; }
+  100% { left: 100%; width: 40%; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.staging-admin-replica .gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.staging-admin-replica .gallery-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #e1e8ef;
+  border-radius: 7px;
+  background: #ffffff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.staging-admin-replica .gallery-card.cover {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px #dbeafe;
+}
+
+.staging-admin-replica .gallery-card img {
+  width: 100%;
+  aspect-ratio: 1;
+  display: block;
+  object-fit: cover;
+  background: #f8fafc;
+}
+
+.staging-admin-replica .gallery-card-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px;
+  background: #ffffff;
+  border-top: 1px solid #edf1f5;
+}
+
+.staging-admin-replica .gallery-card-controls button {
+  min-height: 25px;
+  border: 0;
+  border-radius: 4px;
+  background: #eff6ff;
+  color: #2563eb;
+  padding: 0 6px;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.staging-admin-replica .gallery-card-controls button.remove-image {
+  background: #fff1f2;
+  color: #e11d48;
+}
+
+@media (max-width: 640px) {
+  .staging-admin-replica .gallery-card-controls button {
+    min-height: 40px;
+    font-size: 11px;
+    padding: 0 10px;
+  }
+}
+
+.staging-admin-replica .cover-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 8px;
+  font-weight: 800;
+}
+
+/* ─── Variant Matrix Table ─── */
+.staging-admin-replica .variant-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 7px;
+  background: #ffffff;
+}
+
+.staging-admin-replica .variant-matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.staging-admin-replica .variant-matrix-table th {
+  background: #f8fafc;
+  color: #475569;
+  font-weight: 700;
+  padding: 9px 11px;
+  text-align: right;
+  border-bottom: 1px solid #e2e8f0;
+  white-space: nowrap;
+  font-size: 10px;
+}
+
+.staging-admin-replica .variant-matrix-table td {
+  padding: 8px 11px;
+  border-bottom: 1px solid #edf1f5;
+  vertical-align: middle;
+}
+
+.staging-admin-replica .variant-matrix-table tr:last-child td {
+  border-bottom: none;
+}
+
+.staging-admin-replica .variant-matrix-table tr:hover {
+  background: #fbfdff;
+}
+
+.staging-admin-replica .variant-matrix-table tr.inactive-row {
+  opacity: 0.55;
+  background: #f8fafc;
+}
+
+.staging-admin-replica .variant-thumb-btn {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #dbe5f0;
+  border-radius: 5px;
+  background: #f8fafc;
+  overflow: hidden;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.staging-admin-replica .variant-thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ─── Bulk Operations Bar ─── */
+.staging-admin-replica .bulk-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 7px;
+  background: #f8fafc;
+  padding: 8px 12px;
+}
+
+.staging-admin-replica .bulk-bar span {
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.staging-admin-replica .bulk-input-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.staging-admin-replica .bulk-input-group input {
+  width: 100px;
+  min-height: 30px;
+  border: 1px solid #dfe6ee;
+  border-radius: 5px;
+  padding: 0 7px;
+  font-size: 10px;
+  direction: ltr;
+}
+
+.staging-admin-replica .bulk-input-group button {
+  min-height: 30px;
+  border: 1px solid #dfe6ee;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #334155;
+  padding: 0 8px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.staging-admin-replica .bulk-input-group button:hover {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #2563eb;
+}
+
+/* ─── Presets and Chips ─── */
+.staging-admin-replica .preset-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.staging-admin-replica .preset-chip-btn {
+  min-height: 26px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #475569;
+  padding: 0 8px;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.staging-admin-replica .preset-chip-btn:hover {
+  border-color: #bfdbfe;
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+/* ─── Compact Storefront Preview Modal ─── */
+.staging-admin-replica .preview-modal-backdrop {
+  position: fixed;
+  z-index: 95;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(15, 23, 42, 0.42);
+  padding: 16px;
+}
+
+.staging-admin-replica .preview-modal-card {
+  width: min(100%, 420px);
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.16);
+  overflow: hidden;
+}
+
+.staging-admin-replica .preview-modal-header {
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #edf1f5;
+  padding: 0 14px;
+}
+
+.staging-admin-replica .preview-modal-header b {
+  color: #1e293b;
+  font-size: 12px;
+}
+
+.staging-admin-replica .preview-modal-body {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  background: #f8fafc;
+}
+
+.staging-admin-replica .preview-card-item {
+  width: 100%;
+  max-width: 290px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+}
+
+.staging-admin-replica .preview-card-img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: #f8fafc;
+  display: block;
+}
+
+.staging-admin-replica .preview-card-details {
+  padding: 12px;
+  display: grid;
+  gap: 6px;
+}
+
+.staging-admin-replica .preview-card-details small {
+  color: #8491a2;
+  font-size: 9px;
+}
+
+.staging-admin-replica .preview-card-details h4 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 800;
+  color: #1e293b;
+  line-height: 1.5;
+}
+
+.staging-admin-replica .preview-card-price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.staging-admin-replica .preview-card-price b {
+  color: #2563eb;
+  font-size: 12px;
+}
+
+.staging-admin-replica .preview-card-price em {
+  font-style: normal;
+  font-size: 9px;
+  color: #16a34a;
+}
+
+/* ─── Responsive Adjustments ─── */
+@media (max-width: 760px) {
+  .staging-admin-replica .product-workspace-root {
+    padding-bottom: 72px;
+    gap: 10px;
+  }
+
+  .staging-admin-replica .product-form-grid {
+    grid-template-columns: 1fr;
+    gap: 11px;
+  }
+
+  .staging-admin-replica .product-type-segmented {
+    grid-template-columns: 1fr;
+  }
+
+  .staging-admin-replica .price-summary-strip {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .staging-admin-replica .section-footer-nav {
+    flex-direction: column-reverse;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .staging-admin-replica .section-footer-nav button,
+  .staging-admin-replica .section-footer-nav-right button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ─── Compact Section Completion Nav ─── */
+.staging-admin-replica .section-nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.staging-admin-replica .section-nav-item:hover {
+  background: #f8fafc;
+  color: #1e293b;
+}
+
+.staging-admin-replica .section-nav-item.active {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #2563eb;
+}
+
+.staging-admin-replica .section-status-marker {
+  display: inline-grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.staging-admin-replica .section-status-marker.complete {
+  color: #16a34a;
+}
+
+.staging-admin-replica .section-status-marker.incomplete {
+  color: #94a3b8;
+}
+
+/* ─── Sticky Mobile Action Bar ─── */
+.staging-admin-replica .product-mobile-sticky-bar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .staging-admin-replica .product-editor-workspace {
+    padding-bottom: 84px;
+  }
+
+  .staging-admin-replica .product-mobile-sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.1);
+  }
+
+  .staging-admin-replica .product-mobile-sticky-bar button {
+    flex: 1;
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 8px;
+  }
+}
+
+/* ─── Mobile-First Dedicated Layout (320px - 480px) ─── */
+@media (max-width: 480px) {
+  .staging-admin-replica .product-editor-workspace {
+    padding: 10px 8px 90px;
+    gap: 12px;
+  }
+
+  .staging-admin-replica .product-panel {
+    border-radius: 12px;
+  }
+
+  .staging-admin-replica .product-panel-header {
+    padding: 14px 12px;
+  }
+
+  .staging-admin-replica .product-panel-header b {
+    font-size: 13px;
+  }
+
+  .staging-admin-replica .product-panel-body {
+    padding: 14px 12px;
+  }
+
+  .staging-admin-replica .admin-input,
+  .staging-admin-replica .admin-select {
+    min-height: 44px;
+    font-size: 13px;
+    padding: 0 12px;
+    border-radius: 8px;
+  }
+
+  .staging-admin-replica .admin-field-label {
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+
+  .staging-admin-replica .bulk-bar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px;
+    gap: 10px;
+    border-radius: 10px;
+  }
+
+  .staging-admin-replica .bulk-input-group {
+    width: 100%;
+    flex-direction: row;
+    gap: 6px;
+  }
+
+  .staging-admin-replica .bulk-input-group input {
+    flex: 1;
+    min-height: 44px;
+    font-size: 13px;
+    border-radius: 8px;
+  }
+
+  .staging-admin-replica .bulk-input-group button {
+    min-height: 44px;
+    font-size: 12px;
+    padding: 0 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+
+  .staging-admin-replica .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+    gap: 10px;
+  }
+
+  .staging-admin-replica .gallery-card-controls button {
+    min-height: 42px;
+    font-size: 12px;
+    border-radius: 6px;
+  }
+
+  .staging-admin-replica .section-nav-item {
+    padding: 10px 12px;
+    font-size: 12px;
+    min-height: 44px;
+  }
+}

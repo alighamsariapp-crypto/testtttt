@@ -1,0 +1,379 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('/fonts/Vazirmatn-Regular.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('/fonts/Vazirmatn-Medium.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('/fonts/Vazirmatn-SemiBold.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('/fonts/Vazirmatn-Bold.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('/fonts/Vazirmatn-ExtraBold.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+}
+
+:root {
+  --color-primary: #1D4ED8;
+  --color-secondary: #2563EB;
+  --color-accent: #DC2626;
+  --color-bg: #FFFFFF;
+  --color-text: #0F172A;
+  --store-primary: #2563EB;
+  --store-secondary: #1D4ED8;
+  --store-accent: #DC2626;
+  --font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Mobile-first typography roles, aligned to content purpose rather than ad-hoc utility classes. */
+  --ui-font-meta: 0.75rem;
+  --ui-line-meta: 1.25rem;
+  --ui-font-body: 0.875rem;
+  --ui-line-body: 1.5rem;
+  --ui-font-label: 0.75rem;
+  --ui-font-button: 0.8125rem;
+  --ui-line-button: 1.25rem;
+  --ui-font-card-title: 0.875rem;
+  --ui-line-card-title: 1.375rem;
+  --ui-font-section-title: 1rem;
+  --ui-line-section-title: 1.625rem;
+  --ui-font-page-title: 1.375rem;
+  --ui-line-page-title: 2rem;
+  --ui-font-price: 1rem;
+  --ui-line-price: 1.5rem;
+  --ui-font-price-hero: 1.5rem;
+  --ui-line-price-hero: 2rem;
+  /* Bootstrap-inspired component scale: one predictable base, plus compact and large variants. */
+  --ui-control-height: 2.5rem;
+  --ui-control-height-compact: 2.25rem;
+  --ui-control-height-large: 2.75rem;
+  --ui-control-padding-x: 0.875rem;
+  --ui-radius-control: 0.75rem;
+  --ui-modal-radius: 1.5rem;
+  /* Shared UI layer scale: content < sticky navigation < popovers < drawers < dialogs. */
+  --ui-layer-header: 40;
+  --ui-layer-popover: 50;
+  --ui-layer-drawer: 60;
+  --ui-layer-dialog: 100;
+  --ui-layer-toast: 110;
+}
+
+/* Public storefront colour tokens. Kept out of the admin layout so management controls
+   remain neutral while the customer-facing brand changes immediately after publication. */
+.storefront-theme .text-blue-400,
+.storefront-theme .text-blue-500,
+.storefront-theme .text-blue-600 { color: var(--store-primary) !important; }
+.storefront-theme .text-blue-700,
+.storefront-theme .text-blue-800,
+.storefront-theme .text-blue-900 { color: var(--store-secondary) !important; }
+.storefront-theme .bg-blue-500,
+.storefront-theme .bg-blue-600 { background-color: var(--store-primary) !important; }
+.storefront-theme .bg-blue-700,
+.storefront-theme .bg-blue-800,
+.storefront-theme .bg-blue-900 { background-color: var(--store-secondary) !important; }
+.storefront-theme .bg-blue-50,
+.storefront-theme .bg-blue-50\/30,
+.storefront-theme .bg-blue-50\/40,
+.storefront-theme .bg-blue-50\/50 { background-color: color-mix(in srgb, var(--store-primary) 8%, white) !important; }
+.storefront-theme .bg-blue-100,
+.storefront-theme .bg-blue-100\/50 { background-color: color-mix(in srgb, var(--store-primary) 16%, white) !important; }
+.storefront-theme .border-blue-100,
+.storefront-theme .border-blue-200,
+.storefront-theme .border-blue-300 { border-color: color-mix(in srgb, var(--store-primary) 28%, white) !important; }
+.storefront-theme .ring-blue-500 { --tw-ring-color: var(--store-primary) !important; }
+.storefront-theme .shadow-blue-500\/20,
+.storefront-theme .shadow-blue-600\/20 { --tw-shadow-color: color-mix(in srgb, var(--store-primary) 20%, transparent) !important; }
+.storefront-theme .hover\:bg-blue-50:hover { background-color: color-mix(in srgb, var(--store-primary) 8%, white) !important; }
+.storefront-theme .hover\:bg-blue-100:hover { background-color: color-mix(in srgb, var(--store-primary) 16%, white) !important; }
+.storefront-theme .hover\:bg-blue-500:hover,
+.storefront-theme .hover\:bg-blue-600:hover { background-color: var(--store-primary) !important; }
+.storefront-theme .hover\:bg-blue-700:hover,
+.storefront-theme .hover\:bg-blue-800:hover { background-color: var(--store-secondary) !important; }
+.storefront-theme .hover\:text-blue-600:hover,
+.storefront-theme .hover\:text-blue-700:hover,
+.storefront-theme .hover\:text-blue-800:hover { color: var(--store-secondary) !important; }
+.storefront-theme .focus\:border-blue-500:focus { border-color: var(--store-primary) !important; }
+.storefront-theme .text-red-500,
+.storefront-theme .text-red-600,
+.storefront-theme .text-rose-500,
+.storefront-theme .text-rose-600 { color: var(--store-accent) !important; }
+.storefront-theme .bg-red-500,
+.storefront-theme .bg-red-600,
+.storefront-theme .bg-rose-500,
+.storefront-theme .bg-rose-600 { background-color: var(--store-accent) !important; }
+.storefront-theme .border-red-200,
+.storefront-theme .border-rose-200 { border-color: color-mix(in srgb, var(--store-accent) 28%, white) !important; }
+
+@media (min-width: 640px) {
+  :root {
+    --ui-font-body: 0.9375rem;
+    --ui-line-body: 1.625rem;
+    --ui-font-label: 0.8125rem;
+    --ui-font-button: 0.875rem;
+    --ui-font-card-title: 0.9375rem;
+    --ui-line-card-title: 1.5rem;
+    --ui-font-section-title: 1.125rem;
+    --ui-line-section-title: 1.75rem;
+    --ui-font-page-title: 1.625rem;
+    --ui-line-page-title: 2.375rem;
+    --ui-font-price: 1.125rem;
+    --ui-line-price: 1.75rem;
+    --ui-font-price-hero: 1.875rem;
+    --ui-line-price-hero: 2.375rem;
+    --ui-control-height: 2.625rem;
+    --ui-control-height-compact: 2.375rem;
+    --ui-control-height-large: 3rem;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: #FAFAFA;
+  color: #0F172A;
+  direction: rtl;
+  text-align: right;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  user-select: auto;
+  -webkit-user-select: auto;
+  font-feature-settings: "ss01" on, "cv01" on;
+  font-synthesis: none;
+}
+
+/* Tailwind's font-black is 900; map it to the locally available ExtraBold (800) instead of letting browsers synthesize a heavier face. */
+.font-black {
+  font-weight: 800;
+}
+
+/* Persian numeral typography helper */
+.font-fa-num {
+  font-feature-settings: "ss01" on;
+}
+
+/* Semantic typography roles: apply these in key customer journeys instead of stacking arbitrary text sizes and weights. */
+.ui-text-meta {
+  font-size: var(--ui-font-meta);
+  line-height: var(--ui-line-meta);
+  font-weight: 500;
+}
+
+.ui-text-body {
+  font-size: var(--ui-font-body);
+  line-height: var(--ui-line-body);
+  font-weight: 400;
+}
+
+.ui-text-button {
+  font-size: var(--ui-font-button);
+  line-height: var(--ui-line-button);
+  font-weight: 600;
+}
+
+.ui-text-card-title {
+  font-size: var(--ui-font-card-title);
+  line-height: var(--ui-line-card-title);
+  font-weight: 600;
+}
+
+.ui-text-section-title {
+  font-size: var(--ui-font-section-title);
+  line-height: var(--ui-line-section-title);
+  font-weight: 700;
+}
+
+.ui-text-page-title {
+  font-size: var(--ui-font-page-title);
+  line-height: var(--ui-line-page-title);
+  font-weight: 700;
+}
+
+.ui-numeric {
+  font-feature-settings: "ss01" on, "cv01" on, "tnum" on;
+  font-variant-numeric: tabular-nums;
+}
+
+.ui-price {
+  font-size: var(--ui-font-price);
+  line-height: var(--ui-line-price);
+  font-weight: 700;
+  font-feature-settings: "ss01" on, "cv01" on, "tnum" on;
+  font-variant-numeric: tabular-nums;
+}
+
+.ui-price-hero {
+  font-size: var(--ui-font-price-hero);
+  line-height: var(--ui-line-price-hero);
+  font-weight: 700;
+  font-feature-settings: "ss01" on, "cv01" on, "tnum" on;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Prevent layout jump and shifts on zoom */
+* {
+  box-sizing: border-box;
+}
+
+:where(button, a, input, select, textarea, [role="button"]):focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-secondary) 55%, white);
+  outline-offset: 3px;
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+}
+
+/* Shared component primitives. They mirror Bootstrap's base/sm/lg sizing concept
+   without introducing a second CSS framework beside Tailwind. */
+.ui-control {
+  min-height: var(--ui-control-height);
+  padding-inline: var(--ui-control-padding-x);
+  border-radius: var(--ui-radius-control);
+  font-size: var(--ui-font-button);
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+.ui-control--compact {
+  min-height: var(--ui-control-height-compact);
+  font-size: var(--ui-font-label);
+}
+
+.ui-control--large {
+  min-height: var(--ui-control-height-large);
+  font-size: var(--ui-font-body);
+}
+
+.ui-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--ui-layer-dialog);
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgb(15 23 42 / 0.62);
+  backdrop-filter: blur(3px);
+}
+
+.ui-modal-panel {
+  width: 100%;
+  max-width: 32rem;
+  max-height: min(90dvh, 48rem);
+  overflow: auto;
+  border-radius: var(--ui-modal-radius);
+  background: #fff;
+  box-shadow: 0 24px 48px rgb(15 23 42 / 0.22);
+}
+
+/* Preserve the existing Tailwind width intent when this shared shell is used. */
+.ui-modal-panel.max-w-sm { max-width: 24rem; }
+.ui-modal-panel.max-w-md { max-width: 28rem; }
+.ui-modal-panel.max-w-lg { max-width: 32rem; }
+.ui-modal-panel.max-w-2xl { max-width: 42rem; }
+.ui-modal-panel.max-w-4xl { max-width: 56rem; }
+
+@media (max-width: 639px) {
+  .ui-modal-backdrop {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .ui-modal-panel {
+    width: 100%;
+    max-height: 90dvh;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Smooth continuous marquee animation for partners */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50%); }
+}
+
+.animate-marquee-rtl {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee-rtl:hover {
+  animation-play-state: paused;
+}

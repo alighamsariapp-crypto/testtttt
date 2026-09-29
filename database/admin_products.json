@@ -1,0 +1,322 @@
+[
+  {
+    "category_id": 2,
+    "name": "cccc",
+    "slug": "لپ‌-5301",
+    "sku": "لپ‌-5301",
+    "description": "",
+    "base_price": 33355550,
+    "original_price": 33355550,
+    "discount_price": 22348220,
+    "effective_price": 22348220,
+    "discount_percentage": 33,
+    "discount_percent": 33,
+    "currency": "IRR",
+    "is_active": true,
+    "is_featured": false,
+    "in_stock": true,
+    "initial_stock": 20,
+    "images": [
+      "/uploads/img-1788594932435-103244932.webp"
+    ],
+    "colors": [
+      {
+        "name": "سفید",
+        "hex": "#ffffff",
+        "images": [
+          "/uploads/img-1788594960331-130834314.webp"
+        ],
+        "image": "/uploads/img-1788594960331-130834314.webp"
+      },
+      {
+        "name": "آبی",
+        "hex": "#2563eb",
+        "images": [
+          "/uploads/img-1788594978496-911984137.webp"
+        ],
+        "image": "/uploads/img-1788594978496-911984137.webp"
+      }
+    ],
+    "attributes": {
+      "novinet_admin_colors": [
+        {
+          "name": "سفید",
+          "hex": "#ffffff",
+          "images": [
+            "/uploads/img-1788594960331-130834314.webp"
+          ],
+          "image": "/uploads/img-1788594960331-130834314.webp"
+        },
+        {
+          "name": "آبی",
+          "hex": "#2563eb",
+          "images": [
+            "/uploads/img-1788594978496-911984137.webp"
+          ],
+          "image": "/uploads/img-1788594978496-911984137.webp"
+        }
+      ]
+    },
+    "variants": [
+      {
+        "id": 1788594994026001,
+        "temporary_id": "1788594994026001",
+        "name": "سفید",
+        "sku": "لپ‌-5301-V1788594994026001",
+        "base_price": 33355550,
+        "original_price": 33355550,
+        "price_override": 33355550,
+        "discount_price": 22348220,
+        "effective_price": 22348220,
+        "discount_percentage": 33,
+        "discount_percent": 33,
+        "price": 22348220,
+        "stock": 5,
+        "stock_quantity": 0,
+        "inventory": {
+          "quantity": 0,
+          "reserved_quantity": 0
+        },
+        "is_active": true,
+        "image_url": "/uploads/img-1788594960331-130834314.webp",
+        "images": [
+          "/uploads/img-1788594960331-130834314.webp"
+        ],
+        "attributes": {
+          "color": "سفید",
+          "image_url": "/uploads/img-1788594960331-130834314.webp"
+        },
+        "product_id": 1788594994026
+      },
+      {
+        "id": 1788594994026002,
+        "temporary_id": "1788594994026002",
+        "name": "آبی",
+        "sku": "لپ‌-5301-V1788594994026002",
+        "base_price": 33355550,
+        "original_price": 33355550,
+        "price_override": 33355550,
+        "discount_price": 22348220,
+        "effective_price": 22348220,
+        "discount_percentage": 33,
+        "discount_percent": 33,
+        "price": 22348220,
+        "stock": 20,
+        "stock_quantity": 20,
+        "inventory": {
+          "quantity": 20,
+          "reserved_quantity": 0
+        },
+        "is_active": true,
+        "image_url": "/uploads/img-1788594968091-642167523.webp",
+        "images": [
+          "/uploads/img-1788594978496-911984137.webp"
+        ],
+        "attributes": {
+          "color": "آبی",
+          "image_url": "/uploads/img-1788594968091-642167523.webp"
+        },
+        "product_id": 1788594994026
+      }
+    ],
+    "id": 1788594994026,
+    "stock_quantity": 20,
+    "created_at": "2026-09-05T07:56:34.026Z",
+    "updated_at": "2026-09-05T08:01:31.175Z"
+  },
+  {
+    "id": 103,
+    "category_id": 4,
+    "name": "گوشی موبایل سامسونگ مدل Galaxy S24",
+    "slug": "samsung-s24-demo",
+    "sku": "SAM-S24",
+    "description": "گوشی پرچم‌دار سامسونگ مجهز به هوش مصنوعی گلکسی.",
+    "base_price": 478000000,
+    "currency": "IRR",
+    "stock_quantity": 18,
+    "in_stock": true,
+    "is_active": true,
+    "is_featured": true,
+    "images": [
+      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=900&q=80"
+    ],
+    "gallery_urls": [
+      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=900&q=80"
+    ],
+    "colors": [
+      {
+        "name": "مشکی",
+        "hex": "#1e293b",
+        "images": [
+          "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=80",
+          "https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=900&q=80"
+        ],
+        "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=80"
+      },
+      {
+        "name": "آبی",
+        "hex": "#2563eb",
+        "images": [
+          "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=900&q=80",
+          "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?auto=format&fit=crop&w=900&q=80"
+        ],
+        "image": "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=900&q=80"
+      },
+      {
+        "name": "نارنجی",
+        "hex": "#ea580c",
+        "images": [
+          "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=900&q=80",
+          "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=900&q=80"
+        ],
+        "image": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=900&q=80"
+      }
+    ],
+    "variant_options": [
+      {
+        "key": "storage",
+        "label": "حافظه داخلی"
+      }
+    ],
+    "attributes": {
+      "brand": "سامسونگ",
+      "ram": "8GB",
+      "storage": [
+        "256GB",
+        "512GB"
+      ],
+      "novinet_variant_axes": [
+        {
+          "key": "storage",
+          "label": "حافظه داخلی"
+        }
+      ]
+    },
+    "variants": [
+      {
+        "id": 10031,
+        "product_id": 103,
+        "name": "مشکی · 256GB",
+        "sku": "SAM-S24-BLK-256",
+        "is_active": true,
+        "attributes": {
+          "color": "مشکی",
+          "storage": "256GB",
+          "image_url": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=80"
+        },
+        "image_url": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=80",
+        "inventory": {
+          "quantity": 5,
+          "reserved_quantity": 0
+        },
+        "stock_quantity": 5,
+        "base_price": 478000000,
+        "price": 478000000
+      },
+      {
+        "id": 10032,
+        "product_id": 103,
+        "name": "مشکی · 512GB",
+        "sku": "SAM-S24-BLK-512",
+        "is_active": true,
+        "attributes": {
+          "color": "مشکی",
+          "storage": "512GB",
+          "image_url": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=80"
+        },
+        "image_url": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=80",
+        "inventory": {
+          "quantity": 3,
+          "reserved_quantity": 0
+        },
+        "stock_quantity": 3,
+        "base_price": 528000000,
+        "price": 528000000
+      },
+      {
+        "id": 10033,
+        "product_id": 103,
+        "name": "آبی · 256GB",
+        "sku": "SAM-S24-BLU-256",
+        "is_active": true,
+        "attributes": {
+          "color": "آبی",
+          "storage": "256GB",
+          "image_url": "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=900&q=80"
+        },
+        "image_url": "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=900&q=80",
+        "inventory": {
+          "quantity": 4,
+          "reserved_quantity": 0
+        },
+        "stock_quantity": 4,
+        "base_price": 478000000,
+        "price": 478000000
+      },
+      {
+        "id": 10034,
+        "product_id": 103,
+        "name": "آبی · 512GB",
+        "sku": "SAM-S24-BLU-512",
+        "is_active": true,
+        "attributes": {
+          "color": "آبی",
+          "storage": "512GB",
+          "image_url": "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=900&q=80"
+        },
+        "image_url": "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=900&q=80",
+        "inventory": {
+          "quantity": 2,
+          "reserved_quantity": 0
+        },
+        "stock_quantity": 2,
+        "base_price": 528000000,
+        "price": 528000000
+      },
+      {
+        "id": 10035,
+        "product_id": 103,
+        "name": "نارنجی · 256GB",
+        "sku": "SAM-S24-ORG-256",
+        "is_active": true,
+        "attributes": {
+          "color": "نارنجی",
+          "storage": "256GB",
+          "image_url": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=900&q=80"
+        },
+        "image_url": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=900&q=80",
+        "inventory": {
+          "quantity": 2,
+          "reserved_quantity": 0
+        },
+        "stock_quantity": 2,
+        "base_price": 478000000,
+        "price": 478000000
+      },
+      {
+        "id": 10036,
+        "product_id": 103,
+        "name": "نارنجی · 512GB",
+        "sku": "SAM-S24-ORG-512",
+        "is_active": true,
+        "attributes": {
+          "color": "نارنجی",
+          "storage": "512GB",
+          "image_url": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=900&q=80"
+        },
+        "image_url": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=900&q=80",
+        "inventory": {
+          "quantity": 2,
+          "reserved_quantity": 0
+        },
+        "stock_quantity": 2,
+        "base_price": 528000000,
+        "price": 528000000
+      }
+    ]
+  }
+]

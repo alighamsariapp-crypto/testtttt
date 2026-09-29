@@ -1,0 +1,16 @@
+/* Design review final pass: site workspace uses the available admin canvas, with a stronger Persian operational status strip. */
+@media (min-width: 761px) {
+  .workspace-main:has(.site-workspace) { width: 100%; max-width: none; padding-inline: 26px; }
+  .site-workspace { max-width: none; }
+  .site-status-strip { margin-top: 1px; }
+  .site-status-strip span { min-height: 57px; justify-content: center; padding: 10px 15px; }
+  .site-status-strip small { font-size: 9px; }
+  .site-status-strip b { font-size: 11px; }
+  .site-split-layout { grid-template-columns: minmax(330px,.9fr) minmax(510px,1.1fr); }
+}
+.site-command-title > svg { border: 1px solid #bfdbfe; border-radius: 5px; background: #eff6ff; padding: 4px; }
+.site-command-title span { letter-spacing: 0; }
+.site-status-strip span:nth-child(1) b { color: #2563eb; }
+.site-status-strip span:nth-child(3) b { color: #475569; }
+.site-ops-panel.site-menu-tree-panel > header { border-bottom-color: #dbe5ef; }
+@media (max-width: 760px) { .site-status-strip b { font-size: 10px; } }

@@ -1,0 +1,17 @@
+NoovinNet / ApexStore — Patch نمایش موجودی محصول
+
+محتوای این ZIP باید مستقیماً در مسیر:
+/domains/noovinnet.ir/public_html
+Extract شود؛ نه داخل یک پوشهٔ جدید.
+
+فایل index.html و پوشهٔ assets را overwrite کنید. پس از Extract، صفحهٔ فروشگاه را با Ctrl+F5 باز کنید تا cache مرورگر پاک شود.
+
+این patch فقط bundle frontend را به‌روزرسانی می‌کند. منطق آن پاسخ variants[].inventory.quantity از API را به in_stock و stock_quantity تبدیل می‌کند؛ بنابراین محصول دارای موجودی واقعی دیگر «ناموجود» نمایش داده نمی‌شود.
+
+پیش‌نیازهای تأییدشده پیش از استقرار:
+- TypeScript lint: PASS
+- Frontend mapper regression: PASS
+- Laravel suite: 28 tests / 167 assertions PASS
+- Production API خواندنی: محصول QA دارای inventory.quantity = 2 و reserved_quantity = 0 است
+
+پس از Extract، برای بازآزمایی به من اطلاع دهید تا وضعیت زندهٔ محصول QA و سپس جریان cart/checkout را کنترل کنم.

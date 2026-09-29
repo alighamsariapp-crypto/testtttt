@@ -1,0 +1,126 @@
+name: Build Shared Hosting Incremental Update
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: shared-hosting-incremental-update-main
+  cancel-in-progress: false
+
+jobs:
+  build-incremental-update:
+    name: Build changed files package
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out selected source and deployed baseline tag
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Require main and recorded deployment baseline
+        id: baseline
+        run: |
+          set -euo pipefail
+          [ "$GITHUB_REF_NAME" = 'main' ] || { echo 'Run this workflow on main only.' >&2; exit 1; }
+          git rev-parse --verify 'refs/tags/shared-hosting-deployed^{commit}' >/dev/null
+          base_commit="$(git rev-parse 'refs/tags/shared-hosting-deployed^{commit}')"
+          target_commit="$(git rev-parse HEAD)"
+          git merge-base --is-ancestor "$base_commit" "$target_commit"
+          [ "$base_commit" != "$target_commit" ] || { echo 'No incremental update is needed.' >&2; exit 1; }
+          echo "base_commit=$base_commit" >> "$GITHUB_OUTPUT"
+          echo "target_commit=$target_commit" >> "$GITHUB_OUTPUT"
+
+      - name: Set up PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, sqlite3
+          coverage: none
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install JavaScript dependencies and build frontend
+        run: |
+          pnpm install --frozen-lockfile --ignore-scripts
+          pnpm lint
+          pnpm build
+
+      - name: Install production PHP dependencies
+        run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-progress
+
+      - name: Build changed files package
+        env:
+          NOVINET_BUILD_REF: ${{ github.ref_name }}
+        run: |
+          chmod +x scripts/build_shared_hosting_update_artifact.sh
+          scripts/build_shared_hosting_update_artifact.sh "$GITHUB_WORKSPACE" "$GITHUB_WORKSPACE/.deployment-update-artifact" "${{ steps.baseline.outputs.base_commit }}" "${{ steps.baseline.outputs.target_commit }}"
+
+      - name: Validate incremental artifact
+        run: |
+          set -euo pipefail
+          BASE="$GITHUB_WORKSPACE/.deployment-update-artifact/novinet-shared-hosting-update"
+          test -f "$BASE/DEPLOY_INFO.txt"
+          test -f "$BASE/README_INCREMENTAL_DEPLOYMENT_FA.md"
+          test -f "$BASE/CORE_CHANGED_FILES.txt"
+          test -f "$BASE/PUBLIC_CHANGED_FILES.txt"
+          test -f "$BASE/REMOVALS_NOT_APPLIED.txt"
+          grep -qx "Deployed base commit: ${{ steps.baseline.outputs.base_commit }}" "$BASE/DEPLOY_INFO.txt"
+          grep -qx "Target commit: ${{ steps.baseline.outputs.target_commit }}" "$BASE/DEPLOY_INFO.txt"
+          grep -qx 'Target branch: main' "$BASE/DEPLOY_INFO.txt"
+          if grep -qx 'Test-only stale Vite asset cleanup guide: yes' "$BASE/DEPLOY_INFO.txt"; then
+            test -f "$BASE/TEST_ONLY_VITE_ASSET_CLEANUP_FA.md"
+          fi
+          if [ -f "$BASE/1_UPDATE_NOVINET_CORE_CHANGED_FILES.zip" ]; then
+            ! unzip -Z1 "$BASE/1_UPDATE_NOVINET_CORE_CHANGED_FILES.zip" | grep -Eq '(^|/)\.env($|\.)'
+          fi
+          if [ -f "$BASE/2_UPDATE_PUBLIC_HTML_CHANGED_FILES.zip" ]; then
+            ! unzip -Z1 "$BASE/2_UPDATE_PUBLIC_HTML_CHANGED_FILES.zip" | grep -Eq '(^|/)\.env($|\.)'
+            if grep -qx 'index.html' "$BASE/PUBLIC_CHANGED_FILES.txt"; then
+              unzip -Z1 "$BASE/2_UPDATE_PUBLIC_HTML_CHANGED_FILES.zip" | grep -qx 'index.html'
+              unzip -Z1 "$BASE/2_UPDATE_PUBLIC_HTML_CHANGED_FILES.zip" | grep -q '^assets/'
+            fi
+          fi
+          if [ -f "$BASE/SHA256SUMS.txt" ]; then
+            (cd "$BASE" && sha256sum --check SHA256SUMS.txt)
+          fi
+
+      - name: Upload changed files package
+        id: upload
+        uses: actions/upload-artifact@v7
+        with:
+          name: novinet-shared-hosting-update-${{ github.sha }}
+          path: .deployment-update-artifact/novinet-shared-hosting-update/
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
+
+      - name: Publish update instructions
+        run: |
+          {
+            echo '## ZIP تغییرات هاست اشتراکی آماده است'
+            echo
+            echo "مبنای نصب‌شده: \`${{ steps.baseline.outputs.base_commit }}\`"
+            echo "نسخهٔ هدف: \`${{ steps.baseline.outputs.target_commit }}\`"
+            echo
+            echo 'فقط ZIPهایی را Extract کنید که واقعاً داخل artifact وجود دارند. ابتدا `DEPLOY_INFO.txt` را بخوانید.'
+            echo
+            echo 'بعد از تست موفق روی هاست، workflow **Record Shared Hosting Deployment** را اجرا و Target commit را ثبت کنید تا مبنای ZIP تغییرات بعدی به‌روزرسانی شود.'
+            echo
+            echo "Artifact URL: ${{ steps.upload.outputs.artifact-url }}"
+            echo "SHA-256 digest: ${{ steps.upload.outputs.artifact-digest }}"
+          } >> "$GITHUB_STEP_SUMMARY"

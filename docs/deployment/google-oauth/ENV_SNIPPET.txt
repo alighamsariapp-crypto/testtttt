@@ -1,0 +1,5 @@
+# Add these lines to the existing production .env file. Do NOT upload this file as .env.
+GOOGLE_CLIENT_ID=YOUR_GOOGLE_CLIENT_ID
+GOOGLE_CLIENT_SECRET=YOUR_GOOGLE_CLIENT_SECRET
+GOOGLE_REDIRECT_URI=https://noovinnet.ir/api/v1/auth/google/callback
+GOOGLE_FRONTEND_REDIRECT=https://noovinnet.ir

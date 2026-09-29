@@ -1,0 +1,17 @@
+<IfModule mod_dir.c>
+    DirectoryIndex public/index.html public/index.php index.php
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Prevent rewrite loop when request is already under /public/
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Block access to hidden and sensitive files
+<FilesMatch "(^\.|\.env|composer\.(json|lock)|package(-lock)?\.json|artisan)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

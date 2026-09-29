@@ -1,0 +1,9 @@
+NoovinNet / ApexStore — Patch خطای 500 ثبت quote سرویس
+
+این ZIP را در ریشهٔ پروژهٔ Laravel، یعنی همان مسیر `public_html` که پوشه‌های `app` و `public` را دارد، Extract کنید. فقط فایل زیر overwrite می‌شود:
+
+`app/Modules/Admin/Requests/CreateQuoteRequest.php`
+
+علت رفع: ستون `service_quotes.valid_until` در MariaDB از نوع TIMESTAMP است و تاریخ 2099 خارج از بازهٔ مجاز TIMESTAMP است؛ backend پیش‌تر چنین تاریخ معتبری از دید FormRequest را می‌پذیرفت و هنگام ذخیره به HTTP 500 می‌رسید. اکنون اعتبارسنجی تاریخ بیش از `2038-01-19 03:14:07` را با پاسخ validation 422 رد می‌کند؛ بنابراین 500 به خطای قابل‌فهم و قابل‌مدیریت تبدیل می‌شود.
+
+کنترل‌های محلی: lint PASS، frontend regression PASS، Laravel suite برابر 31 tests / 185 assertions PASS و build PASS. پس از Extract بنویسید «اکسترکت شد» تا quote با تاریخ معتبر و سپس پذیرش مشتری در production بازآزمایی شود.

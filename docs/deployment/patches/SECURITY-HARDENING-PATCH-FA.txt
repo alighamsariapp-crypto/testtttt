@@ -1,0 +1,15 @@
+NoovinNet / ApexStore — Security Hardening Patch
+
+این فایل ZIP را در ریشهٔ پروژه، یعنی همان `public_html` که پوشه‌های `app` و `public` داخل آن هستند، Extract کنید. فقط سه فایل زیر جایگزین می‌شوند:
+
+- `routes/api.php`
+- `app/Modules/Auth/Services/AuthService.php`
+- `public/.htaccess`
+
+رفع‌ها:
+
+1. لینک تایید ایمیل اکنون باید signature موقت Laravel داشته باشد. لینک بدون signature به‌جای تایید حساب با پاسخ 403 رد می‌شود.
+2. پس از reset password، تمام tokenهای Sanctum قبلی کاربر revoke می‌شوند تا sessionهای قدیمی قابل استفاده نمانند.
+3. مسیرهای SPA که مستقیم توسط Apache سرو می‌شوند، مانند `/auth` و `/admin/*`، اکنون همان headerهای امنیتی پایه را دریافت می‌کنند: CSP، HSTS، X-Frame-Options، nosniff، Referrer-Policy و Permissions-Policy.
+
+کنترل‌های محلی: TypeScript lint PASS و Laravel suite برابر 33 tests / 192 assertions PASS. پس از Extract بنویسید «اکسترکت شد» تا headerهای مستقیم SPA و رفتار verification امضاشده در production بازآزمایی شوند.

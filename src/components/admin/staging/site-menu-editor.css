@@ -1,0 +1,34 @@
+/* Design: compact row actions and inline menu editor for the Novinet Site workspace; mobile prioritizes readable labels and touch targets. */
+.site-nav-list article { grid-template-columns: 30px minmax(0,1fr) 58px auto auto; }
+.site-menu-row-actions { display: flex; align-items: center; gap: 3px; }
+.site-menu-row-actions button { width: 26px; height: 26px; display: grid; place-items: center; border: 1px solid #e1e8ef; border-radius: 4px; background: #fff; color: #64748b; padding: 0; }
+.site-menu-row-actions button:hover:not(:disabled) { border-color: #bfdbfe; background: #eff6ff; color: #2563eb; }
+.site-menu-row-actions button:disabled { cursor: not-allowed; opacity: .35; }
+.site-menu-row-actions button.danger { color: #e11d48; }
+.site-menu-row-actions button.danger:hover { border-color: #fecdd3; background: #fff1f2; }
+
+.site-menu-editor { border-top: 1px solid #dfe7ef; background: #f8fbff; padding: 13px 14px; }
+.site-menu-editor > header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.site-menu-editor > header span, .site-menu-editor > header b { display: block; }
+.site-menu-editor > header span { color: #2563eb; font-size: 9px; font-weight: 800; }
+.site-menu-editor > header b { margin-top: 4px; color: #334155; font-size: 11px; }
+.site-menu-editor > header > button { width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid #dfe7ef; border-radius: 5px; background: #fff; color: #64748b; padding: 0; }
+.site-menu-form-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(105px,.55fr) auto; align-items: end; gap: 9px; margin-top: 12px; }
+.site-menu-form-grid label { min-width: 0; display: grid; gap: 5px; color: #64748b; font-size: 8px; font-weight: 700; }
+.site-menu-form-grid input:not([type="checkbox"]), .site-menu-form-grid select { min-width: 0; height: 34px; border: 1px solid #dbe3ec; border-radius: 5px; background: #fff; color: #334155; padding: 0 8px; font-size: 10px; outline: none; }
+.site-menu-form-grid input:focus, .site-menu-form-grid select:focus { border-color: #60a5fa; box-shadow: 0 0 0 2px #dbeafe; }
+.site-menu-form-grid .menu-visibility-field { min-height: 34px; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.menu-visibility-field input { width: 15px; height: 15px; accent-color: #2563eb; }
+.site-menu-error { margin: 8px 0 0; border: 1px solid #fecdd3; border-radius: 5px; background: #fff1f2; color: #be123c; padding: 6px 8px; font-size: 9px; font-weight: 700; }
+.site-menu-editor > footer { display: flex; justify-content: flex-end; gap: 7px; margin-top: 12px; }
+
+@media (max-width: 760px) {
+  .site-nav-list article { grid-template-columns: 29px minmax(0,1fr) auto; align-items: start; }
+  .site-nav-list article > .site-row-switch { grid-column: 2; grid-row: 2; justify-self: start; margin-top: 3px; }
+  .site-menu-row-actions { grid-column: 3; grid-row: 1 / span 2; align-self: center; flex-wrap: wrap; justify-content: flex-end; width: 58px; }
+  .site-menu-row-actions button { width: 27px; height: 27px; }
+  .site-menu-editor { padding: 12px 10px; }
+  .site-menu-form-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .site-menu-form-grid label:first-child, .site-menu-form-grid label:nth-child(2) { grid-column: 1 / -1; }
+  .site-menu-editor > footer .site-save, .site-menu-editor > footer .site-reset { flex: 1; }
+}

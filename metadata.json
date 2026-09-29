@@ -1,0 +1,6 @@
+{
+  "name": "NoovinNet / ApexStore Backend",
+  "description": "Production-grade modular monolith Laravel 12 backend and React/Tailwind frontend for NoovinNet ApexStore e-commerce, telecommunications equipment, and online engineering services.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

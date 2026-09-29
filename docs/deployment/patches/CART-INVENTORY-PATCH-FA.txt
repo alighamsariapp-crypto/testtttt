@@ -1,0 +1,18 @@
+NoovinNet / ApexStore — Patch موجودی سبد و checkout
+
+این ZIP باید در ریشهٔ پروژهٔ Laravel، یعنی همان مسیر فعلی که پوشه‌های `app` و `public` در آن قرار دارند، Extract شود. طبق استقرار قبلی شما این مسیر `/domains/noovinnet.ir/public_html` بوده است. فایل‌ها باید overwrite شوند و داخل پوشهٔ جدید قرار نگیرند.
+
+محتوای patch:
+- `app/Modules/Inventory/Models/Inventory.php`
+- `app/Modules/Inventory/Services/InventoryService.php`
+- `app/Modules/Cart/Services/CartService.php`
+
+علت رفع: API کاتالوگ برای محصول QA مقدار `inventory.quantity = 2` برمی‌گرداند، اما production هنگام افزودن به سبد موجودی قابل‌فروش را 0 تشخیص می‌داد. این patch محاسبهٔ موجودی قابل فروش را به متد صریح `availableQuantity()` منتقل می‌کند و سبد و checkout هر دو همان متد را فراخوانی می‌کنند.
+
+پس از Extract، 30 تا 60 ثانیه صبر کنید و فروشگاه را با Ctrl+F5 تازه‌سازی کنید. سپس فقط بنویسید «اکسترکت شد» تا افزودن محصول QA به سبد و گردش خرید کیف پول دوباره به‌صورت زنده آزمون شود.
+
+کنترل‌های محلی پیش از استقرار:
+- TypeScript lint: PASS
+- Frontend product-mapper regression: PASS
+- Laravel suite: 29 tests / 172 assertions PASS
+- Vite build: PASS

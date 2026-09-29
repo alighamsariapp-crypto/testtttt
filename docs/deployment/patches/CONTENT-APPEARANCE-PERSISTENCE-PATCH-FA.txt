@@ -1,0 +1,12 @@
+NoovinNet / ApexStore — Patch اتصال محتوای وبلاگ و Appearance به persistence
+
+این ZIP را در ریشهٔ پروژه، یعنی `public_html` که پوشهٔ `public` داخل آن وجود دارد، Extract کنید. باید `public/index.html` و فایل جدید داخل `public/assets` overwrite شوند؛ فایل‌ها را در پوشهٔ جدید استخراج نکنید.
+
+رفع‌های انجام‌شده بدون بازطراحی UI:
+
+1. تب «مدیریت وبلاگ و محتوای سایت» دیگر فهرست hard-coded و local-only ندارد. ایجاد، ویرایش عنوان و حذف مقاله اکنون از عملیات persistent موجود در AppContext استفاده می‌کند و داده را در گروه تنظیمات `blog_posts` ذخیره می‌کند.
+2. تب «طراحی بنر، اسلایدر و ظاهر صفحه اصلی» دیگر صرفاً toast نمایشی نیست. ذخیرهٔ hero و افزودن/حذف بنر اکنون از گروه تنظیمات `appearance` و API واقعی استفاده می‌کند.
+
+کنترل‌های محلی: TypeScript lint PASS، regression frontend PASS، Laravel suite برابر 31 tests / 185 assertions PASS و Vite build PASS.
+
+پس از Extract فقط بنویسید «اکسترکت شد». سپس persistence تنظیمات/blog/appearance را با دادهٔ QA و بازگردانی کنترل‌شده در production بازآزمایی می‌کنم.

@@ -1,0 +1,9 @@
+NoovinNet / ApexStore — Patch پایداری ورود ادمین
+
+این ZIP را در همان مسیر قبلی پروژه، یعنی `/domains/noovinnet.ir/public_html`، Extract کنید. فایل `public/index.html` و فایل جدید داخل `public/assets` باید overwrite شوند و نباید ZIP را داخل پوشه‌ای جدید استخراج کنید.
+
+رفع انجام‌شده مربوط به بازیابی نشست در frontend است. پیش از این، هنگام بارگذاری یا refresh صفحه با token معتبر، اگر یکی از endpointهای فرعی حساب (نشانی، سفارش، علاقه‌مندی، کیف پول، سبد یا نشست‌ها) موقتاً خطا می‌داد، `Promise.all` کل بازیابی را متوقف می‌کرد و user در state ثبت نمی‌شد؛ نتیجه می‌توانست بازگشت اشتباه به فرم ورود ادمین باشد. اکنون identity فقط با `/users/me` اعتبارسنجی می‌شود و endpointهای فرعی با `Promise.allSettled` مستقل بارگذاری می‌شوند. شکست موقت هر endpoint فرعی نشست معتبر را حذف نمی‌کند.
+
+کنترل‌های پیش از استقرار: TypeScript lint PASS، regression frontend PASS، Laravel suite برابر 29 tests / 172 assertions PASS و Vite build PASS.
+
+پس از Extract، صفحهٔ پنل ادمین را با Ctrl+F5 باز کنید و ورود را تکرار کنید. در صورت مشاهدهٔ خطا، فقط متن خطا را بدون رمز ارسال کنید.

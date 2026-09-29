@@ -1,0 +1,108 @@
+name: Build Shared Hosting Artifact
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: shared-hosting-artifact-main
+  cancel-in-progress: false
+
+jobs:
+  build-artifact:
+    name: Build File Manager deployment package
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out selected source
+        uses: actions/checkout@v6
+
+      - name: Set up PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, sqlite3
+          coverage: none
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install JavaScript dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Validate TypeScript and build frontend
+        run: |
+          pnpm lint
+          pnpm build
+
+      - name: Install production PHP dependencies
+        run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-progress
+
+      - name: Build File Manager deployment artifact
+        env:
+          NOVINET_BUILD_COMMIT: ${{ github.sha }}
+          NOVINET_BUILD_REF: ${{ github.ref_name }}
+        run: |
+          chmod +x scripts/build_shared_hosting_artifact.sh
+          scripts/build_shared_hosting_artifact.sh "$GITHUB_WORKSPACE" "$GITHUB_WORKSPACE/.deployment-artifact"
+
+      - name: Validate artifact contents
+        run: |
+          set -euo pipefail
+          BASE="$GITHUB_WORKSPACE/.deployment-artifact/novinet-shared-hosting"
+          test -f "$BASE/1_UPLOAD_TO_HOME_NOVINET_CORE.zip"
+          test -f "$BASE/2_UPLOAD_TO_PUBLIC_HTML.zip"
+          test -f "$BASE/database/FRESH_DATABASE_IMPORT.sql"
+          test -f "$BASE/MIGRATION_RUN_URL.txt"
+          test -f "$BASE/README_FILE_MANAGER_DEPLOYMENT_FA.md"
+          test -f "$BASE/BUILD_INFO.txt"
+          test -f "$BASE/SHA256SUMS.txt"
+          grep -qx "Source branch: $GITHUB_REF_NAME" "$BASE/BUILD_INFO.txt"
+          grep -qx "Source commit: $GITHUB_SHA" "$BASE/BUILD_INFO.txt"
+          (cd "$BASE" && sha256sum --check SHA256SUMS.txt)
+          unzip -Z1 "$BASE/1_UPLOAD_TO_HOME_NOVINET_CORE.zip" > /tmp/novinet-core-artifact-files.txt
+          unzip -Z1 "$BASE/2_UPLOAD_TO_PUBLIC_HTML.zip" > /tmp/novinet-public-artifact-files.txt
+          if grep -qx 'novinet_core/.env' /tmp/novinet-core-artifact-files.txt; then
+            echo 'Unsafe artifact: .env must never be bundled.' >&2
+            exit 1
+          fi
+          grep -qx 'novinet_core/vendor/autoload.php' /tmp/novinet-core-artifact-files.txt
+          grep -qx 'novinet_core/BUILD_INFO.txt' /tmp/novinet-core-artifact-files.txt
+          unzip -p "$BASE/1_UPLOAD_TO_HOME_NOVINET_CORE.zip" novinet_core/BUILD_INFO.txt | grep -qx "Source branch: $GITHUB_REF_NAME"
+          unzip -p "$BASE/1_UPLOAD_TO_HOME_NOVINET_CORE.zip" novinet_core/BUILD_INFO.txt | grep -qx "Source commit: $GITHUB_SHA"
+          grep -qx 'index.php' /tmp/novinet-public-artifact-files.txt
+          grep -q '^assets/' /tmp/novinet-public-artifact-files.txt
+
+      - name: Upload File Manager package
+        id: upload
+        uses: actions/upload-artifact@v7
+        with:
+          name: novinet-shared-hosting-${{ github.sha }}
+          path: .deployment-artifact/novinet-shared-hosting/
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
+
+      - name: Publish download instructions
+        run: |
+          {
+            echo '## بستهٔ هاست اشتراکی آماده است'
+            echo
+            echo 'از بخش **Artifacts** این اجرا، فایل `novinet-shared-hosting-${{ github.sha }}` را دانلود کنید.'
+            echo
+            echo 'داخل artifact دو ZIP اصلی، `BUILD_INFO.txt` و فایل راهنمای فارسی قرار دارد. قبل از upload، branch و commit داخل `BUILD_INFO.txt` را با release موردنظر تطبیق دهید. فایل `.env` واقعی و اطلاعات دیتابیس عمداً داخل artifact نیستند.'
+            echo
+            echo "Artifact URL: ${{ steps.upload.outputs.artifact-url }}"
+            echo "SHA-256 digest: ${{ steps.upload.outputs.artifact-digest }}"
+          } >> "$GITHUB_STEP_SUMMARY"

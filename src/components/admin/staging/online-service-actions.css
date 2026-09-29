@@ -1,0 +1,27 @@
+.service-list .service-row-edit {
+  width: 28px;
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dbe5ef;
+  border-radius: 4px;
+  background: #fff;
+  color: #2563eb;
+  padding: 0;
+  font-size: 0;
+}
+
+.service-list .service-row-edit:hover {
+  border-color: #93c5fd;
+  background: #eff6ff;
+}
+
+.service-list .service-row-delete {
+  color: #e11d48;
+}
+
+.service-list .service-row-delete:hover {
+  border-color: #fecdd3;
+  background: #fff1f2;
+}

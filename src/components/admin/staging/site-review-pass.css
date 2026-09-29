@@ -1,0 +1,24 @@
+/* Design review pass: denser control-center rhythm, Persian-first staging language, and stronger four-part operational summary. */
+@media (min-width: 761px) {
+  .site-command { min-height: 68px; padding-bottom: 12px; }
+  .site-split-layout { grid-template-columns: minmax(300px,.9fr) minmax(440px,1.1fr); gap: 12px; padding-top: 12px; }
+  .site-preview-canvas { min-height: 246px; padding: 14px; }
+  .site-control-panel { padding: 13px; }
+  .site-template-row { margin-top: 11px; padding: 10px 0; }
+  .site-form-grid { padding: 11px 0; }
+  .site-protection { margin-top: 11px; padding: 8px; }
+}
+
+.site-status-strip { background: #fff; border-top: 2px solid #dbeafe; }
+.site-status-strip span:first-child { background: #f8fbff; }
+.site-status-strip small { font-weight: 700; }
+.site-status-strip b { font-weight: 800; }
+.site-status-strip b.site-stage-value { display: inline-flex; align-items: center; width: fit-content; border-radius: 99px; background: #eff6ff; padding: 3px 6px; }
+.site-shortcuts { margin-top: 12px; }
+.site-shortcuts > header { background: #fbfcfe; }
+.site-shortcuts button > span { border: 1px solid #dbeafe; }
+
+@media (max-width: 760px) {
+  .site-command-actions .site-save { flex: 1; }
+  .site-preview-canvas { min-height: 282px; }
+}
