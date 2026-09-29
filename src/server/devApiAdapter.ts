@@ -327,7 +327,7 @@ export function mountDevelopmentApiRoutes(app: express.Express, db: Database): v
   });
 
   const uploadWrapper = (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    memoryUpload.single('image')(req, res, (err: any) => {
+    (memoryUpload.single('image') as any)(req, res, (err: any) => {
       if (err) {
         if (err.code === 'LIMIT_FILE_SIZE') {
           return res.status(422).json({
