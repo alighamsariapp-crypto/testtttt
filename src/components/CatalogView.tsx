@@ -162,10 +162,16 @@ export const CatalogView: React.FC = () => {
   } = useApp();
   const storefrontProducts = useMemo(() => getStorefrontProducts(products), [products]);
 
+  const maxCatalogPrice = useMemo(() => {
+    if (!products || products.length === 0) return 1_000_000_000;
+    const maxVal = Math.max(...products.map(p => Number(p.effective_price || p.base_price || 0)));
+    return Math.max(1_000_000_000, Math.ceil(maxVal / 100_000_000) * 100_000_000);
+  }, [products]);
+
   // Search & Filter States
   const [searchQuery, setSearchQuery] = useState('');
   const [inStockOnly, setInStockOnly] = useState(false);
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 90000000]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000000000]);
   const [sortBy, setSortBy] = useState<'bestseller' | 'newest' | 'price_asc' | 'price_desc' | 'rating'>('bestseller');
   
   // Smart dynamic filters state
@@ -377,6 +383,60 @@ export const CatalogView: React.FC = () => {
     return getCategoryDescendantSlugs(selectedCategorySlug, categories);
   }, [categories, selectedCategorySlug]);
 
+  // Compute all descendant category IDs for the current active category
+  const descendantCategoryIds = useMemo(() => {
+    if (!activeCategory) return [];
+    const flat = flattenCategories(categories);
+    const ids: number[] = [activeCategory.id];
+    const findChildIds = (parentId: number) => {
+      flat.filter(c => c.parent_id === parentId).forEach(child => {
+        if (!ids.includes(child.id)) {
+          ids.push(child.id);
+          findChildIds(child.id);
+        }
+      });
+    };
+    findChildIds(activeCategory.id);
+    return ids;
+  }, [categories, activeCategory]);
+
+  const isProductMatchingCategory = (p: Product): boolean => {
+    if (!selectedCategorySlug) return true;
+    const normActive = normalizeCategorySlug(selectedCategorySlug);
+
+    // 1. Direct database category ID relationship
+    if (p.category_id && descendantCategoryIds.includes(p.category_id)) {
+      return true;
+    }
+
+    // 2. Canonical category slugs & hierarchy path
+    if (p.category_slug && descendantSlugs.includes(normalizeCategorySlug(p.category_slug))) {
+      return true;
+    }
+    if (p.subcategory_slug && descendantSlugs.includes(normalizeCategorySlug(p.subcategory_slug))) {
+      return true;
+    }
+    if (p.sub_subcategory_slug && descendantSlugs.includes(normalizeCategorySlug(p.sub_subcategory_slug))) {
+      return true;
+    }
+    if ((p as any).category?.slug && descendantSlugs.includes(normalizeCategorySlug((p as any).category.slug))) {
+      return true;
+    }
+    if (p.category_path && p.category_path.some(s => descendantSlugs.includes(normalizeCategorySlug(s)))) {
+      return true;
+    }
+
+    // 3. Normalized direct slug match
+    if (p.category_slug && normalizeCategorySlug(p.category_slug) === normActive) {
+      return true;
+    }
+    if ((p as any).category?.slug && normalizeCategorySlug((p as any).category.slug) === normActive) {
+      return true;
+    }
+
+    return false;
+  };
+
   // Immediate child subcategories for top selector bar
   const directChildCategories = useMemo(() => {
     if (!activeCategory) {
@@ -438,17 +498,7 @@ export const CatalogView: React.FC = () => {
   const dynamicFilterOptions = useMemo(() => {
     // Get products matching current category scope
     const pool = selectedCategorySlug 
-      ? storefrontProducts.filter(p => {
-          const normActive = normalizeCategorySlug(selectedCategorySlug);
-          return (
-            descendantSlugs.includes(p.category_slug) ||
-            (p.subcategory_slug && descendantSlugs.includes(p.subcategory_slug)) ||
-            (p.sub_subcategory_slug && descendantSlugs.includes(p.sub_subcategory_slug)) ||
-            (p.category_path && p.category_path.some(s => descendantSlugs.includes(normalizeCategorySlug(s)))) ||
-            (normActive === 'simcard' && p.category_slug === 'simcard') ||
-            (normActive === 'laptops' && p.category_slug === 'laptops')
-          );
-        })
+      ? storefrontProducts.filter(isProductMatchingCategory)
       : storefrontProducts;
 
     const brands = new Set<string>();
@@ -503,25 +553,14 @@ export const CatalogView: React.FC = () => {
       wifiStandards: Array.from(wifiStandards),
       ports: Array.from(ports),
     };
-  }, [storefrontProducts, selectedCategorySlug, descendantSlugs]);
+  }, [storefrontProducts, selectedCategorySlug, descendantSlugs, descendantCategoryIds, categories]);
 
   // Filtering Logic
   const filteredProducts = useMemo(() => {
     return storefrontProducts.filter(product => {
       // 1. Hierarchical Category Filter
-      if (selectedCategorySlug) {
-        const normActive = normalizeCategorySlug(selectedCategorySlug);
-        const matchCategory = 
-          descendantSlugs.includes(product.category_slug) ||
-          (product.subcategory_slug && descendantSlugs.includes(product.subcategory_slug)) ||
-          (product.sub_subcategory_slug && descendantSlugs.includes(product.sub_subcategory_slug)) ||
-          (product.category_path && product.category_path.some(s => descendantSlugs.includes(normalizeCategorySlug(s)))) ||
-          (normActive === 'simcard' && product.category_slug === 'simcard') ||
-          (normActive === 'laptops' && product.category_slug === 'laptops');
-
-        if (!matchCategory) {
-          return false;
-        }
+      if (selectedCategorySlug && !isProductMatchingCategory(product)) {
+        return false;
       }
 
       // 2. Search Query Filter
@@ -542,7 +581,10 @@ export const CatalogView: React.FC = () => {
 
       // 4. Price Range Filter
       const price = product.effective_price || product.base_price;
-      if (price < priceRange[0] || price > priceRange[1]) {
+      if (priceRange[0] > 0 && price < priceRange[0]) {
+        return false;
+      }
+      if (priceRange[1] > 0 && priceRange[1] < maxCatalogPrice && price > priceRange[1]) {
         return false;
       }
 
@@ -701,14 +743,14 @@ export const CatalogView: React.FC = () => {
     if (poeOnly) count++;
     if (selectedColors.length) count += selectedColors.length;
     if (selectedDevices.length) count += selectedDevices.length;
-    if (priceRange[0] > 0 || priceRange[1] < 90000000) count++;
+    if (priceRange[0] > 0 || (priceRange[1] > 0 && priceRange[1] < maxCatalogPrice)) count++;
     if (searchQuery.trim()) count++;
     return count;
   }, [
     inStockOnly, selectedBrands, selectedSimOperators, selectedSimTypes, selectedSimNumberTypes,
     selectedSimPrefixes, selectedCpus, selectedRams, selectedStorages, selectedGpus, selectedScreenSizes,
     selectedNetworkGens, selectedModemTypes, selectedWifiStandards, selectedPorts, poeOnly,
-    selectedColors, selectedDevices, priceRange, searchQuery
+    selectedColors, selectedDevices, priceRange, searchQuery, maxCatalogPrice
   ]);
 
   // Reset all filters except category
@@ -732,7 +774,7 @@ export const CatalogView: React.FC = () => {
     setPoeOnly(false);
     setSelectedColors([]);
     setSelectedDevices([]);
-    setPriceRange([0, 90000000]);
+    setPriceRange([0, maxCatalogPrice]);
     setSortBy('bestseller');
   };
 
@@ -823,30 +865,15 @@ export const CatalogView: React.FC = () => {
               دسته‌بندی‌های معتبر پیشنهادی:
             </div>
             <div className="flex flex-wrap justify-center gap-2">
-              <button
-                onClick={() => navigateToCategory('laptops', ['laptops'])}
-                className="px-3 py-1.5 rounded-xl bg-slate-50 hover:bg-blue-50 hover:text-blue-600 text-xs font-semibold text-slate-600 border border-slate-100 transition cursor-pointer"
-              >
-                لپ‌تاپ و اولترابوک
-              </button>
-              <button
-                onClick={() => navigateToCategory('simcard', ['sim-card'])}
-                className="px-3 py-1.5 rounded-xl bg-slate-50 hover:bg-blue-50 hover:text-blue-600 text-xs font-semibold text-slate-600 border border-slate-100 transition cursor-pointer"
-              >
-                سیم‌کارت و ارتباطات
-              </button>
-              <button
-                onClick={() => navigateToCategory('modem-internet', ['modem-internet'])}
-                className="px-3 py-1.5 rounded-xl bg-slate-50 hover:bg-blue-50 hover:text-blue-600 text-xs font-semibold text-slate-600 border border-slate-100 transition cursor-pointer"
-              >
-                مودم و اینترنت
-              </button>
-              <button
-                onClick={() => navigateToCategory('networking-equipment', ['networking-equipment'])}
-                className="px-3 py-1.5 rounded-xl bg-slate-50 hover:bg-blue-50 hover:text-blue-600 text-xs font-semibold text-slate-600 border border-slate-100 transition cursor-pointer"
-              >
-                تجهیزات شبکه
-              </button>
+              {flattenCategories(categories).filter(c => !c.parent_id).slice(0, 6).map(cat => (
+                <button
+                  key={cat.id}
+                  onClick={() => navigateToCategory(cat.slug, [cat.slug])}
+                  className="px-3 py-1.5 rounded-xl bg-slate-50 hover:bg-blue-50 hover:text-blue-600 text-xs font-semibold text-slate-600 border border-slate-100 transition cursor-pointer"
+                >
+                  {cat.name}
+                </button>
+              ))}
             </div>
           </div>
         </div>
@@ -1461,30 +1488,30 @@ export const CatalogView: React.FC = () => {
                   <input
                     type="range"
                     min="0"
-                    max="90000000"
-                    step="500000"
-                    value={priceRange[1]}
+                    max={maxCatalogPrice}
+                    step="5000000"
+                    value={Math.min(priceRange[1], maxCatalogPrice)}
                     onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
                     className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
                   />
                   <div className="flex gap-2">
                     <button
-                      onClick={() => setPriceRange([0, 5000000])}
-                      className="flex-1 py-1 text-[10px] font-bold bg-slate-50 hover:bg-blue-50 rounded-lg text-slate-600"
+                      onClick={() => setPriceRange([0, 250000000])}
+                      className="flex-1 py-1 text-[10px] font-bold bg-slate-50 hover:bg-blue-50 rounded-lg text-slate-600 cursor-pointer"
                     >
-                      زیر ۵ م
+                      زیر ۲۵ م
                     </button>
                     <button
-                      onClick={() => setPriceRange([5000000, 25000000])}
-                      className="flex-1 py-1 text-[10px] font-bold bg-slate-50 hover:bg-blue-50 rounded-lg text-slate-600"
+                      onClick={() => setPriceRange([250000000, 500000000])}
+                      className="flex-1 py-1 text-[10px] font-bold bg-slate-50 hover:bg-blue-50 rounded-lg text-slate-600 cursor-pointer"
                     >
-                      ۵ تا ۲۵ م
+                      ۲۵ تا ۵۰ م
                     </button>
                     <button
-                      onClick={() => setPriceRange([25000000, 90000000])}
-                      className="flex-1 py-1 text-[10px] font-bold bg-slate-50 hover:bg-blue-50 rounded-lg text-slate-600"
+                      onClick={() => setPriceRange([500000000, maxCatalogPrice])}
+                      className="flex-1 py-1 text-[10px] font-bold bg-slate-50 hover:bg-blue-50 rounded-lg text-slate-600 cursor-pointer"
                     >
-                      بالای ۲۵ م
+                      بالای ۵۰ م
                     </button>
                   </div>
                 </div>
@@ -2139,11 +2166,11 @@ export const CatalogView: React.FC = () => {
                       <span>{formatMoney(priceRange[0], 'IRR')}</span>
                       <span>تا {formatMoney(priceRange[1], 'IRR')}</span>
                     </div>
-                    <input type="range" min="0" max="90000000" step="500000" value={priceRange[1]} onChange={(event) => setPriceRange([priceRange[0], Number(event.target.value)])} className="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-slate-200 accent-blue-600" />
+                    <input type="range" min="0" max={maxCatalogPrice} step="5000000" value={Math.min(priceRange[1], maxCatalogPrice)} onChange={(event) => setPriceRange([priceRange[0], Number(event.target.value)])} className="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-slate-200 accent-blue-600" />
                     <div className="grid grid-cols-3 gap-2">
-                      <button type="button" onClick={() => setPriceRange([0, 5000000])} className="min-h-9 rounded-xl bg-white px-1 text-[10px] font-bold text-slate-600 ring-1 ring-slate-200">زیر ۵ م</button>
-                      <button type="button" onClick={() => setPriceRange([5000000, 25000000])} className="min-h-9 rounded-xl bg-white px-1 text-[10px] font-bold text-slate-600 ring-1 ring-slate-200">۵ تا ۲۵ م</button>
-                      <button type="button" onClick={() => setPriceRange([25000000, 90000000])} className="min-h-9 rounded-xl bg-white px-1 text-[10px] font-bold text-slate-600 ring-1 ring-slate-200">بالای ۲۵ م</button>
+                      <button type="button" onClick={() => setPriceRange([0, 250000000])} className="min-h-9 rounded-xl bg-white px-1 text-[10px] font-bold text-slate-600 ring-1 ring-slate-200">زیر ۲۵ م</button>
+                      <button type="button" onClick={() => setPriceRange([250000000, 500000000])} className="min-h-9 rounded-xl bg-white px-1 text-[10px] font-bold text-slate-600 ring-1 ring-slate-200">۲۵ تا ۵۰ م</button>
+                      <button type="button" onClick={() => setPriceRange([500000000, maxCatalogPrice])} className="min-h-9 rounded-xl bg-white px-1 text-[10px] font-bold text-slate-600 ring-1 ring-slate-200">بالای ۵۰ م</button>
                     </div>
                   </div>
                 )}

@@ -132,7 +132,7 @@ import {
   handleExchangePaymentStatusToken,
   handleSimulateTestPayment,
 } from "./paymentRoutes";
-import { queryProductsFromDatabase, recordAuditLog } from "./db";
+import { queryProductsFromDatabase, queryRows, recordAuditLog } from "./db";
 
 /**
  * Mounts development-only mock / SQLite API routes on an Express app.
@@ -562,10 +562,34 @@ export function mountDevelopmentApiRoutes(app: express.Express, db: Database): v
   const scopedProducts = (categorySlug?: string) => {
     const prods = queryProductsFromDatabase(db);
     if (!categorySlug) return prods;
-    const current = categories.find((category) => category.slug === categorySlug);
+    const catRows = queryRows(db, "SELECT id, parent_id, slug, name FROM categories WHERE is_active = 1");
+    let decodedSlug = categorySlug;
+    try {
+      decodedSlug = decodeURIComponent(categorySlug);
+    } catch {}
+    const clean = decodedSlug.trim().toLowerCase();
+    const normalized = clean === 'modem' || clean === 'modem-internet' || clean === 'modems' || clean === 'internet'
+      ? 'modems'
+      : (clean === 'laptop' ? 'laptops' : (clean === 'network' || clean === 'networking' ? 'networking-equipment' : clean));
+
+    const current = catRows.find((category: any) => 
+      category.slug.toLowerCase() === clean || 
+      category.slug.toLowerCase() === normalized || 
+      String(category.name).toLowerCase() === clean
+    );
     if (!current) return [];
-    const ids = [current.id, ...categories.filter((category) => category.parent_id === current.id).map((category) => category.id)];
-    return prods.filter((product) => ids.includes(product.category_id));
+    const descendantIds: number[] = [Number(current.id)];
+    const findChildren = (parentId: number) => {
+      catRows.filter((category: any) => Number(category.parent_id) === parentId).forEach((child: any) => {
+        const cId = Number(child.id);
+        if (!descendantIds.includes(cId)) {
+          descendantIds.push(cId);
+          findChildren(cId);
+        }
+      });
+    };
+    findChildren(Number(current.id));
+    return prods.filter((product) => descendantIds.includes(Number(product.category_id)));
   };
 
   app.get('/api/v1/products', (req, res) => response(res, scopedProducts(String(req.query.category_slug || '')), 'محصولات دریافت شدند.'));

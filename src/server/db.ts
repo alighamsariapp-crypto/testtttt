@@ -1578,9 +1578,57 @@ export function formatProductFromDb(db: Database, pRow: any): any {
 
   const inStock = totalStock > 0;
 
+  let categorySlug: string | undefined = undefined;
+  let categoryName: string | undefined = undefined;
+  let subcategorySlug: string | undefined = undefined;
+  let subSubcategorySlug: string | undefined = undefined;
+  let categoryPath: string[] = [];
+  let categoryObj: { id: number; name: string; slug: string } | null = null;
+
+  if (pRow.category_id !== null && pRow.category_id !== undefined) {
+    const catId = Number(pRow.category_id);
+    const catRows = queryRows(db, "SELECT id, parent_id, name, slug FROM categories WHERE id = ?", [catId]);
+    if (catRows.length > 0) {
+      const cat = catRows[0];
+      categoryObj = { id: Number(cat.id), name: String(cat.name), slug: String(cat.slug) };
+      categoryName = String(cat.name);
+
+      const chain: Array<{ id: number; name: string; slug: string; parent_id: number | null }> = [cat];
+      let currentParentId = cat.parent_id !== null && cat.parent_id !== undefined ? Number(cat.parent_id) : null;
+      while (currentParentId !== null && currentParentId !== undefined && currentParentId > 0) {
+        const parentRows = queryRows(db, "SELECT id, parent_id, name, slug FROM categories WHERE id = ?", [currentParentId]);
+        if (parentRows.length > 0) {
+          const parentCat = parentRows[0];
+          chain.unshift(parentCat);
+          currentParentId = parentCat.parent_id !== null && parentCat.parent_id !== undefined ? Number(parentCat.parent_id) : null;
+        } else {
+          break;
+        }
+      }
+
+      categoryPath = chain.map((c) => String(c.slug));
+      if (chain.length === 1) {
+        categorySlug = chain[0].slug;
+      } else if (chain.length === 2) {
+        categorySlug = chain[0].slug;
+        subcategorySlug = chain[1].slug;
+      } else if (chain.length >= 3) {
+        categorySlug = chain[0].slug;
+        subcategorySlug = chain[1].slug;
+        subSubcategorySlug = chain[2].slug;
+      }
+    }
+  }
+
   return {
     id: pId,
     category_id: pRow.category_id !== null && pRow.category_id !== undefined ? Number(pRow.category_id) : null,
+    category: categoryObj,
+    category_name: categoryName,
+    category_slug: categorySlug,
+    subcategory_slug: subcategorySlug,
+    sub_subcategory_slug: subSubcategorySlug,
+    category_path: categoryPath.length > 0 ? categoryPath : undefined,
     name: String(pRow.name),
     slug: String(pRow.slug),
     sku: String(pRow.sku),

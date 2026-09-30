@@ -17,7 +17,7 @@ export const normalizeCategorySlug = (slug: string): string => {
   const clean = decodedSlug.trim().toLowerCase();
   if (clean === 'sim-card' || clean === 'sim_card' || clean === 'simcards') return 'simcard';
   if (clean === 'laptop' || clean === 'laptops-equipment') return 'laptops';
-  if (clean === 'modem' || clean === 'modems' || clean === 'internet') return 'modem-internet';
+  if (clean === 'modem' || clean === 'modem-internet' || clean === 'modems' || clean === 'internet') return 'modems';
   if (clean === 'network' || clean === 'networking') return 'networking-equipment';
   if (clean === 'accessory') return 'accessories';
   return clean;
@@ -47,18 +47,106 @@ export const findCategoryBySlug = (
   slug: string | null | undefined, 
   categories: Category[]
 ): Category | undefined => {
-  if (!slug) return undefined;
-  const normalized = normalizeCategorySlug(slug);
+  if (!slug || !categories || categories.length === 0) return undefined;
+  let decodedSlug = slug;
+  try {
+    decodedSlug = decodeURIComponent(slug);
+  } catch {}
+  const clean = decodedSlug.trim().toLowerCase();
+  const normalized = normalizeCategorySlug(clean);
   const flat = flattenCategories(categories);
   
-  // Exact slug match
-  let found = flat.find(c => c.slug.toLowerCase() === normalized || c.slug.toLowerCase() === slug.toLowerCase());
+  // 1. Direct ID match if numeric
+  if (/^\d+$/.test(clean)) {
+    const numId = Number(clean);
+    const byId = flat.find(c => c.id === numId);
+    if (byId) return byId;
+  }
+
+  // 2. Exact slug match or normalized slug match
+  let found = flat.find(c => c.slug.toLowerCase() === clean || c.slug.toLowerCase() === normalized);
   if (found) return found;
 
-  // Check aliases
+  // 3. Name match (supports Persian names like 'موبایل' or 'مودم و اینترنت')
+  found = flat.find(c => c.name.toLowerCase() === clean || c.name.toLowerCase() === decodedSlug.toLowerCase());
+  if (found) return found;
+
+  // 4. Aliases
   if (normalized === 'simcard') {
     found = flat.find(c => c.slug === 'simcard' || c.slug === 'sim-card');
     if (found) return found;
+  }
+  if (normalized === 'modems') {
+    found = flat.find(c => c.slug === 'modems' || c.slug === 'modem-internet' || c.name.includes('مودم'));
+    if (found) return found;
+  }
+  if (normalized === 'laptops') {
+    found = flat.find(c => c.slug === 'laptops' || c.name.includes('لپ‌تاپ') || c.name.includes('لپتاپ'));
+    if (found) return found;
+  }
+  if (normalized === 'networking-equipment') {
+    found = flat.find(c => c.slug === 'networking-equipment' || c.slug === 'network' || c.name.includes('شبکه'));
+    if (found) return found;
+  }
+
+  return undefined;
+};
+
+/**
+ * Resolves a Quick Access item reference against canonical loaded categories from SQLite.
+ * Matches by category ID, exact slug, normalized alias, or category name/keyword.
+ * Returns the matched Category or undefined if no matching category exists in the database.
+ */
+export const resolveCategoryForQuickAccess = (
+  reference: string | undefined | null,
+  categories: Category[],
+  fallbackTitleOrId?: string
+): Category | undefined => {
+  if (!categories || categories.length === 0) return undefined;
+
+  // 1. Try finding by reference (slug, ID, or alias)
+  if (reference) {
+    const found = findCategoryBySlug(reference, categories);
+    if (found) return found;
+  }
+
+  // 2. Try finding by title/id if provided
+  if (fallbackTitleOrId) {
+    const found = findCategoryBySlug(fallbackTitleOrId, categories);
+    if (found) return found;
+  }
+
+  // 3. Semantic keyword resolution against loaded database categories
+  const targetTerms: string[] = [];
+  if (reference) targetTerms.push(reference.toLowerCase());
+  if (fallbackTitleOrId) targetTerms.push(fallbackTitleOrId.toLowerCase());
+
+  const flat = flattenCategories(categories);
+  for (const term of targetTerms) {
+    if (term.includes('modem') || term.includes('مودم') || term.includes('اینترنت')) {
+      const modemCat = flat.find((c) => c.slug === 'modems' || c.slug.includes('modem') || c.name.includes('مودم'));
+      if (modemCat) return modemCat;
+    }
+    if (term.includes('laptop') || term.includes('لپ‌تاپ') || term.includes('لپتاپ') || term.includes('کامپیوتر')) {
+      const laptopCat = flat.find((c) => c.slug === 'laptops' || c.slug.includes('laptop') || c.name.includes('لپ‌تاپ') || c.name.includes('لپتاپ'));
+      if (laptopCat) return laptopCat;
+    }
+    if (term.includes('mobile') || term.includes('موبایل') || term.includes('گوشی')) {
+      const mobileCat = flat.find((c) => c.slug === 'mobile' || c.slug.includes('mobile') || c.name.includes('موبایل'));
+      if (mobileCat) return mobileCat;
+    }
+    if (term.includes('appliance') || term.includes('خانگی')) {
+      const homeCat = flat.find((c) => c.slug === 'home-appliances' || c.name.includes('خانگی'));
+      if (homeCat) return homeCat;
+    }
+    if (term.includes('sim') || term.includes('سیم‌کارت') || term.includes('سیمکارت')) {
+      const simCat = flat.find((c) => c.slug === 'simcard' || c.slug === 'sim-card' || c.name.includes('سیم'));
+      if (simCat) return simCat;
+    }
+    if (term.includes('network') || term.includes('شبکه')) {
+      const netCat = flat.find((c) => c.slug === 'networking-equipment' || c.slug === 'network' || c.name.includes('شبکه'));
+      if (netCat) return netCat;
+    }
   }
 
   return undefined;
