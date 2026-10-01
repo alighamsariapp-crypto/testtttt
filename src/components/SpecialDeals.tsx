@@ -61,7 +61,7 @@ export const SpecialDeals: React.FC = () => {
             {/* Clock */}
             <div className="flex items-center gap-2">
               <Timer className="w-4 h-4 text-amber-400" />
-              <div className="ui-text-button ui-numeric flex items-center gap-1 font-mono">
+              <div className="ui-text-button ui-numeric flex items-center gap-1 font-semibold">
                 <span className="w-7 h-7 rounded-lg bg-black/40 border border-white/10 flex items-center justify-center text-amber-300">
                   {String(timeLeft.hours).padStart(2, '0')}
                 </span>
@@ -118,7 +118,7 @@ export const SpecialDeals: React.FC = () => {
                 
                 <div className="flex-1 flex flex-col justify-between h-full space-y-2 min-w-0">
                   <div>
-                    <span className="ui-text-meta px-2 py-0.5 rounded-md bg-red-600 text-white">
+                    <span className="ui-text-badge px-2.5 py-0.5 rounded-md bg-red-600 text-white">
                       {product.discount_percentage || 20}٪ تخفیف
                     </span>
                     <h3
@@ -134,11 +134,11 @@ export const SpecialDeals: React.FC = () => {
 
                   <div className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-2 pt-1 border-t border-white/10">
                     <div className="min-w-0">
-                      <div className="ui-price text-[11px] sm:text-base leading-tight whitespace-nowrap tabular-nums text-amber-300 font-sans">
+                      <div className="ui-price whitespace-nowrap text-amber-300">
                         {product.effective_price?.toLocaleString('fa-IR')} <span className="ui-text-meta font-normal text-slate-300">{product.currency}</span>
                       </div>
                       {product.base_price > (product.effective_price || 0) && (
-                        <div className="ui-text-meta text-slate-400 line-through font-sans">
+                        <div className="ui-text-meta text-slate-400 line-through ui-numeric">
                           {(product.base_price || 0).toLocaleString('fa-IR')}
                         </div>
                       )}
@@ -155,7 +155,7 @@ export const SpecialDeals: React.FC = () => {
                         >
                           <Plus className="w-3.5 h-3.5" />
                         </button>
-                        <span className="ui-text-button ui-numeric w-6 text-center text-white font-sans">
+                        <span className="ui-text-button ui-numeric w-6 text-center text-white">
                           {cartItem.quantity}
                         </span>
                         <button
@@ -184,12 +184,12 @@ export const SpecialDeals: React.FC = () => {
                     ) : canPurchase && requiresConfigurationSelection ? (
                       <button
                         onClick={() => navigateToProduct(product.slug)}
-                        className="rounded-xl bg-white px-3 py-2 text-[10px] font-bold text-blue-900 shadow-md"
+                        className="rounded-xl bg-white px-3 py-1.5 ui-text-badge text-blue-900 shadow-md"
                       >
                         انتخاب
                       </button>
                     ) : (
-                      <span className="rounded-xl bg-white/10 px-2 py-1.5 text-[10px] font-bold text-slate-300">ناموجود</span>
+                      <span className="rounded-xl bg-white/10 px-2 py-1.5 ui-text-badge text-slate-300">ناموجود</span>
                     )}
                   </div>
                 </div>

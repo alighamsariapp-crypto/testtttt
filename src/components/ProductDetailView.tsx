@@ -625,14 +625,14 @@ export const ProductDetailView: React.FC = () => {
           {/* Product Info */}
           <div className="flex flex-col gap-1 mt-3">
             <div className="flex justify-between items-start mb-2">
-              <span className="text-[12px] font-bold text-[#364fd9] bg-[#364fd9]/10 px-3 py-1 rounded-full uppercase tracking-wider">
+              <span className="ui-text-badge text-[#364fd9] bg-[#364fd9]/10 px-3 py-1 rounded-full uppercase tracking-wider">
                 {product.brand || product.category_name || 'ORIGINAL'}
               </span>
             </div>
-            <h2 className="leading-[1.3] font-bold text-[#1A1B23] mb-1 text-[18px]">
+            <h2 className="leading-tight font-bold text-[#1A1B23] mb-1 ui-text-page-title">
               {product.name}
             </h2>
-            <p className="text-[14px] text-[#444654] leading-relaxed">
+            <p className="ui-text-body text-[#444654]">
               {product.short_description || product.technology || 'مودم روتر بی‌سیم نسل جدید با پایداری سیگنال و سرعت فوق‌العاده'}
             </p>
           </div>
@@ -640,7 +640,7 @@ export const ProductDetailView: React.FC = () => {
           {/* Model Selection */}
           {configurationChoices.length > 0 && (
             <div className="flex flex-col gap-2 mt-2">
-              <label className="block text-[12px] font-bold text-[#444654] mb-1">انتخاب مدل</label>
+              <label className="block ui-text-label font-bold text-[#444654] mb-1">انتخاب مدل</label>
               <div className="flex flex-wrap gap-2">
                 {configurationChoices.map(({ name, variants }) => {
                   const selected = selectedConfiguration === name;
@@ -651,14 +651,14 @@ export const ProductDetailView: React.FC = () => {
                       type="button"
                       disabled={unavailable}
                       onClick={() => selectConfiguration(name)}
-                      className={`px-4 py-2 rounded-lg text-[12px] font-bold transition-all disabled:opacity-40 disabled:cursor-not-allowed ${
+                      className={`px-4 py-2 rounded-lg ui-text-button transition-all disabled:opacity-40 disabled:cursor-not-allowed ${
                         selected 
                           ? 'border-2 border-[#364fd9] bg-[#364fd9]/5 text-[#364fd9]' 
                           : 'border border-[#E6E8F0] text-[#444654] font-medium bg-white'
                       }`}
                     >
                       {name}
-                      {unavailable && <small className="mr-1 text-[10px] text-red-500 font-normal">(ناموجود)</small>}
+                      {unavailable && <small className="mr-1 ui-text-badge text-red-500 font-normal">(ناموجود)</small>}
                     </button>
                   );
                 })}
@@ -670,8 +670,8 @@ export const ProductDetailView: React.FC = () => {
           {displayColorChoices.length > 0 && (
             <div className="mt-2">
               <div className="flex justify-between items-center mb-2">
-                <label className="text-[12px] font-bold text-[#444654]">انتخاب رنگ</label>
-                <span className="text-[11px] font-medium text-[#444654]">{selectedColor || 'انتخاب کنید'}</span>
+                <label className="ui-text-label font-bold text-[#444654]">انتخاب رنگ</label>
+                <span className="ui-text-meta font-medium text-[#444654]">{selectedColor || 'انتخاب کنید'}</span>
               </div>
               <div className="flex gap-3">
                 {displayColorChoices.map(({ name, hex, variants }) => {
@@ -704,8 +704,8 @@ export const ProductDetailView: React.FC = () => {
           {/* Price Card Mobile Focus */}
           <div className="mt-4 p-4 bg-white rounded-xl border border-[#E6E8F0] shadow-sm flex flex-col gap-2">
             <div className="flex justify-between items-center">
-              <span className="text-[12px] font-bold text-[#444654]">قیمت نهایی</span>
-              <span className={`text-[10px] font-bold px-2 py-1 rounded-md border flex items-center gap-1 ${
+              <span className="ui-text-label font-bold text-[#444654]">قیمت نهایی</span>
+              <span className={`ui-text-badge px-2 py-1 rounded-md border flex items-center gap-1 ${
                 isOutOfStock ? 'bg-red-50 text-red-700 border-red-100' : 'bg-emerald-50 text-emerald-700 border-emerald-100'
               }`}>
                 <PackageX className="w-3.5 h-3.5" />
@@ -714,34 +714,34 @@ export const ProductDetailView: React.FC = () => {
             </div>
             <div className="flex items-baseline justify-end gap-1.5 mt-1 w-full">
               {product.discount_percentage ? (
-                <span className="text-[14px] text-slate-400 line-through font-sans ml-2">
+                <span className="ui-text-meta text-slate-400 line-through ui-numeric ml-2">
                   {(product.base_price || 0).toLocaleString('fa-IR')}
                 </span>
               ) : null}
-              <span className="text-[24px] font-bold tracking-tight text-[#364fd9] font-sans">
+              <span className="ui-price-hero font-bold tracking-tight text-[#364fd9]">
                 {currentPrice.toLocaleString('fa-IR')}
               </span>
-              <span className="text-[13px] font-medium text-[#444654]">تومان</span>
+              <span className="ui-text-meta font-medium text-[#444654]">تومان</span>
             </div>
           </div>
 
           {/* Key Features List */}
           <div className="mt-4 mb-4">
-            <h3 className="text-[13px] font-bold text-[#1A1B23] mb-3">ویژگی‌های کلیدی:</h3>
+            <h3 className="ui-text-section-title text-[#1A1B23] mb-3">ویژگی‌های کلیدی:</h3>
             <ul className="grid grid-cols-1 gap-2">
-              <li className="flex items-center gap-3 text-[13px] text-[#444654] bg-white p-2.5 rounded-lg border border-[#E6E8F0]">
+              <li className="flex items-center gap-3 ui-text-body text-[#444654] bg-white p-2.5 rounded-lg border border-[#E6E8F0]">
                 <span className="w-6 h-6 rounded-full bg-[#364fd9]/10 flex items-center justify-center text-[#364fd9] shrink-0">
                   <Check className="w-3.5 h-3.5" />
                 </span>
                 پشتیبانی از شبکه 5G فوق سریع
               </li>
-              <li className="flex items-center gap-3 text-[13px] text-[#444654] bg-white p-2.5 rounded-lg border border-[#E6E8F0]">
+              <li className="flex items-center gap-3 ui-text-body text-[#444654] bg-white p-2.5 rounded-lg border border-[#E6E8F0]">
                 <span className="w-6 h-6 rounded-full bg-[#364fd9]/10 flex items-center justify-center text-[#364fd9] shrink-0">
                   <Check className="w-3.5 h-3.5" />
                 </span>
                 {product.technology || 'فناوری Wi-Fi 6 دو بانده'}
               </li>
-              <li className="flex items-center gap-3 text-[13px] text-[#444654] bg-white p-2.5 rounded-lg border border-[#E6E8F0]">
+              <li className="flex items-center gap-3 ui-text-body text-[#444654] bg-white p-2.5 rounded-lg border border-[#E6E8F0]">
                 <span className="w-6 h-6 rounded-full bg-[#364fd9]/10 flex items-center justify-center text-[#364fd9] shrink-0">
                   <Check className="w-3.5 h-3.5" />
                 </span>
@@ -753,8 +753,8 @@ export const ProductDetailView: React.FC = () => {
           {/* Description Card */}
           {product.description && (
             <div className="border border-[#E6E8F0] rounded-xl bg-white p-4 shadow-sm">
-              <h3 className="text-[14px] font-bold text-[#1A1B23] mb-2">معرفی کالا</h3>
-              <p className="text-[13px] text-[#444654] leading-relaxed">
+              <h3 className="ui-text-section-title text-[#1A1B23] mb-2">معرفی کالا</h3>
+              <p className="ui-text-body text-[#444654]">
                 {product.description}
               </p>
             </div>
@@ -763,7 +763,7 @@ export const ProductDetailView: React.FC = () => {
           {/* Specs Accordion Structured */}
           <div className="border border-[#E6E8F0] rounded-xl bg-white overflow-hidden shadow-sm">
             <details className="group" open>
-              <summary className="flex justify-between items-center p-3 text-[14px] font-bold text-[#1A1B23] cursor-pointer list-none select-none">
+              <summary className="flex justify-between items-center p-3 ui-text-section-title text-[#1A1B23] cursor-pointer list-none select-none">
                 <span>مشخصات فنی</span>
                 <ChevronDown className="w-4 h-4 text-[#444654] transition-transform group-open:rotate-180" />
               </summary>
@@ -777,22 +777,22 @@ export const ProductDetailView: React.FC = () => {
                           <div className="w-6 h-6 rounded bg-[#364fd9]/10 flex items-center justify-center text-[#364fd9]">
                             <GroupIcon className="w-3.5 h-3.5" />
                           </div>
-                          <h3 className="text-[13px] font-bold text-[#1A1B23]">{group.title}</h3>
+                          <h3 className="ui-text-card-title text-[#1A1B23]">{group.title}</h3>
                         </div>
                         {group.specs.map(([key, val], sIdx) => (
                           <div 
                             key={`spec-${key}`} 
                             className={`flex justify-between items-center py-1.5 ${sIdx < group.specs.length - 1 ? 'border-b border-[#E6E8F0]/50' : ''}`}
                           >
-                            <span className="text-[12px] text-[#444654]">{key}</span>
-                            <span className="text-[12px] font-medium text-[#1A1B23] text-left">{formatSpecValue(val)}</span>
+                            <span className="ui-text-meta text-[#444654]">{key}</span>
+                            <span className="ui-text-meta font-medium text-[#1A1B23] text-left">{formatSpecValue(val)}</span>
                           </div>
                         ))}
                       </div>
                     );
                   })
                 ) : (
-                  <p className="text-xs text-slate-400 py-1">مشخصات فنی ثبت نشده است.</p>
+                  <p className="ui-text-meta text-slate-400 py-1">مشخصات فنی ثبت نشده است.</p>
                 )}
               </div>
             </details>
@@ -801,12 +801,12 @@ export const ProductDetailView: React.FC = () => {
           {/* Mobile Reviews Card */}
           <div className="border border-[#E6E8F0] rounded-xl bg-white p-4 shadow-sm">
             <div className="flex justify-between items-center mb-3">
-              <h3 className="text-[14px] font-bold text-[#1A1B23]">
+              <h3 className="ui-text-section-title text-[#1A1B23]">
                 نظرات کاربران ({commentsList.length})
               </h3>
               <button 
                 onClick={() => setShowReviewModal(true)}
-                className="text-[12px] font-bold text-[#364fd9] flex items-center gap-1"
+                className="ui-text-button text-[#364fd9] flex items-center gap-1"
               >
                 <Edit3 className="w-3.5 h-3.5" />
                 <span>ثبت نظر</span>
@@ -825,12 +825,12 @@ export const ProductDetailView: React.FC = () => {
                         ))}
                       </div>
                     </div>
-                    <p className="text-[#444654] leading-relaxed text-[12px]">{comment.content}</p>
+                    <p className="text-[#444654] leading-relaxed ui-text-body">{comment.content}</p>
                   </div>
                 ))}
               </div>
             ) : (
-              <p className="text-xs text-slate-400">هنوز نظری ثبت نشده است.</p>
+              <p className="ui-text-meta text-slate-400">هنوز نظری ثبت نشده است.</p>
             )}
           </div>
 
@@ -850,10 +850,10 @@ export const ProductDetailView: React.FC = () => {
               </button>
               <div className="flex flex-col justify-center">
                 <div className="flex items-center gap-1">
-                  <span className="text-[17px] text-[#364fd9] font-bold font-sans">
+                  <span className="ui-price text-[#364fd9] font-bold">
                     {isOutOfStock ? 'ناموجود' : currentPrice.toLocaleString('fa-IR')}
                   </span>
-                  {!isOutOfStock && <span className="text-[10px] text-[#444654]">تومان</span>}
+                  {!isOutOfStock && <span className="ui-text-meta font-normal text-[#444654]">تومان</span>}
                 </div>
               </div>
             </div>
@@ -869,7 +869,7 @@ export const ProductDetailView: React.FC = () => {
                 >
                   +
                 </button>
-                <span className="w-6 text-center text-xs font-bold font-sans">{quantity}</span>
+                <span className="w-6 text-center ui-text-button ui-numeric font-semibold">{quantity}</span>
                 <button 
                   type="button" 
                   aria-label="کاهش تعداد" 

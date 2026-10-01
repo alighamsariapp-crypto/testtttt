@@ -41,7 +41,7 @@ export const QuickAccessGrid: React.FC = () => {
   if (!items.length) return null;
 
   return <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-    <div className="flex items-center justify-between mb-4"><h2 className="text-sm font-bold text-slate-800 tracking-tight">دسترسی سریع</h2></div>
+    <div className="flex items-center justify-between mb-4"><h2 className="ui-text-section-title text-slate-800 tracking-tight">دسترسی سریع</h2></div>
     <div className="grid grid-cols-3 sm:grid-cols-5 gap-2.5 sm:gap-4">
       {items.map((item) => {
         const Icon = iconMap[item.icon] ?? Globe;
@@ -58,7 +58,7 @@ export const QuickAccessGrid: React.FC = () => {
           <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center border transition-all duration-200 group-hover:scale-105 shadow-sm overflow-hidden ${toneMap[item.id] ?? 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'}`}>
             {item.imageUrl ? <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover" /> : <Icon className="w-6 h-6 sm:w-7 sm:h-7" />}
           </div>
-          <span className="text-[11px] sm:text-xs font-semibold text-slate-700 group-hover:text-blue-600 transition line-clamp-1">{item.title}</span>
+          <span className="ui-text-label font-semibold text-slate-700 group-hover:text-blue-600 transition line-clamp-1">{item.title}</span>
         </button>;
       })}
     </div>

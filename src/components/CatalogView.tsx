@@ -80,12 +80,12 @@ const MobileFilterOptionGroup: React.FC<MobileFilterOptionGroupProps> = ({
       <button
         type="button"
         onClick={onToggleExpanded}
-        className="flex min-h-11 w-full items-center justify-between gap-3 rounded-xl px-1 text-right text-xs font-extrabold text-slate-800"
+        className="flex min-h-11 w-full items-center justify-between gap-3 rounded-xl px-1 text-right ui-text-label font-bold text-slate-800"
         aria-expanded={expanded}
       >
         <span>{title}</span>
         <span className="flex items-center gap-2 text-slate-400">
-          {selected.length > 0 && <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-sans font-bold text-blue-700">{selected.length}</span>}
+          {selected.length > 0 && <span className="rounded-full bg-blue-50 px-2 py-0.5 ui-text-badge ui-numeric font-bold text-blue-700">{selected.length}</span>}
           {expanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
         </span>
       </button>
@@ -99,7 +99,7 @@ const MobileFilterOptionGroup: React.FC<MobileFilterOptionGroupProps> = ({
                   key={option}
                   type="button"
                   onClick={() => onToggleOption(option)}
-                  className={`min-h-9 rounded-xl border px-3 text-xs font-bold transition ${isSelected ? 'border-blue-600 bg-blue-600 text-white shadow-sm shadow-blue-500/20' : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-blue-300 hover:bg-blue-50'}`}
+                  className={`min-h-9 rounded-xl border px-3 ui-text-button transition ${isSelected ? 'border-blue-600 bg-blue-600 text-white shadow-sm shadow-blue-500/20' : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-blue-300 hover:bg-blue-50'}`}
                 >
                   {option}
                 </button>
@@ -111,7 +111,7 @@ const MobileFilterOptionGroup: React.FC<MobileFilterOptionGroupProps> = ({
             {options.map((option) => {
               const isSelected = selected.includes(option);
               return (
-                <label key={option} className="flex min-h-10 cursor-pointer items-center justify-between gap-3 rounded-xl bg-slate-50 px-3 text-xs text-slate-700 transition hover:bg-blue-50">
+                <label key={option} className="flex min-h-10 cursor-pointer items-center justify-between gap-3 rounded-xl bg-slate-50 px-3 ui-text-body text-slate-700 transition hover:bg-blue-50">
                   <span>{option}</span>
                   <input
                     type="checkbox"
@@ -131,12 +131,12 @@ const MobileFilterOptionGroup: React.FC<MobileFilterOptionGroupProps> = ({
 
 const SchemaFacetGroup: React.FC<{ facet: CatalogFacet; selected: string[]; open: boolean; onOpen: () => void; onToggle: (value: string) => void }> = ({ facet, selected, open, onOpen, onToggle }) => (
   <section className="border-b border-slate-100 pb-4">
-    <button type="button" onClick={onOpen} className="flex min-h-11 w-full items-center justify-between gap-3 rounded-xl px-1 text-right text-xs font-extrabold text-slate-900">
+    <button type="button" onClick={onOpen} className="flex min-h-11 w-full items-center justify-between gap-3 rounded-xl px-1 text-right ui-text-label font-bold text-slate-900">
       <span>{facet.label}{facet.unit ? <small className="mr-1 font-medium text-slate-400">({facet.unit})</small> : null}</span>
-      <span className="flex items-center gap-2 text-slate-400">{selected.length > 0 ? <small className="rounded-full bg-blue-50 px-2 py-0.5 font-sans text-[10px] font-bold text-blue-700">{selected.length}</small> : null}{open ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}</span>
+      <span className="flex items-center gap-2 text-slate-400">{selected.length > 0 ? <small className="rounded-full bg-blue-50 px-2 py-0.5 ui-text-badge ui-numeric font-bold text-blue-700">{selected.length}</small> : null}{open ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}</span>
     </button>
     {open && <div className="mt-1.5 space-y-1.5">
-      {facet.options.map((option) => <label key={option.value} className="flex min-h-10 cursor-pointer items-center justify-between gap-3 rounded-xl px-2 text-xs text-slate-700 transition hover:bg-slate-50"><span className="min-w-0 truncate">{option.label}</span><span className="flex shrink-0 items-center gap-2"><small className="font-sans text-[10px] text-slate-400">{option.count}</small><input type="checkbox" checked={selected.includes(option.value)} onChange={() => onToggle(option.value)} className="h-4 w-4 rounded text-blue-600 focus:ring-blue-500" /></span></label>)}
+      {facet.options.map((option) => <label key={option.value} className="flex min-h-10 cursor-pointer items-center justify-between gap-3 rounded-xl px-2 ui-text-body text-slate-700 transition hover:bg-slate-50"><span className="min-w-0 truncate">{option.label}</span><span className="flex shrink-0 items-center gap-2"><small className="ui-text-meta ui-numeric text-slate-400">{option.count}</small><input type="checkbox" checked={selected.includes(option.value)} onChange={() => onToggle(option.value)} className="h-4 w-4 rounded text-blue-600 focus:ring-blue-500" /></span></label>)}
     </div>}
   </section>
 );
@@ -930,8 +930,8 @@ export const CatalogView: React.FC = () => {
             <Layers className="h-5 w-5" />
           </div>
           <div className="min-w-0">
-            <p className="text-[11px] font-medium text-slate-500">دسته‌بندی محصولات</p>
-            <h1 className="mt-0.5 truncate text-sm font-extrabold text-slate-900 sm:text-base">
+            <p className="ui-text-meta text-slate-500">دسته‌بندی محصولات</p>
+            <h1 className="mt-0.5 truncate ui-text-section-title text-slate-900 sm:ui-text-page-title">
               {activeCategory?.name || 'همه محصولات فروشگاه'}
             </h1>
           </div>
@@ -939,10 +939,10 @@ export const CatalogView: React.FC = () => {
         <button
           type="button"
           onClick={() => setCategoryBrowserOpen(true)}
-          className="mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl border border-blue-100 bg-blue-50 px-4 text-xs font-bold text-blue-700 transition hover:border-blue-200 hover:bg-blue-100 sm:mt-0 sm:w-auto"
+          className="mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl border border-blue-100 bg-blue-50 px-4 ui-text-button text-blue-700 transition hover:border-blue-200 hover:bg-blue-100 sm:mt-0 sm:w-auto"
         >
           <span>مرور همه دسته‌بندی‌ها</span>
-          <span className="rounded-full bg-white px-2 py-0.5 font-sans text-[11px] text-blue-700 shadow-xs">{flattenCategories(categories).length}</span>
+          <span className="rounded-full bg-white px-2 py-0.5 ui-text-badge ui-numeric text-blue-700 shadow-xs">{flattenCategories(categories).length}</span>
           <ChevronLeft className="h-4 w-4" />
         </button>
       </section>
@@ -961,9 +961,9 @@ export const CatalogView: React.FC = () => {
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <div className="flex items-center gap-2">
                 <SlidersHorizontal className="w-4 h-4 text-blue-600" />
-                <h2 className="text-sm font-extrabold text-slate-900">فیلترهای هوشمند</h2>
+                <h2 className="ui-text-section-title text-slate-900">فیلترهای هوشمند</h2>
                 {activeFiltersCount > 0 && (
-                  <span className="w-5 h-5 rounded-full bg-blue-600 text-white text-[11px] font-extrabold flex items-center justify-center font-mono">
+                  <span className="w-5 h-5 rounded-full bg-blue-600 text-white ui-text-badge ui-numeric flex items-center justify-center">
                     {activeFiltersCount}
                   </span>
                 )}
@@ -971,7 +971,7 @@ export const CatalogView: React.FC = () => {
               {activeFiltersCount > 0 && (
                 <button
                   onClick={resetFilters}
-                  className="text-xs text-red-500 hover:text-red-600 font-bold transition flex items-center gap-1 cursor-pointer"
+                  className="ui-text-meta text-red-500 hover:text-red-600 font-bold transition flex items-center gap-1 cursor-pointer"
                 >
                   <RotateCcw className="w-3 h-3" />
                   <span>پاکسازی</span>
@@ -1799,14 +1799,14 @@ export const CatalogView: React.FC = () => {
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-1.5 flex-wrap">
                         {discount > 0 && (
-                          <span className="px-2 py-0.5 rounded-lg bg-red-500 text-white font-extrabold text-[10px] font-mono shadow-xs">
+                          <span className="px-2.5 py-0.5 rounded-lg bg-red-500 text-white ui-text-badge ui-numeric shadow-xs">
                             {discount}٪ تخفیف
                           </span>
                         )}
                         {productIsAvailable ? (
-                          <span className={`px-2 py-0.5 rounded-lg font-bold text-[10px] border ${
+                          <span className={`px-2.5 py-0.5 rounded-lg ui-text-badge border ${
                             requiresConfigurationSelection
-                              ? 'bg-blue-50 text-blue-700 border-blue-200/60'
+                               ? 'bg-blue-50 text-blue-700 border-blue-200/60'
                               : isAtStockLimit
                               ? 'bg-amber-50 text-amber-700 border-amber-200/60'
                               : 'bg-emerald-50 text-emerald-700 border-emerald-200/60'
@@ -1814,7 +1814,7 @@ export const CatalogView: React.FC = () => {
                             {requiresConfigurationSelection ? 'انتخاب پیکربندی' : isAtStockLimit ? 'موجودی محصول تمام شده است' : 'موجود در انبار'}
                           </span>
                         ) : (
-                          <span className="px-2 py-0.5 rounded-lg bg-slate-100 text-slate-500 font-bold text-[10px]">
+                          <span className="px-2.5 py-0.5 rounded-lg bg-slate-100 text-slate-500 ui-text-badge">
                             ناموجود
                           </span>
                         )}
@@ -1850,7 +1850,7 @@ export const CatalogView: React.FC = () => {
                     <div className="mt-3 space-y-2 flex-1 flex flex-col justify-between">
                       <div>
                         {/* Brand & Category Label */}
-                        <div className="flex items-center justify-between text-[11px] text-slate-400 font-medium">
+                        <div className="flex items-center justify-between ui-text-meta text-slate-400 font-medium">
                           <span>{product.brand || 'نوین‌نت'}</span>
                           <span>{product.category_name}</span>
                         </div>
@@ -1858,7 +1858,7 @@ export const CatalogView: React.FC = () => {
                         {/* Title */}
                         <h3 
                           onClick={() => navigateToProduct(product.slug)}
-                          className="text-xs sm:text-sm font-extrabold text-slate-900 hover:text-blue-600 transition cursor-pointer line-clamp-2 mt-1 leading-snug"
+                          className="ui-text-card-title text-slate-900 hover:text-blue-600 transition cursor-pointer line-clamp-2 mt-1"
                         >
                           {product.name}
                         </h3>
@@ -1866,22 +1866,22 @@ export const CatalogView: React.FC = () => {
                         {/* Dynamic Category Badges (CPU/RAM for laptop, Operator for SIM, Gen for modem) */}
                         <div className="flex items-center gap-1.5 flex-wrap mt-2">
                           {product.processor && (
-                            <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[10px] font-medium">
+                            <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 ui-text-badge font-medium">
                               {product.processor}
                             </span>
                           )}
                           {product.ram && (
-                            <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 text-[10px] font-bold">
+                            <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 ui-text-badge">
                               RAM: {product.ram}
                             </span>
                           )}
                           {product.sim_operator && (
-                            <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-800 text-[10px] font-bold">
+                            <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-800 ui-text-badge">
                               {product.sim_operator}
                             </span>
                           )}
                           {product.network_generation && (
-                            <span className="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 text-[10px] font-bold">
+                            <span className="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 ui-text-badge">
                               {product.network_generation}
                             </span>
                           )}
@@ -1892,11 +1892,11 @@ export const CatalogView: React.FC = () => {
                       <div className="pt-3 border-t border-slate-100 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-2 mt-2">
                         <div className="min-w-0">
                           {discount > 0 && (
-                            <div className="text-[11px] text-slate-400 line-through font-mono">
+                            <div className="ui-text-meta text-slate-400 line-through ui-numeric">
                               {(product.base_price || 0).toLocaleString('fa-IR')}
                             </div>
                           )}
-                          <div className="text-[11px] sm:text-sm leading-tight font-extrabold text-blue-700 font-mono whitespace-nowrap tabular-nums">
+                          <div className="ui-price leading-tight text-blue-700 whitespace-nowrap">
                             {formatMoney(effectivePrice, product.currency)}
                           </div>
                         </div>
@@ -1913,7 +1913,7 @@ export const CatalogView: React.FC = () => {
                               >
                                 <Plus className="w-3 h-3" />
                               </button>
-                              <span className="text-xs font-extrabold text-blue-900 font-mono px-1 tabular-nums">
+                              <span className="ui-text-button ui-numeric font-semibold text-blue-900 px-1">
                                 {cartItem.quantity}
                               </span>
                               <button
@@ -1927,7 +1927,7 @@ export const CatalogView: React.FC = () => {
                           ) : (
                             <button
                               onClick={() => addToCart(product, 1, quickVariant?.id)}
-                              className="px-3 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-blue-500/20 transition active:scale-95"
+                              className="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white ui-text-button flex items-center gap-1.5 shadow-md shadow-blue-500/20 transition active:scale-95"
                             >
                               <ShoppingCart className="w-3.5 h-3.5" />
                               <span>سبد خرید</span>
@@ -1936,14 +1936,14 @@ export const CatalogView: React.FC = () => {
                         ) : requiresConfigurationSelection ? (
                           <button
                             onClick={() => navigateToProduct(product.slug)}
-                            className="px-2.5 py-1.5 rounded-xl bg-blue-600 text-white font-semibold text-xs shadow-md shadow-blue-500/20"
+                            className="px-3 py-1.5 rounded-xl bg-blue-600 text-white ui-text-button shadow-md shadow-blue-500/20"
                           >
                             انتخاب
                           </button>
                         ) : (
                           <button
                             disabled
-                            className="px-2.5 py-1.5 rounded-xl bg-slate-100 text-slate-400 font-semibold text-xs cursor-not-allowed"
+                            className="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-400 ui-text-button cursor-not-allowed"
                           >
                             ناموجود
                           </button>

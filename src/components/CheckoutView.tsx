@@ -104,20 +104,20 @@ export const CheckoutView: React.FC = () => {
         </div>
 
         <div className="space-y-2">
-          <h1 className="text-xl sm:text-2xl font-black text-slate-900">سفارش شما ثبت شد و در انتظار پرداخت است</h1>
-          <p className="text-xs sm:text-sm text-slate-500">
+          <h1 className="ui-text-page-title text-slate-900">سفارش شما ثبت شد و در انتظار پرداخت است</h1>
+          <p className="ui-text-body text-slate-500">
             پس از تأیید پرداخت توسط درگاه، وضعیت سفارش به‌روزرسانی و جزئیات ارسال اطلاع‌رسانی می‌شود.
           </p>
         </div>
 
-        <div className="p-6 bg-slate-50 rounded-3xl border border-slate-100 text-right space-y-3 text-xs">
+        <div className="p-6 bg-slate-50 rounded-3xl border border-slate-100 text-right space-y-3 ui-text-meta">
           <div className="flex items-center justify-between border-b border-slate-200 pb-2.5">
             <span className="text-slate-500">شماره سفارش:</span>
-            <span className="font-mono font-bold text-slate-900 text-sm">{completedOrder.order_number}</span>
+            <span className="ui-numeric font-semibold text-slate-900 text-sm">{completedOrder.order_number}</span>
           </div>
           <div className="flex items-center justify-between border-b border-slate-200 pb-2.5">
             <span className="text-slate-500">مبلغ سفارش:</span>
-            <span className="font-bold text-blue-700 text-sm font-sans">{formatMoney(completedOrder.grand_total, completedOrder.currency)}</span>
+            <span className="ui-price text-blue-700 text-sm">{formatMoney(completedOrder.grand_total, completedOrder.currency)}</span>
           </div>
           <div className="flex items-center justify-between border-b border-slate-200 pb-2.5">
             <span className="text-slate-500">روش پرداخت:</span>
@@ -136,7 +136,7 @@ export const CheckoutView: React.FC = () => {
         <div className="flex items-center justify-center gap-3 pt-4">
           <button
             onClick={() => setActiveView('home')}
-            className="px-6 py-3 bg-blue-600 text-white rounded-2xl text-xs sm:text-sm font-bold shadow-md hover:bg-blue-700 transition"
+            className="px-6 py-3 bg-blue-600 text-white rounded-2xl ui-text-body font-semibold shadow-md hover:bg-blue-700 transition"
           >
             بازگشت به صفحه اصلی
           </button>
@@ -149,10 +149,10 @@ export const CheckoutView: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
       
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl sm:text-2xl font-black text-slate-900">نهایی‌سازی و پرداخت سفارش</h1>
+        <h1 className="ui-text-page-title text-slate-900">نهایی‌سازی و پرداخت سفارش</h1>
         <button
           onClick={() => setActiveView('cart')}
-          className="text-xs font-semibold text-slate-600 hover:text-blue-600 flex items-center gap-1"
+          className="ui-text-meta font-semibold text-slate-600 hover:text-blue-600 flex items-center gap-1"
         >
           <ArrowRight className="w-4 h-4" />
           <span>بازگشت به سبد</span>
@@ -166,75 +166,75 @@ export const CheckoutView: React.FC = () => {
           
           {/* Shipping Address Box */}
           <div className="bg-white rounded-3xl border border-slate-100 p-6 shadow-sm space-y-4">
-            <div className="flex items-center gap-2 text-sm font-bold text-slate-900 border-b border-slate-100 pb-3">
+            <div className="flex items-center gap-2 ui-text-card-title text-slate-900 border-b border-slate-100 pb-3">
               <Truck className="w-4 h-4 text-blue-600" />
               <span>مشخصات و نشانی گیرنده</span>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-xs font-medium text-slate-700">نام و نام خانوادگی تحویل‌گیرنده</label>
+                <label className="ui-text-label font-medium text-slate-700">نام و نام خانوادگی تحویل‌گیرنده</label>
                 <input
                   type="text"
                   required
                   value={addressForm.recipient_name}
                   onChange={(e) => setAddressForm({ ...addressForm, recipient_name: e.target.value })}
-                  className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500"
+                  className="w-full px-3 py-2 ui-text-body bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-medium text-slate-700">شماره همراه</label>
+                <label className="ui-text-label font-medium text-slate-700">شماره همراه</label>
                 <input
                   type="tel"
                   required
                   value={addressForm.phone}
                   onChange={(e) => setAddressForm({ ...addressForm, phone: e.target.value })}
-                  className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 font-sans"
+                  className="w-full px-3 py-2 ui-text-body ui-numeric bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-medium text-slate-700">استان</label>
+                <label className="ui-text-label font-medium text-slate-700">استان</label>
                 <input
                   type="text"
                   required
                   value={addressForm.province}
                   onChange={(e) => setAddressForm({ ...addressForm, province: e.target.value })}
-                  className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500"
+                  className="w-full px-3 py-2 ui-text-body bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-medium text-slate-700">شهر</label>
+                <label className="ui-text-label font-medium text-slate-700">شهر</label>
                 <input
                   type="text"
                   required
                   value={addressForm.city}
                   onChange={(e) => setAddressForm({ ...addressForm, city: e.target.value })}
-                  className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500"
+                  className="w-full px-3 py-2 ui-text-body bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500"
                 />
               </div>
 
               <div className="sm:col-span-2 space-y-1">
-                <label className="text-xs font-medium text-slate-700">کد پستی ده‌رقمی</label>
+                <label className="ui-text-label font-medium text-slate-700">کد پستی ده‌رقمی</label>
                 <input
                   type="text"
                   required
                   value={addressForm.postal_code}
                   onChange={(e) => setAddressForm({ ...addressForm, postal_code: e.target.value })}
-                  className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 font-mono"
+                  className="w-full px-3 py-2 ui-text-body ui-numeric bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500"
                 />
               </div>
 
               <div className="sm:col-span-2 space-y-1">
-                <label className="text-xs font-medium text-slate-700">آدرس پستی دقیق</label>
+                <label className="ui-text-label font-medium text-slate-700">آدرس پستی دقیق</label>
                 <textarea
                   rows={2}
                   required
                   value={addressForm.address_line}
                   onChange={(e) => setAddressForm({ ...addressForm, address_line: e.target.value })}
-                  className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500"
+                  className="w-full px-3 py-2 ui-text-body bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500"
                 />
               </div>
             </div>
@@ -243,17 +243,17 @@ export const CheckoutView: React.FC = () => {
           {/* Payment Gateway Selection */}
           <div className="bg-white rounded-3xl border border-slate-100 p-6 shadow-sm space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <div className="flex items-center gap-2 text-sm font-bold text-slate-900">
+              <div className="flex items-center gap-2 ui-text-card-title text-slate-900">
                 <CreditCard className="w-4 h-4 text-blue-600" />
                 <span>انتخاب روش و درگاه پرداخت</span>
               </div>
-              <span className="text-[11px] text-slate-400">درگاه‌های تاییدشده و امن</span>
+              <span className="ui-text-meta text-slate-400">درگاه‌های تاییدشده و امن</span>
             </div>
 
             {availableGateways.length === 0 ? (
               <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 flex items-start gap-3">
                 <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-                <div className="space-y-1 text-xs">
+                <div className="space-y-1 ui-text-body">
                   <p className="font-bold">هیچ درگاه پرداختی در حال حاضر فعال نمی‌باشد.</p>
                   <p className="text-amber-700 leading-relaxed">
                     لطفاً با پشتیبانی سیستم تماس حاصل نمایید یا از طریق بخش مدیریت درگاه‌های پرداخت را پیکربندی نمایید.
@@ -276,25 +276,25 @@ export const CheckoutView: React.FC = () => {
                     >
                       <div className="flex items-start justify-between gap-2">
                         <div className="space-y-1">
-                          <div className="text-xs font-bold text-slate-900 flex items-center gap-1.5 flex-wrap">
+                          <div className="ui-text-card-title text-slate-900 flex items-center gap-1.5 flex-wrap">
                             <span>{gateway.title || gateway.name}</span>
                             {gateway.is_test && (
-                              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200 font-bold">
+                              <span className="ui-text-badge px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200 font-semibold">
                                 شبیه‌ساز تستی (Staging)
                               </span>
                             )}
                             {!gateway.is_test && gateway.environment === 'sandbox' && (
-                              <span className="text-[10px] px-1.5 py-0.5 rounded bg-sky-100 text-sky-800 border border-sky-200">
+                              <span className="ui-text-badge px-1.5 py-0.5 rounded bg-sky-100 text-sky-800 border border-sky-200">
                                 آزمایشی (سندباکس)
                               </span>
                             )}
                             {!gateway.is_test && gateway.environment === 'production' && (
-                              <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">
+                              <span className="ui-text-badge px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">
                                 شاپرک مستقیم
                               </span>
                             )}
                           </div>
-                          <p className="text-[11px] text-slate-500 line-clamp-2 leading-relaxed">
+                          <p className="ui-text-meta text-slate-500 line-clamp-2 leading-relaxed">
                             {gateway.description || gateway.display_label}
                           </p>
                         </div>
@@ -310,7 +310,7 @@ export const CheckoutView: React.FC = () => {
                       {gateway.capabilities && gateway.capabilities.length > 0 && (
                         <div className="flex items-center gap-1 flex-wrap pt-1 border-t border-slate-200/60">
                           {gateway.capabilities.map((cap) => (
-                            <span key={cap} className="text-[9px] px-1.5 py-0.5 rounded bg-white text-slate-600 border border-slate-200">
+                            <span key={cap} className="ui-text-badge px-1.5 py-0.5 rounded bg-white text-slate-600 border border-slate-200">
                               {cap === 'cards_shetab'
                                 ? 'کارت‌های عضو شتاب'
                                 : cap === 'instant_settlement'
@@ -338,36 +338,36 @@ export const CheckoutView: React.FC = () => {
         {/* Order Review & Pay CTA (4 cols) */}
         <div className="lg:col-span-4 space-y-4">
           <div className="bg-white rounded-3xl border border-slate-100 p-6 shadow-sm space-y-4">
-            <h3 className="text-sm font-bold text-slate-900">مجموع پرداختی</h3>
+            <h3 className="ui-text-section-title text-slate-900">مجموع پرداختی</h3>
 
-            <div className="space-y-2 text-xs text-slate-600 border-b border-slate-100 pb-4">
+            <div className="space-y-2 ui-text-meta text-slate-600 border-b border-slate-100 pb-4">
               <div className="flex justify-between">
                 <span>تعداد اقلام:</span>
-                <span className="font-bold">{cartSummary?.item_count || 0} عدد</span>
+                <span className="ui-numeric font-semibold">{cartSummary?.item_count || 0} عدد</span>
               </div>
               <div className="flex justify-between">
                 <span>هزینه کالاها:</span>
-                <span className="font-bold font-sans">{formatMoney(cartSummary?.subtotal, cartSummary?.currency)}</span>
+                <span className="ui-price font-medium">{formatMoney(cartSummary?.subtotal, cartSummary?.currency)}</span>
               </div>
               <div className="flex justify-between">
                 <span>هزینه حمل و نقل:</span>
-                <span className="font-bold font-sans">{cartSummary?.shipping_total === 0 ? 'رایگان' : formatMoney(cartSummary?.shipping_total, cartSummary?.currency)}</span>
+                <span className="ui-price font-medium">{cartSummary?.shipping_total === 0 ? 'رایگان' : formatMoney(cartSummary?.shipping_total, cartSummary?.currency)}</span>
               </div>
               <div className="flex justify-between">
                 <span>مالیات:</span>
-                <span className="font-bold font-sans">{formatMoney(cartSummary?.tax, cartSummary?.currency)}</span>
+                <span className="ui-price font-medium">{formatMoney(cartSummary?.tax, cartSummary?.currency)}</span>
               </div>
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-slate-800">مبلغ قابل پرداخت:</span>
-              <span className="text-lg font-black text-blue-700 font-sans">{formatMoney(cartSummary?.grand_total, cartSummary?.currency)}</span>
+              <span className="ui-text-body font-semibold text-slate-800">مبلغ قابل پرداخت:</span>
+              <span className="ui-price-hero text-blue-700 text-lg">{formatMoney(cartSummary?.grand_total, cartSummary?.currency)}</span>
             </div>
 
             <button
               type="submit"
               disabled={isProcessing || availableGateways.length === 0 || !paymentGateway}
-              className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs sm:text-sm font-bold rounded-2xl shadow-lg shadow-emerald-600/30 transition flex items-center justify-center gap-2"
+              className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white ui-text-body font-semibold rounded-2xl shadow-lg shadow-emerald-600/30 transition flex items-center justify-center gap-2"
             >
               <ShieldCheck className="w-4 h-4" />
               <span>

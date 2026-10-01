@@ -310,8 +310,8 @@ export const CartStep3Payment: React.FC = () => {
                 <div className="flex items-center gap-3">
                   <CheckCircle2 className="w-5 h-5 text-emerald-600" />
                   <div>
-                    <div className="text-xs font-bold text-emerald-900">
-                      کد تخفیف <span className="font-mono">{appliedCoupon.code}</span> اعمال شد
+                    <div className="ui-text-card-title text-emerald-900">
+                      کد تخفیف <span className="font-semibold ui-numeric">{appliedCoupon.code}</span> اعمال شد
                     </div>
                     <div className="ui-text-meta text-emerald-700 mt-0.5">
                       مبلغ {(appliedCoupon?.discount_amount || 0).toLocaleString('fa-IR')} تومان از فاکتور کسر گردید.
@@ -320,7 +320,7 @@ export const CartStep3Payment: React.FC = () => {
                 </div>
                 <button
                   onClick={removeCoupon}
-                  className="p-1.5 rounded-xl text-red-500 hover:bg-red-100/50 transition text-xs font-bold flex items-center gap-1"
+                  className="p-1.5 rounded-xl text-red-500 hover:bg-red-100/50 transition ui-text-label font-semibold flex items-center gap-1"
                 >
                   <X className="w-4 h-4" />
                   <span>حذف</span>
@@ -334,17 +334,17 @@ export const CartStep3Payment: React.FC = () => {
                     value={couponInput}
                     onChange={(e) => setCouponInput(e.target.value)}
                     placeholder="کد تخفیف را وارد کنید (مثال: NOOVIN10)"
-                    className="flex-1 px-4 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs focus:bg-white focus:border-blue-500 focus:outline-hidden transition"
+                    className="flex-1 px-4 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 ui-text-body focus:bg-white focus:border-blue-500 focus:outline-hidden transition"
                   />
                   <button
                     type="submit"
-                    className="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl text-xs font-bold transition active:scale-95 shrink-0 shadow-xs"
+                    className="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl ui-text-label font-semibold transition active:scale-95 shrink-0 shadow-xs"
                   >
                     اعمال کد
                   </button>
                 </div>
                 {couponFeedback && (
-                  <div className={`text-xs p-2 rounded-xl font-medium ${
+                  <div className={`ui-text-meta p-2 rounded-xl font-medium ${
                     couponFeedback.type === 'success' ? 'text-emerald-700 bg-emerald-50' : 'text-red-600 bg-red-50'
                   }`}>
                     {couponFeedback.message}
@@ -358,17 +358,17 @@ export const CartStep3Payment: React.FC = () => {
 
         {/* Right/Left 6-Point Clear Order Factor Card (4 cols) */}
         <div className="lg:col-span-4 bg-white rounded-3xl border border-slate-100 p-6 shadow-xs space-y-5 sticky top-24">
-          <h2 className="text-sm font-extrabold text-slate-900 pb-3 border-b border-slate-100 flex items-center justify-between">
+          <h2 className="ui-text-section-title text-slate-900 pb-3 border-b border-slate-100 flex items-center justify-between">
             <span>صورت‌حساب نهایی</span>
-            <span className="text-[11px] font-bold text-blue-600">{cartSummary.item_count} قلم کالا</span>
+            <span className="ui-text-badge font-semibold text-blue-600">{cartSummary.item_count} قلم کالا</span>
           </h2>
 
-          <div className="space-y-3.5 text-xs">
+          <div className="space-y-3.5 ui-text-meta">
             
             {/* 1. مبلغ سفارش */}
             <div className="flex items-center justify-between text-slate-600">
               <span>۱. مبلغ سفارش (کالاها):</span>
-              <span className="font-bold text-slate-800 font-sans">
+              <span className="ui-price text-slate-800 font-medium">
                 {cartSummary.subtotal.toLocaleString('fa-IR')} {cartSummary.currency}
               </span>
             </div>
@@ -377,7 +377,7 @@ export const CartStep3Payment: React.FC = () => {
             {cartSummary.discount_total > 0 && (
               <div className="flex items-center justify-between text-emerald-600">
                 <span>۲. تخفیف محصولات:</span>
-                <span className="font-bold font-sans">
+                <span className="ui-price text-emerald-600 font-medium">
                   -{cartSummary.discount_total.toLocaleString('fa-IR')} {cartSummary.currency}
                 </span>
               </div>
@@ -387,7 +387,7 @@ export const CartStep3Payment: React.FC = () => {
             {cartSummary.coupon_discount > 0 && (
               <div className="flex items-center justify-between text-emerald-600 font-medium">
                 <span>۳. تخفیف کد تبلیغاتی:</span>
-                <span className="font-bold font-sans">
+                <span className="ui-price text-emerald-600 font-medium">
                   -{cartSummary.coupon_discount.toLocaleString('fa-IR')} {cartSummary.currency}
                 </span>
               </div>
@@ -396,17 +396,17 @@ export const CartStep3Payment: React.FC = () => {
             {/* هزینه ارسال */}
             <div className="flex items-center justify-between text-slate-600">
               <span>هزینه حمل و نقل:</span>
-              <span className="font-bold text-slate-800 font-sans">
+              <span className="ui-price text-slate-800 font-medium">
                 {shippingCost === 0 ? 'رایگان' : `${shippingCost.toLocaleString('fa-IR')} ${cartSummary.currency}`}
               </span>
             </div>
 
             {/* 4. مبلغ نهایی */}
             <div className="pt-3 border-t-2 border-slate-100 flex items-center justify-between">
-              <span className="text-xs sm:text-sm font-black text-slate-900">۴. مبلغ نهایی قابل پرداخت:</span>
-              <div className="text-base sm:text-lg font-black text-blue-700 font-sans">
+              <span className="ui-text-body font-bold text-slate-900">۴. مبلغ نهایی قابل پرداخت:</span>
+              <div className="ui-price-hero text-blue-700 text-lg sm:text-xl">
                 {estimatedGrandTotal.toLocaleString('fa-IR')}{' '}
-                <span className="text-xs font-normal text-slate-600">{cartSummary.currency}</span>
+                <span className="ui-text-meta font-normal text-slate-600">{cartSummary.currency}</span>
               </div>
             </div>
 
@@ -417,7 +417,7 @@ export const CartStep3Payment: React.FC = () => {
             id="checkout-pay-btn"
             onClick={handlePayment}
             disabled={isProcessing}
-            className={`w-full min-h-12 py-3 active:scale-98 text-white rounded-2xl text-xs sm:text-sm font-bold shadow-lg transition flex items-center justify-center gap-2 ${selectedAddress ? 'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-600/30' : 'bg-slate-700 hover:bg-slate-800 shadow-slate-900/15'}`}
+            className={`w-full min-h-12 py-3 active:scale-98 text-white rounded-2xl ui-text-body font-semibold shadow-lg transition flex items-center justify-center gap-2 ${selectedAddress ? 'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-600/30' : 'bg-slate-700 hover:bg-slate-800 shadow-slate-900/15'}`}
           >
             {isProcessing ? (
               <div className="flex items-center gap-2">
@@ -432,7 +432,7 @@ export const CartStep3Payment: React.FC = () => {
             )}
           </button>
 
-          <div className="p-3 rounded-2xl bg-slate-50 border border-slate-100 flex items-center gap-2 text-[11px] text-slate-500">
+          <div className="p-3 rounded-2xl bg-slate-50 border border-slate-100 flex items-center gap-2 ui-text-meta text-slate-500">
             <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
             <span>پرداخت از طریق درگاه امن شاپرک با پروتکل رمزنگاری SSL</span>
           </div>
@@ -444,12 +444,12 @@ export const CartStep3Payment: React.FC = () => {
       {/* MOBILE FLOATING PAYMENT BAR */}
       <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 px-4 py-3 sm:hidden shadow-2xl flex items-center justify-between gap-3 safe-area-bottom">
         <div className="flex flex-col">
-          <span className="text-[10px] text-slate-500 font-medium">مبلغ نهایی فاکتور</span>
+          <span className="ui-text-meta text-slate-500 font-medium">مبلغ نهایی فاکتور</span>
           <div className="flex items-baseline gap-1 mt-0.5">
-            <span className="text-base font-black text-emerald-700 font-sans">
+            <span className="ui-price-hero text-emerald-700 text-lg">
               {estimatedGrandTotal.toLocaleString('fa-IR')}
             </span>
-            <span className="text-[11px] font-bold text-slate-600">{cartSummary.currency}</span>
+            <span className="ui-text-meta font-medium text-slate-600">{cartSummary.currency}</span>
           </div>
         </div>
 
@@ -457,7 +457,7 @@ export const CartStep3Payment: React.FC = () => {
           id="mobile-checkout-pay-btn"
           onClick={handlePayment}
           disabled={isProcessing}
-          className={`min-h-11 px-4 py-2.5 active:scale-95 text-white rounded-2xl text-xs font-bold flex items-center gap-2 shadow-lg transition shrink-0 ${selectedAddress ? 'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-600/30' : 'bg-slate-700 hover:bg-slate-800 shadow-slate-900/15'}`}
+          className={`min-h-11 px-4 py-2.5 active:scale-95 text-white rounded-2xl ui-text-body font-semibold flex items-center gap-2 shadow-lg transition shrink-0 ${selectedAddress ? 'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-600/30' : 'bg-slate-700 hover:bg-slate-800 shadow-slate-900/15'}`}
         >
           {isProcessing ? (
             <div className="flex items-center gap-2">

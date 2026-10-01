@@ -233,18 +233,18 @@ export const AddressModal: React.FC<AddressModalProps> = ({ isOpen, onClose, onS
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label className="space-y-1 block">
-                <span className="text-xs font-bold text-slate-700">نام گیرنده</span>
+                <span className="ui-text-label font-semibold text-slate-700">نام گیرنده</span>
                 <input
                   value={recipientName}
                   onChange={(event) => { setRecipientName(event.target.value); clearError('recipientName'); }}
                   placeholder="مثال: علی احمدی"
-                  className={`w-full min-h-11 px-3.5 text-sm bg-slate-50 border rounded-xl focus:outline-none transition ${errors.recipientName ? 'border-rose-500 bg-rose-50/20' : 'border-slate-200 focus:border-blue-500 focus:bg-white'}`}
+                  className={`w-full min-h-11 px-3.5 ui-text-body bg-slate-50 border rounded-xl focus:outline-none transition ${errors.recipientName ? 'border-rose-500 bg-rose-50/20' : 'border-slate-200 focus:border-blue-500 focus:bg-white'}`}
                 />
-                {errors.recipientName && <span className="text-[11px] text-rose-600 font-medium">{errors.recipientName}</span>}
+                {errors.recipientName && <span className="ui-text-meta text-rose-600 font-medium">{errors.recipientName}</span>}
               </label>
 
               <label className="space-y-1 block">
-                <span className="text-xs font-bold text-slate-700">شماره تماس گیرنده</span>
+                <span className="ui-text-label font-semibold text-slate-700">شماره تماس گیرنده</span>
                 <input
                   type="tel"
                   inputMode="numeric"
@@ -252,43 +252,43 @@ export const AddressModal: React.FC<AddressModalProps> = ({ isOpen, onClose, onS
                   value={phone}
                   onChange={(event) => { setPhone(normalizeDigits(event.target.value).slice(0, 11)); clearError('phone'); }}
                   placeholder="09xxxxxxxxx"
-                  className={`w-full min-h-11 px-3.5 text-sm bg-slate-50 border rounded-xl focus:outline-none font-sans transition ${errors.phone ? 'border-rose-500 bg-rose-50/20' : 'border-slate-200 focus:border-blue-500 focus:bg-white'}`}
+                  className={`w-full min-h-11 px-3.5 ui-text-body ui-numeric bg-slate-50 border rounded-xl focus:outline-none transition ${errors.phone ? 'border-rose-500 bg-rose-50/20' : 'border-slate-200 focus:border-blue-500 focus:bg-white'}`}
                 />
-                {errors.phone && <span className="text-[11px] text-rose-600 font-medium">{errors.phone}</span>}
+                {errors.phone && <span className="ui-text-meta text-rose-600 font-medium">{errors.phone}</span>}
               </label>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="space-y-1">
-                <span className="text-xs font-bold text-slate-700">استان</span>
+                <span className="ui-text-label font-semibold text-slate-700">استان</span>
                 <button
                   type="button"
                   onClick={() => openPicker('province')}
-                  className={`w-full min-h-11 px-3.5 text-sm bg-slate-50 border rounded-xl text-right flex items-center justify-between gap-3 transition ${errors.province ? 'border-rose-500 bg-rose-50/20' : 'border-slate-200 hover:bg-white focus-visible:border-blue-500'}`}
+                  className={`w-full min-h-11 px-3.5 ui-text-body bg-slate-50 border rounded-xl text-right flex items-center justify-between gap-3 transition ${errors.province ? 'border-rose-500 bg-rose-50/20' : 'border-slate-200 hover:bg-white focus-visible:border-blue-500'}`}
                 >
                   <span className={selectedProvince ? 'text-slate-900 font-semibold truncate' : 'text-slate-400'}>{selectedProvince || 'انتخاب استان'}</span>
                   <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
                 </button>
-                {errors.province && <span className="text-[11px] text-rose-600 font-medium">{errors.province}</span>}
+                {errors.province && <span className="ui-text-meta text-rose-600 font-medium">{errors.province}</span>}
               </div>
 
               <div className="space-y-1">
-                <span className="text-xs font-bold text-slate-700">شهر</span>
+                <span className="ui-text-label font-semibold text-slate-700">شهر</span>
                 <button
                   type="button"
                   disabled={!selectedProvince}
                   onClick={() => openPicker('city')}
-                  className={`w-full min-h-11 px-3.5 text-sm bg-slate-50 border rounded-xl text-right flex items-center justify-between gap-3 transition ${errors.city ? 'border-rose-500 bg-rose-50/20' : 'border-slate-200 hover:bg-white focus-visible:border-blue-500'} ${!selectedProvince ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  className={`w-full min-h-11 px-3.5 ui-text-body bg-slate-50 border rounded-xl text-right flex items-center justify-between gap-3 transition ${errors.city ? 'border-rose-500 bg-rose-50/20' : 'border-slate-200 hover:bg-white focus-visible:border-blue-500'} ${!selectedProvince ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                   <span className={selectedCity ? 'text-slate-900 font-semibold truncate' : 'text-slate-400'}>{selectedCity || (selectedProvince ? 'انتخاب شهر' : 'ابتدا استان را انتخاب کنید')}</span>
                   <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
                 </button>
-                {errors.city && <span className="text-[11px] text-rose-600 font-medium">{errors.city}</span>}
+                {errors.city && <span className="ui-text-meta text-rose-600 font-medium">{errors.city}</span>}
               </div>
             </div>
 
             <label className="space-y-1 block">
-              <span className="text-xs font-bold text-slate-700">کد پستی (۱۰ رقم)</span>
+              <span className="ui-text-label font-semibold text-slate-700">کد پستی (۱۰ رقم)</span>
               <input
                 type="text"
                 inputMode="numeric"
@@ -297,28 +297,28 @@ export const AddressModal: React.FC<AddressModalProps> = ({ isOpen, onClose, onS
                 onChange={(event) => { setPostalCode(normalizeDigits(event.target.value).slice(0, 10)); clearError('postalCode'); }}
                 placeholder="1234567890"
                 maxLength={10}
-                className={`w-full min-h-11 px-3.5 text-sm bg-slate-50 border rounded-xl focus:outline-none font-sans transition ${errors.postalCode ? 'border-rose-500 bg-rose-50/20' : 'border-slate-200 focus:border-blue-500 focus:bg-white'}`}
+                className={`w-full min-h-11 px-3.5 ui-text-body ui-numeric bg-slate-50 border rounded-xl focus:outline-none transition ${errors.postalCode ? 'border-rose-500 bg-rose-50/20' : 'border-slate-200 focus:border-blue-500 focus:bg-white'}`}
               />
-              <span className="block text-[11px] text-slate-400">فقط رقم وارد کنید؛ پس از تکمیل ۱۰ رقم، خطای مزاحم نمایش داده نمی‌شود.</span>
-              {errors.postalCode && <span className="text-[11px] text-rose-600 font-medium">{errors.postalCode}</span>}
+              <span className="block ui-text-meta text-slate-400">فقط رقم وارد کنید؛ پس از تکمیل ۱۰ رقم، خطای مزاحم نمایش داده نمی‌شود.</span>
+              {errors.postalCode && <span className="ui-text-meta text-rose-600 font-medium">{errors.postalCode}</span>}
             </label>
 
             <label className="space-y-1 block">
-              <span className="text-xs font-bold text-slate-700">آدرس کامل</span>
+              <span className="ui-text-label font-semibold text-slate-700">آدرس کامل</span>
               <textarea
                 rows={3}
                 value={addressLine}
                 onChange={(event) => { setAddressLine(event.target.value); clearError('addressLine'); }}
                 placeholder="خیابان، کوچه، پلاک، واحد و توضیحات تحویل را وارد کنید…"
-                className={`w-full min-h-24 px-3.5 py-3 text-sm bg-slate-50 border rounded-xl focus:outline-none resize-y transition ${errors.addressLine ? 'border-rose-500 bg-rose-50/20' : 'border-slate-200 focus:border-blue-500 focus:bg-white'}`}
+                className={`w-full min-h-24 px-3.5 py-3 ui-text-body bg-slate-50 border rounded-xl focus:outline-none resize-y transition ${errors.addressLine ? 'border-rose-500 bg-rose-50/20' : 'border-slate-200 focus:border-blue-500 focus:bg-white'}`}
               />
-              {errors.addressLine && <span className="text-[11px] text-rose-600 font-medium">{errors.addressLine}</span>}
+              {errors.addressLine && <span className="ui-text-meta text-rose-600 font-medium">{errors.addressLine}</span>}
             </label>
           </div>
 
           <footer className="p-4 sm:px-7 border-t border-slate-100 bg-white flex items-center gap-2 shrink-0">
-            <button type="button" onClick={onClose} disabled={isSaving} className="min-h-11 px-4 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-xl transition disabled:opacity-50">انصراف</button>
-            <button type="submit" disabled={isSaving} className="min-h-11 flex-1 sm:flex-none sm:px-7 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl shadow-md shadow-blue-600/25 transition disabled:cursor-wait disabled:opacity-70">{isSaving ? 'در حال ذخیره…' : 'ذخیرهٔ آدرس'}</button>
+            <button type="button" onClick={onClose} disabled={isSaving} className="min-h-11 px-4 ui-text-label font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition disabled:opacity-50">انصراف</button>
+            <button type="submit" disabled={isSaving} className="min-h-11 flex-1 sm:flex-none sm:px-7 bg-blue-600 hover:bg-blue-700 text-white ui-text-body font-semibold rounded-xl shadow-md shadow-blue-600/25 transition disabled:cursor-wait disabled:opacity-70">{isSaving ? 'در حال ذخیره…' : 'ذخیرهٔ آدرس'}</button>
           </footer>
         </form>
       </section>
@@ -330,8 +330,8 @@ export const AddressModal: React.FC<AddressModalProps> = ({ isOpen, onClose, onS
             <div className="min-h-10 flex items-center justify-center" aria-hidden="true"><span className="w-12 h-1.5 rounded-full bg-slate-300" /></div>
             <header className="px-5 pb-3 flex items-start justify-between gap-3 border-b border-slate-100">
               <div>
-                <h3 className="text-base font-black text-slate-900">{pickerTitle}</h3>
-                <p className="text-[11px] text-slate-500 mt-1">{pickerHint}</p>
+                <h3 className="ui-text-section-title text-slate-900">{pickerTitle}</h3>
+                <p className="ui-text-meta text-slate-500 mt-1">{pickerHint}</p>
               </div>
               <button type="button" onClick={() => setPickerMode(null)} className="min-w-11 min-h-11 rounded-xl text-slate-500 hover:bg-slate-100 flex items-center justify-center" aria-label="بستن"><X className="w-5 h-5" /></button>
             </header>

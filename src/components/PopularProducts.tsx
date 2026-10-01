@@ -75,19 +75,19 @@ export const PopularProducts: React.FC = () => {
                 {/* Badge Tag */}
                 <div className="absolute top-3 right-3 z-10">
                   {product.is_smart ? (
-                    <span className="ui-text-meta px-2.5 py-1 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    <span className="ui-text-badge px-2.5 py-0.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200">
                       هوشمند
                     </span>
                   ) : product.is_bestseller ? (
-                    <span className="ui-text-meta px-2.5 py-1 rounded-xl bg-amber-50 text-amber-700 border border-amber-200">
+                    <span className="ui-text-badge px-2.5 py-0.5 rounded-lg bg-amber-50 text-amber-700 border border-amber-200">
                       پرفروش
                     </span>
                   ) : product.discount_percentage ? (
-                    <span className="ui-text-meta px-2.5 py-1 rounded-xl bg-red-50 text-red-700 border border-red-200">
+                    <span className="ui-text-badge px-2.5 py-0.5 rounded-lg bg-red-50 text-red-700 border border-red-200">
                       {product.discount_percentage}٪ تخفیف
                     </span>
                   ) : (
-                    <span className={`ui-text-meta px-2.5 py-1 rounded-xl border ${canPurchase ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-slate-100 text-slate-500 border-slate-200'}`}>
+                    <span className={`ui-text-badge px-2.5 py-0.5 rounded-lg border ${canPurchase ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-slate-100 text-slate-500 border-slate-200'}`}>
                       {canPurchase ? 'موجود' : 'ناموجود'}
                     </span>
                   )}
@@ -141,7 +141,7 @@ export const PopularProducts: React.FC = () => {
                 {/* Bottom Row: Price & Quantity Switcher (Point 10) */}
                 <div className="pt-2.5 border-t border-slate-100 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-2">
                   <div className="min-w-0">
-                    <div className="ui-price text-[11px] sm:text-base leading-tight text-slate-900 font-sans whitespace-nowrap tabular-nums">
+                    <div className="ui-price text-slate-900 whitespace-nowrap">
                       {product.effective_price?.toLocaleString('fa-IR')}
                     </div>
                     <div className="ui-text-meta text-slate-400 whitespace-nowrap">{product.currency}</div>
@@ -192,12 +192,12 @@ export const PopularProducts: React.FC = () => {
                   ) : canPurchase && requiresConfigurationSelection ? (
                     <button
                       onClick={() => handleProductClick(product.slug)}
-                      className="rounded-xl bg-blue-600 px-3 py-2 text-[10px] font-bold text-white shadow-md shadow-blue-500/20"
+                      className="rounded-xl bg-blue-600 px-3 py-1.5 ui-text-badge text-white shadow-md shadow-blue-500/20"
                     >
                       انتخاب
                     </button>
                   ) : (
-                    <span className="rounded-xl bg-slate-100 px-2 py-2 text-[10px] font-bold text-slate-400">ناموجود</span>
+                    <span className="rounded-xl bg-slate-100 px-2 py-1.5 ui-text-badge text-slate-400">ناموجود</span>
                   )}
                 </div>
 

@@ -118,7 +118,7 @@ export const Header: React.FC = () => {
                   setActiveView('store');
                 }
               }}
-              className="underline font-normal text-[11px] opacity-90 hover:opacity-100 transition"
+              className="underline font-normal ui-text-meta opacity-90 hover:opacity-100 transition"
             >
               {appearanceSettings.topBannerLinkText} ←
             </button>
@@ -149,7 +149,7 @@ export const Header: React.FC = () => {
               className="flex items-center gap-2 group cursor-pointer focus:outline-none shrink-0"
             >
               <span 
-                className="text-2xl sm:text-3xl font-extrabold tracking-tight text-blue-700 font-sans transition-transform group-hover:scale-102" 
+                className="text-2xl sm:text-3xl font-bold tracking-tight text-blue-700 transition-transform group-hover:scale-102" 
                 style={{ color: appearanceSettings.brandPrimaryColor || themeSettings.primary_color }}
               >
                 {themeSettings.brand_name || 'noovinnet'}
@@ -199,17 +199,17 @@ export const Header: React.FC = () => {
                   >
                     <div className="flex w-full gap-5" aria-label="دسته‌بندی‌های فروشگاه">
                       <aside className="w-52 shrink-0 border-l border-slate-100 pl-4 flex flex-col">
-                        <div className="px-3 pb-2 text-[11px] font-bold text-slate-400">دسته‌بندی‌های فروشگاه</div>
+                        <div className="px-3 pb-2 ui-text-meta font-bold text-slate-400">دسته‌بندی‌های فروشگاه</div>
                         <div className="min-h-0 flex-1 space-y-1 overflow-y-auto pr-1">
                           {storeRootCategories.map((category) => {
                             const isActive = selectedStoreCategory?.id === category.id;
-                            return <button key={category.id} type="button" onMouseEnter={() => setActiveStoreTab(category.slug)} onFocus={() => setActiveStoreTab(category.slug)} onClick={() => { navigateToCategory(category.slug, [category.slug]); setHoveredMenu(null); }} className={`flex w-full items-center justify-between rounded-xl px-3 py-2 text-right text-xs font-bold transition ${isActive ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20' : 'text-slate-700 hover:bg-slate-50'}`}><span className="truncate">{category.name}</span><ChevronDown className={`h-3.5 w-3.5 rotate-90 ${isActive ? 'text-white' : 'text-slate-400'}`} /></button>;
+                            return <button key={category.id} type="button" onMouseEnter={() => setActiveStoreTab(category.slug)} onFocus={() => setActiveStoreTab(category.slug)} onClick={() => { navigateToCategory(category.slug, [category.slug]); setHoveredMenu(null); }} className={`flex w-full items-center justify-between rounded-xl px-3 py-2 text-right ui-text-button transition ${isActive ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20' : 'text-slate-700 hover:bg-slate-50'}`}><span className="truncate">{category.name}</span><ChevronDown className={`h-3.5 w-3.5 rotate-90 ${isActive ? 'text-white' : 'text-slate-400'}`} /></button>;
                           })}
                         </div>
-                        <button type="button" onClick={() => { navigateToCategory(null, []); setHoveredMenu(null); }} className="mt-3 w-full rounded-xl bg-slate-100 px-3 py-2 text-center text-xs font-bold text-slate-600 transition hover:bg-blue-50 hover:text-blue-700">همهٔ محصولات</button>
+                        <button type="button" onClick={() => { navigateToCategory(null, []); setHoveredMenu(null); }} className="mt-3 w-full rounded-xl bg-slate-100 px-3 py-2 text-center ui-text-button text-slate-600 transition hover:bg-blue-50 hover:text-blue-700">همهٔ محصولات</button>
                       </aside>
                       <section className="min-w-0 flex-1 overflow-y-auto">
-                        {selectedStoreCategory ? <><div className="mb-3 flex items-center justify-between border-b border-slate-100 pb-2"><div><b className="block text-sm text-slate-800">{selectedStoreCategory.name}</b><small className="mt-1 block text-[11px] text-slate-500">{selectedStoreCategory.description || 'مشاهدهٔ کالاهای این دسته و زیردسته‌های آن'}</small></div><button type="button" onClick={() => { navigateToCategory(selectedStoreCategory.slug, [selectedStoreCategory.slug]); setHoveredMenu(null); }} className="text-[11px] font-bold text-blue-600 hover:underline">مشاهدهٔ همه</button></div>{selectedStoreChildren.length ? <div className="grid grid-cols-2 gap-3">{selectedStoreChildren.slice(0, 8).map((child) => <button key={child.id} type="button" onClick={() => { navigateToCategory(child.slug, [selectedStoreCategory.slug, child.slug]); setHoveredMenu(null); }} className="rounded-xl border border-slate-100 p-3 text-right transition hover:border-blue-100 hover:bg-blue-50/60"><b className="block text-xs text-slate-800">{child.name}</b><small className="mt-1 block truncate text-[10px] text-slate-500">{child.description || `مشاهدهٔ محصولات ${child.name}`}</small></button>)}</div> : <div className="grid min-h-40 place-items-center rounded-2xl border border-dashed border-slate-200 bg-slate-50/70 px-6 text-center"><div><b className="block text-xs text-slate-700">زیردسته‌ای برای این گروه ثبت نشده است</b><small className="mt-2 block text-[11px] leading-5 text-slate-500">کالاهای همین دسته از صفحهٔ اختصاصی آن قابل مشاهده‌اند.</small></div></div>}</> : <div className="grid h-full place-items-center text-center"><div><b className="block text-sm text-slate-800">دستهٔ فعالی برای فروشگاه ثبت نشده است</b><small className="mt-2 block text-xs text-slate-500">از پنل مدیریت، دستهٔ اصلی و زیردسته‌ها را بسازید.</small></div></div>}
+                        {selectedStoreCategory ? <><div className="mb-3 flex items-center justify-between border-b border-slate-100 pb-2"><div><b className="block ui-text-card-title text-slate-800">{selectedStoreCategory.name}</b><small className="mt-1 block ui-text-meta text-slate-500">{selectedStoreCategory.description || 'مشاهدهٔ کالاهای این دسته و زیردسته‌های آن'}</small></div><button type="button" onClick={() => { navigateToCategory(selectedStoreCategory.slug, [selectedStoreCategory.slug]); setHoveredMenu(null); }} className="ui-text-meta font-bold text-blue-600 hover:underline">مشاهدهٔ همه</button></div>{selectedStoreChildren.length ? <div className="grid grid-cols-2 gap-3">{selectedStoreChildren.slice(0, 8).map((child) => <button key={child.id} type="button" onClick={() => { navigateToCategory(child.slug, [selectedStoreCategory.slug, child.slug]); setHoveredMenu(null); }} className="rounded-xl border border-slate-100 p-3 text-right transition hover:border-blue-100 hover:bg-blue-50/60"><b className="block text-xs font-semibold text-slate-800">{child.name}</b><small className="mt-1 block truncate ui-text-meta text-slate-500">{child.description || `مشاهدهٔ محصولات ${child.name}`}</small></button>)}</div> : <div className="grid min-h-40 place-items-center rounded-2xl border border-dashed border-slate-200 bg-slate-50/70 px-6 text-center"><div><b className="block text-xs font-semibold text-slate-700">زیردسته‌ای برای این گروه ثبت نشده است</b><small className="mt-2 block ui-text-meta leading-5 text-slate-500">کالاهای همین دسته از صفحهٔ اختصاصی آن قابل مشاهده‌اند.</small></div></div>}</> : <div className="grid h-full place-items-center text-center"><div><b className="block text-sm font-semibold text-slate-800">دستهٔ فعالی برای فروشگاه ثبت نشده است</b><small className="mt-2 block text-xs text-slate-500">از پنل مدیریت، دستهٔ اصلی و زیردسته‌ها را بسازید.</small></div></div>}
                       </section>
                     </div>
                     {false && <>
@@ -1020,8 +1020,8 @@ export const Header: React.FC = () => {
                           )}
                           <span className="truncate text-slate-800 font-medium">{p.name}</span>
                         </div>
-                        <span className="text-[11px] font-bold text-blue-600 shrink-0 font-sans">
-                          {p.effective_price?.toLocaleString('fa-IR')}
+                        <span className="ui-text-meta font-bold text-blue-600 shrink-0 ui-numeric">
+                          {p.effective_price?.toLocaleString('fa-IR')} تومان
                         </span>
                       </button>
                     ))
@@ -1035,7 +1035,7 @@ export const Header: React.FC = () => {
                       setActiveView('store');
                       setSearchDropdownOpen(false);
                     }}
-                    className="w-full text-center py-2 text-[11px] font-bold text-blue-600 hover:bg-blue-50 rounded-xl transition"
+                    className="w-full text-center py-2 ui-text-meta font-bold text-blue-600 hover:bg-blue-50 rounded-xl transition"
                   >
                     مشاهده همه در فروشگاه
                   </button>
@@ -1070,7 +1070,7 @@ export const Header: React.FC = () => {
             >
               <Heart className="w-5 h-5" />
               {favorites.length > 0 && (
-                <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-rose-500 text-white text-[10px] font-black flex items-center justify-center shadow-xs animate-in zoom-in">
+                <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-rose-500 text-white ui-text-badge flex items-center justify-center shadow-xs animate-in zoom-in ui-numeric">
                   {favorites.length}
                 </span>
               )}
@@ -1085,7 +1085,7 @@ export const Header: React.FC = () => {
             >
               <ShoppingCart className="w-5 h-5" />
               {cartSummary.item_count > 0 && (
-                <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-red-600 text-white text-[10px] font-black flex items-center justify-center shadow-xs animate-in zoom-in">
+                <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-red-600 text-white ui-text-badge flex items-center justify-center shadow-xs animate-in zoom-in ui-numeric">
                   {cartSummary.item_count}
                 </span>
               )}
@@ -1102,7 +1102,7 @@ export const Header: React.FC = () => {
                   setAuthModalOpen(true);
                 }
               }}
-              className="hidden md:flex items-center gap-2 px-3.5 py-2 sm:py-2.5 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-bold shadow-md shadow-blue-500/20 transition active:scale-95 cursor-pointer"
+              className="hidden md:flex items-center gap-2 px-3.5 py-2 sm:py-2.5 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white ui-text-button shadow-md shadow-blue-500/20 transition active:scale-95 cursor-pointer"
             >
               <span className="hidden sm:inline">
                 {user ? user.name.split(' ')[0] : 'ورود / ثبت‌نام'}

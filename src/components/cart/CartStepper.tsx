@@ -52,7 +52,7 @@ export const CartStepper: React.FC<CartStepperProps> = ({ currentStep, onStepCli
             >
               {/* Circle */}
               <div
-                className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center font-bold text-xs sm:text-sm transition-all shadow-xs ${
+                className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center font-semibold text-xs sm:text-sm transition-all shadow-xs ${
                   isCompleted
                     ? 'bg-blue-600 text-white'
                     : isActive
@@ -63,13 +63,13 @@ export const CartStepper: React.FC<CartStepperProps> = ({ currentStep, onStepCli
                 {isCompleted ? (
                   <Check className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[3]" />
                 ) : (
-                  <span>{step.id}</span>
+                  <span className="ui-numeric">{step.id}</span>
                 )}
               </div>
 
               {/* Label */}
               <span
-                className={`text-[11px] sm:text-xs font-bold transition-colors ${
+                className={`ui-text-label font-semibold transition-colors ${
                   isActive ? 'text-blue-700' : isCompleted ? 'text-slate-700' : 'text-slate-400'
                 }`}
               >

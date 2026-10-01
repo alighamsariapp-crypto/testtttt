@@ -53,8 +53,8 @@ export const CartStep1Items: React.FC = () => {
           </div>
 
           <div className="space-y-2">
-            <h2 className="text-lg sm:text-xl font-extrabold text-slate-900">سبد خرید شما در حال حاضر خالی است</h2>
-            <p className="text-xs sm:text-sm text-slate-500">
+            <h2 className="ui-text-section-title text-slate-900">سبد خرید شما در حال حاضر خالی است</h2>
+            <p className="ui-text-body text-slate-500">
               می‌توانید برای مشاهده محصولات و افزودن آن‌ها به فروشگاه مراجعه کنید.
             </p>
           </div>
@@ -62,7 +62,7 @@ export const CartStep1Items: React.FC = () => {
           <div>
             <button
               onClick={() => setActiveView('store')}
-              className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl text-xs sm:text-sm font-bold shadow-lg shadow-blue-600/30 transition hover:scale-102 active:scale-98"
+              className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl ui-text-body font-semibold shadow-lg shadow-blue-600/30 transition hover:scale-102 active:scale-98"
             >
               مشاهده محصولات فروشگاه
             </button>
@@ -76,7 +76,7 @@ export const CartStep1Items: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-28 sm:pb-6 space-y-6">
       
       {/* Breadcrumbs */}
-      <div className="hidden sm:flex items-center gap-2 text-xs text-slate-400">
+      <div className="hidden sm:flex items-center gap-2 ui-text-meta text-slate-400">
         <button onClick={() => setActiveView('home')} className="hover:text-blue-600">خانه</button>
         <span>/</span>
         <span className="text-slate-700 font-medium">سبد خرید</span>
@@ -90,15 +90,15 @@ export const CartStep1Items: React.FC = () => {
       {/* Header with item count badge */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <h1 id="checkout-step-heading" tabIndex={-1} className="text-lg sm:text-2xl font-black text-slate-900 outline-none">سبد خرید شما</h1>
-          <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-black">
+          <h1 id="checkout-step-heading" tabIndex={-1} className="ui-text-page-title text-slate-900 outline-none">سبد خرید شما</h1>
+          <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-700 ui-text-badge font-semibold">
             {cartSummary.item_count} کالا
           </span>
         </div>
 
         <button
           onClick={() => setActiveView('store')}
-          className="text-xs font-bold text-blue-600 hover:text-blue-700 hidden sm:flex items-center gap-1"
+          className="ui-text-meta font-semibold text-blue-600 hover:text-blue-700 hidden sm:flex items-center gap-1"
         >
           <span>ادامه خرید در فروشگاه</span>
           <ArrowLeft className="w-3.5 h-3.5" />
@@ -134,15 +134,15 @@ export const CartStep1Items: React.FC = () => {
                 </div>
                 
                 <div className="space-y-1 min-w-0 flex-1">
-                  <h3 className="text-xs sm:text-sm font-bold text-slate-900 line-clamp-1">
+                  <h3 className="ui-text-card-title text-slate-900 line-clamp-1">
                     {item.product_name}
                   </h3>
                   {item.variant_name && item.variant_name !== 'استاندارد' && (
-                    <div className="text-[11px] text-slate-500 font-medium">
+                    <div className="ui-text-meta text-slate-500">
                       مدل: {item.variant_name}
                     </div>
                   )}
-                  <div className="text-xs sm:text-sm font-black text-slate-900 font-sans">
+                  <div className="ui-price text-slate-900">
                     {formatMoney(item.unit_price, item.currency)}
                   </div>
                 </div>
@@ -152,7 +152,7 @@ export const CartStep1Items: React.FC = () => {
               <div className="flex items-center justify-between sm:justify-end gap-4 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100">
                 
                 {/* Total price for this item on mobile */}
-                <div className="sm:hidden text-xs font-extrabold text-blue-700 font-sans">
+                <div className="sm:hidden ui-price text-blue-700">
                   جمع: {formatMoney(item.unit_price * item.quantity, item.currency)}
                 </div>
 
@@ -172,7 +172,7 @@ export const CartStep1Items: React.FC = () => {
                     </button>
 
                     {/* Quantity Display */}
-                    <span className="w-9 text-center text-xs sm:text-sm font-black font-sans text-slate-900">
+                    <span className="w-9 text-center ui-numeric font-semibold text-slate-900 text-sm">
                       {item.quantity}
                     </span>
 
@@ -191,7 +191,7 @@ export const CartStep1Items: React.FC = () => {
                     </button>
                   </div>
                   {isAtStockLimit && (
-                    <p className="text-[10px] font-bold text-amber-700" role="status">
+                    <p className="ui-text-meta font-medium text-amber-700" role="status">
                       موجودی محصول تمام شده است
                     </p>
                   )}
@@ -207,14 +207,14 @@ export const CartStep1Items: React.FC = () => {
 
         {/* Order Summary Card (4 cols) */}
         <div className="relative lg:col-span-4 bg-white rounded-3xl border border-slate-100 p-6 pb-24 sm:pb-6 shadow-xs space-y-5 lg:sticky lg:top-24">
-          <h2 className="text-sm font-extrabold text-slate-900 pb-3 border-b border-slate-100">
+          <h2 className="ui-text-section-title text-slate-900 pb-3 border-b border-slate-100">
             خلاصه فاکتور خرید
           </h2>
 
-          <div className="space-y-3 text-xs">
+          <div className="space-y-3 ui-text-meta">
             <div className="flex items-center justify-between text-slate-600">
               <span>قیمت کالاها ({cartSummary?.item_count || 0}):</span>
-              <span className="font-bold text-slate-800 font-sans">
+              <span className="ui-price text-slate-800 font-medium">
                 {formatMoney(cartSummary?.subtotal, cartSummary?.currency)}
               </span>
             </div>
@@ -222,7 +222,7 @@ export const CartStep1Items: React.FC = () => {
             {Boolean(cartSummary?.discount_total && cartSummary.discount_total > 0) && (
               <div className="flex items-center justify-between text-emerald-600">
                 <span>تخفیف کل کالاها:</span>
-                <span className="font-bold font-sans">
+                <span className="ui-price text-emerald-600 font-medium">
                   -{formatMoney(cartSummary?.discount_total, cartSummary?.currency)}
                 </span>
               </div>
@@ -230,14 +230,14 @@ export const CartStep1Items: React.FC = () => {
 
             <div className="flex items-center justify-between text-slate-600">
               <span>هزینه بسته‌بندی و ارسال:</span>
-              <span className="font-bold text-slate-800 font-sans">
+              <span className="ui-price text-slate-800 font-medium">
                 {cartSummary?.shipping_total === 0 ? 'رایگان' : formatMoney(cartSummary?.shipping_total, cartSummary?.currency)}
               </span>
             </div>
 
-            <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-sm">
-              <span className="font-extrabold text-slate-900">مبلغ نهایی قابل پرداخت:</span>
-              <span className="text-base font-black text-blue-700 font-sans">
+            <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span className="ui-text-body font-bold text-slate-900">مبلغ نهایی قابل پرداخت:</span>
+              <span className="ui-price-hero text-blue-700 text-lg sm:text-xl">
                 {formatMoney(cartSummary?.grand_total, cartSummary?.currency)}
               </span>
             </div>
@@ -246,13 +246,13 @@ export const CartStep1Items: React.FC = () => {
           <button
             id="cart-continue-checkout-btn"
             onClick={requestCheckoutLogin}
-            className="absolute inset-x-6 bottom-5 min-h-12 bg-blue-600 hover:bg-blue-700 active:scale-98 text-white rounded-2xl text-xs font-bold shadow-lg shadow-blue-600/30 transition flex items-center justify-center gap-2 sm:static sm:w-full sm:min-h-0 sm:py-3.5 sm:text-sm"
+            className="absolute inset-x-6 bottom-5 min-h-12 bg-blue-600 hover:bg-blue-700 active:scale-98 text-white rounded-2xl ui-text-body font-semibold shadow-lg shadow-blue-600/30 transition flex items-center justify-center gap-2 sm:static sm:w-full sm:min-h-0 sm:py-3.5"
           >
             <span>ثبت و ادامه خرید</span>
             <ArrowLeft className="w-4 h-4" />
           </button>
 
-          <div className="p-3 rounded-2xl bg-blue-50/60 border border-blue-100 flex items-center gap-2 text-[11px] text-blue-800">
+          <div className="p-3 rounded-2xl bg-blue-50/60 border border-blue-100 flex items-center gap-2 ui-text-meta text-blue-800">
             <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
             <span>ضمانت اصالت کالا و ۷ روز مهلت تست و بازگشت</span>
           </div>

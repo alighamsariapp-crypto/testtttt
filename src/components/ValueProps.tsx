@@ -37,8 +37,8 @@ export const ValueProps: React.FC = () => {
                 <Icon className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-slate-800">{item.title}</h3>
-                <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{item.description}</p>
+                <h3 className="ui-text-card-title font-semibold text-slate-800">{item.title}</h3>
+                <p className="ui-text-meta text-slate-500 mt-0.5 leading-relaxed">{item.description}</p>
               </div>
             </div>
           );
