@@ -41,6 +41,10 @@ export default defineConfig(({ mode, command }) => {
       alias: {
         '@': path.resolve(__dirname, '.'),
       },
+      dedupe: ['react', 'react-dom'],
+    },
+    optimizeDeps: {
+      include: ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime', 'lucide-react'],
     },
     build: {
       // Laravel/Apache serves the frontend from public/. Keep Laravel's
