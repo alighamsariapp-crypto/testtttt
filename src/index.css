@@ -56,13 +56,13 @@
   --store-accent: #DC2626;
   --font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   /* Mobile-first typography roles, aligned to content purpose rather than ad-hoc utility classes. */
-  --ui-font-meta: 0.8125rem;
+  --ui-font-meta: 0.75rem;
   --ui-line-meta: 1.35rem;
   --ui-font-body: 0.875rem;
   --ui-line-body: 1.75;
   --ui-font-label: 0.8125rem;
   --ui-line-label: 1.25rem;
-  --ui-font-badge: 0.75rem;
+  --ui-font-badge: 0.6875rem;
   --ui-line-badge: 1rem;
   --ui-font-button: 0.875rem;
   --ui-line-button: 1.25rem;
@@ -201,7 +201,7 @@ body {
 .ui-text-meta {
   font-size: var(--ui-font-meta);
   line-height: var(--ui-line-meta);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .ui-text-label {

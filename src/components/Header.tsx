@@ -157,13 +157,13 @@ export const Header: React.FC = () => {
             </button>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center gap-5 xl:gap-7 text-xs xl:text-sm font-semibold text-slate-700">
+            <nav className="hidden lg:flex items-center gap-5 xl:gap-7 ui-text-label text-slate-700">
               
               {/* خانه (Home) */}
               <button
                 onClick={() => setActiveView('home')}
                 className={`py-2 transition-colors hover:text-blue-600 cursor-pointer ${
-                  activeView === 'home' ? 'text-blue-600 font-bold border-b-2 border-blue-600' : ''
+                  activeView === 'home' ? 'text-blue-600 font-semibold border-b-2 border-blue-600' : ''
                 }`}
               >
                 خانه
@@ -180,9 +180,9 @@ export const Header: React.FC = () => {
                   onClick={() => navigateToCategory(null, [])}
                   className={`flex items-center gap-1.5 py-2 transition-colors hover:text-blue-600 cursor-pointer ${
                     activeView === 'store' || activeView === 'product-detail'
-                      ? 'text-blue-600 font-bold border-b-2 border-blue-600'
+                      ? 'text-blue-600 font-semibold border-b-2 border-blue-600'
                       : hoveredMenu === 'store'
-                      ? 'text-blue-600 font-bold'
+                      ? 'text-blue-600 font-semibold'
                       : ''
                   }`}
                 >
@@ -649,9 +649,9 @@ export const Header: React.FC = () => {
                   onClick={() => setActiveView('services')}
                   className={`flex items-center gap-1.5 py-2 transition-colors hover:text-blue-600 cursor-pointer ${
                     activeView === 'services' || activeView === 'service-detail'
-                      ? 'text-blue-600 font-bold border-b-2 border-blue-600'
+                      ? 'text-blue-600 font-semibold border-b-2 border-blue-600'
                       : hoveredMenu === 'services'
-                      ? 'text-blue-600 font-bold'
+                      ? 'text-blue-600 font-semibold'
                       : ''
                   }`}
                 >
@@ -708,12 +708,12 @@ export const Header: React.FC = () => {
                       <section className="min-w-0 flex-1 overflow-y-auto pr-1" aria-label="خدمات دستهٔ فعال">
                         <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                           <div>
-                            <span className="block text-sm font-extrabold text-slate-800">{selectedServiceCategory}</span>
-                            <small className="mt-1 block text-[11px] text-slate-500">خدمات منتشرشدهٔ این دسته</small>
+                            <span className="block ui-text-card-title text-slate-800">{selectedServiceCategory}</span>
+                            <small className="mt-1 block ui-text-meta text-slate-500">خدمات منتشرشدهٔ این دسته</small>
                           </div>
                         </div>
                         <div className="mt-3 grid grid-cols-2 gap-3">
-                          {selectedCategoryServices.slice(0, 4).map((service) => <button key={service.id} type="button" onClick={() => { navigateToService(service.slug); setHoveredMenu(null); }} className="min-h-20 rounded-2xl border border-slate-100 p-3 text-right transition hover:border-blue-200 hover:bg-blue-50/60 group"><span className="block truncate text-xs font-bold text-slate-800 group-hover:text-blue-700">{service.name}</span><small className="mt-1 block line-clamp-2 text-[11px] leading-5 text-slate-500">{service.short_description || service.description || 'مشاهدهٔ راهنما و مراحل انجام خدمت'}</small></button>)}
+                          {selectedCategoryServices.slice(0, 4).map((service) => <button key={service.id} type="button" onClick={() => { navigateToService(service.slug); setHoveredMenu(null); }} className="min-h-20 rounded-2xl border border-slate-100 p-3 text-right transition hover:border-blue-200 hover:bg-blue-50/60 group"><span className="block truncate ui-text-body font-semibold text-slate-800 group-hover:text-blue-700">{service.name}</span><small className="mt-1 block line-clamp-2 ui-text-meta leading-5 text-slate-500">{service.short_description || service.description || 'مشاهدهٔ راهنما و مراحل انجام خدمت'}</small></button>)}
                         </div>
                         <button type="button" onClick={() => { if (selectedServiceCategory) navigateToServiceCategory(selectedServiceCategory); setHoveredMenu(null); }} className="mt-4 inline-flex items-center gap-2 text-xs font-bold text-blue-700 transition hover:text-blue-900">مشاهدهٔ همهٔ خدمات {selectedServiceCategory}<ArrowLeft className="h-3.5 w-3.5" /></button>
                       </section>

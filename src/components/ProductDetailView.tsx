@@ -446,7 +446,7 @@ export const ProductDetailView: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <span className="text-[11px] font-bold text-[#1333c1] block mb-1">
+                    <span className="ui-text-badge text-[#1333c1] block mb-1">
                       {p.category_name || p.brand}
                     </span>
                     <h3 className="ui-text-card-title text-slate-800 line-clamp-2 mb-3 group-hover:text-[#1333c1] transition">
@@ -454,7 +454,7 @@ export const ProductDetailView: React.FC = () => {
                     </h3>
                   </div>
                   <div className="flex items-center justify-between pt-2 border-t border-slate-50">
-                    <span className="ui-price text-slate-900 font-sans">
+                    <span className="ui-price text-slate-900">
                       {(p.effective_price || p.base_price).toLocaleString('fa-IR')} {p.currency}
                     </span>
                     <span className="ui-text-meta text-[#1333c1] group-hover:underline">
@@ -568,7 +568,7 @@ export const ProductDetailView: React.FC = () => {
           </button>
           
           <div className="flex-1 px-2">
-            <h1 className="text-[16px] font-bold text-center truncate text-[#1A1B23]">
+            <h1 className="ui-text-card-title text-center truncate text-[#1A1B23]">
               جزئیات محصول
             </h1>
           </div>
@@ -588,7 +588,7 @@ export const ProductDetailView: React.FC = () => {
                 onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/product-placeholder.svg'; }}
               />
               {product.discount_percentage ? (
-                <div className="absolute top-3 right-3 bg-red-600 text-white font-extrabold text-[11px] px-2.5 py-0.5 rounded-lg shadow-sm">
+                <div className="absolute top-3 right-3 bg-red-600 text-white ui-text-badge px-2.5 py-0.5 rounded-lg shadow-sm">
                   {product.discount_percentage}٪ تخفیف
                 </div>
               ) : null}
@@ -718,7 +718,7 @@ export const ProductDetailView: React.FC = () => {
                   {(product.base_price || 0).toLocaleString('fa-IR')}
                 </span>
               ) : null}
-              <span className="ui-price-hero font-bold tracking-tight text-[#364fd9]">
+              <span className="ui-price-hero text-[#364fd9]">
                 {currentPrice.toLocaleString('fa-IR')}
               </span>
               <span className="ui-text-meta font-medium text-[#444654]">تومان</span>
@@ -850,7 +850,7 @@ export const ProductDetailView: React.FC = () => {
               </button>
               <div className="flex flex-col justify-center">
                 <div className="flex items-center gap-1">
-                  <span className="ui-price text-[#364fd9] font-bold">
+                  <span className="ui-price text-[#364fd9]">
                     {isOutOfStock ? 'ناموجود' : currentPrice.toLocaleString('fa-IR')}
                   </span>
                   {!isOutOfStock && <span className="ui-text-meta font-normal text-[#444654]">تومان</span>}
@@ -903,7 +903,7 @@ export const ProductDetailView: React.FC = () => {
         <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
           
           {/* Breadcrumb Navigation */}
-          <nav aria-label="Breadcrumb" className="flex items-center h-[24px] gap-2 font-body text-[13px] text-[#444654] mb-6">
+          <nav aria-label="Breadcrumb" className="flex items-center h-[24px] gap-2 ui-text-meta text-[#444654] mb-6">
             <button onClick={() => setActiveView('home')} className="hover:text-[#1333c1] transition-colors">خانه</button>
             <ChevronLeft className="w-4 h-4 text-[#444654]/60" />
             <button onClick={() => navigateToCategory(null, [])} className="hover:text-[#1333c1] transition-colors">فروشگاه</button>
@@ -935,7 +935,7 @@ export const ProductDetailView: React.FC = () => {
                   
                   {/* Floating Discount Badge */}
                   {product.discount_percentage ? (
-                    <div className="absolute top-4 right-4 bg-red-600 text-white font-extrabold text-xs px-3 py-1 rounded-lg shadow-sm">
+                    <div className="absolute top-4 right-4 bg-red-600 text-white ui-text-badge px-3 py-1 rounded-lg shadow-sm">
                       {product.discount_percentage}٪ تخفیف
                     </div>
                   ) : null}
@@ -973,21 +973,21 @@ export const ProductDetailView: React.FC = () => {
                   <div className="w-12 h-12 rounded-xl bg-[#1333c1]/5 flex items-center justify-center mb-3 text-[#1333c1] group-hover:bg-[#1333c1] group-hover:text-white transition-colors">
                     <Zap className="w-6 h-6" />
                   </div>
-                  <span className="text-[12px] font-bold text-[#1A1B23]">تکنولوژی نسل پنجم</span>
+                  <span className="ui-text-label font-semibold text-[#1A1B23]">تکنولوژی نسل پنجم</span>
                 </div>
 
                 <div className="group flex flex-col items-center justify-center text-center p-4 bg-white rounded-2xl border border-[#E3E1ED]/50 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
                   <div className="w-12 h-12 rounded-xl bg-[#1333c1]/5 flex items-center justify-center mb-3 text-[#1333c1] group-hover:bg-[#1333c1] group-hover:text-white transition-colors">
                     <Activity className="w-6 h-6" />
                   </div>
-                  <span className="text-[12px] font-bold text-[#1A1B23]">پایداری فوق‌العاده</span>
+                  <span className="ui-text-label font-semibold text-[#1A1B23]">پایداری فوق‌العاده</span>
                 </div>
 
                 <div className="group flex flex-col items-center justify-center text-center p-4 bg-white rounded-2xl border border-[#E3E1ED]/50 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
                   <div className="w-12 h-12 rounded-xl bg-[#1333c1]/5 flex items-center justify-center mb-3 text-[#1333c1] group-hover:bg-[#1333c1] group-hover:text-white transition-colors">
                     <Truck className="w-6 h-6" />
                   </div>
-                  <span className="text-[12px] font-bold text-[#1A1B23]">ارسال و نصب سریع</span>
+                  <span className="ui-text-label font-semibold text-[#1A1B23]">ارسال و نصب سریع</span>
                 </div>
               </div>
 
@@ -1002,25 +1002,25 @@ export const ProductDetailView: React.FC = () => {
                   {product.brand && (
                     <button 
                       onClick={() => navigateToCategory(null, [])}
-                      className="font-body text-[11px] font-bold tracking-wider uppercase text-[#1333c1]/80 hover:text-[#1333c1] transition-colors mb-1.5 inline-block text-right cursor-pointer"
+                      className="ui-text-badge font-semibold tracking-wider uppercase text-[#1333c1]/80 hover:text-[#1333c1] transition-colors mb-1.5 inline-block text-right cursor-pointer"
                     >
                       {product.brand}
                     </button>
                   )}
-                  <h1 className="text-[24px] font-bold text-[#1A1B23] leading-tight mb-3">
+                  <h1 className="ui-text-page-title text-[#1A1B23] leading-tight mb-3">
                     {product.name}
                   </h1>
                   <div className="flex items-center gap-3">
                     <div className="flex items-center gap-1 bg-[#f4f2fe] px-2 py-1 rounded-md">
                       <Star className="w-4 h-4 text-[#F59E0B] fill-[#F59E0B]" />
-                      <span className="font-bold text-[13px] text-[#1A1B23]">{product.rating}</span>
+                      <span className="ui-text-meta font-bold text-[#1A1B23] ui-numeric">{product.rating}</span>
                     </div>
                     <span 
                       onClick={() => {
                         const el = document.getElementById('user-reviews-section');
                         el?.scrollIntoView({ behavior: 'smooth' });
                       }}
-                      className="text-[12px] text-[#444654] hover:text-[#1333c1] transition-colors cursor-pointer underline underline-offset-4 decoration-[#c5c5d7]/30"
+                      className="ui-text-meta text-[#444654] hover:text-[#1333c1] transition-colors cursor-pointer underline underline-offset-4 decoration-[#c5c5d7]/30"
                     >
                       ({commentsList.length > 0 ? commentsList.length : product.review_count} نظر کاربر)
                     </span>
@@ -1032,7 +1032,7 @@ export const ProductDetailView: React.FC = () => {
                   {/* Model Selection */}
                   {configurationChoices.length > 0 && (
                     <div>
-                      <label className="block text-[12px] font-bold text-[#444654] mb-3">انتخاب مدل</label>
+                      <label className="block ui-text-label font-semibold text-[#444654] mb-3">انتخاب مدل</label>
                       <div className="flex flex-wrap gap-2">
                         {configurationChoices.map(({ name, variants }) => {
                           const selected = selectedConfiguration === name;
@@ -1043,14 +1043,14 @@ export const ProductDetailView: React.FC = () => {
                               type="button"
                               disabled={unavailable}
                               onClick={() => selectConfiguration(name)}
-                              className={`px-4 py-2 rounded-lg text-[12px] font-bold transition-all disabled:opacity-45 disabled:cursor-not-allowed ${
+                              className={`px-4 py-2 rounded-lg ui-text-label font-semibold transition-all disabled:opacity-45 disabled:cursor-not-allowed ${
                                 selected 
                                   ? 'border-2 border-[#1333c1] bg-[#1333c1]/5 text-[#1333c1]' 
                                   : 'border border-[#c5c5d7]/50 hover:border-[#1333c1]/50 text-[#444654] font-medium hover:bg-white'
                               }`}
                             >
                               <span>{name}</span>
-                              {unavailable && <small className="mr-1.5 text-[10px] text-red-500 font-normal">ناموجود</small>}
+                              {unavailable && <small className="mr-1.5 ui-text-badge text-red-500 font-normal">ناموجود</small>}
                             </button>
                           );
                         })}
@@ -1062,8 +1062,8 @@ export const ProductDetailView: React.FC = () => {
                   {displayColorChoices.length > 0 && (
                     <div>
                       <div className="flex justify-between items-center mb-3">
-                        <label className="text-[12px] font-bold text-[#444654]">انتخاب رنگ</label>
-                        <span className="text-[11px] font-medium text-[#444654]/70">{selectedColor || 'انتخاب کنید'}</span>
+                        <label className="ui-text-label font-semibold text-[#444654]">انتخاب رنگ</label>
+                        <span className="ui-text-meta text-[#444654]/70">{selectedColor || 'انتخاب کنید'}</span>
                       </div>
                       <div className="flex gap-3">
                         {displayColorChoices.map(({ name, hex, variants }) => {
@@ -1096,7 +1096,7 @@ export const ProductDetailView: React.FC = () => {
                   {/* Warranty / Package Variants */}
                   {packageVariants.some((variant) => variant.name !== 'Default') && (
                     <div className="space-y-2">
-                      <label className="text-[12px] font-bold text-[#444654]">گارانتی یا پکیج:</label>
+                      <label className="ui-text-label font-semibold text-[#444654]">گارانتی یا پکیج:</label>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {packageVariants.filter((variant) => variant.name !== 'Default').map((variant) => {
                           const isSelected = selectedVariantId === variant.id;
@@ -1111,11 +1111,11 @@ export const ProductDetailView: React.FC = () => {
                                 isSelected ? 'border-[#1333c1] bg-[#1333c1]/5 shadow-xs' : 'border-[#E3E1ED] bg-white hover:border-[#1333c1]/40'
                               }`}
                             >
-                              <div className="flex items-center justify-between text-xs font-bold text-[#1A1B23] mb-1">
+                              <div className="flex items-center justify-between ui-text-label font-semibold text-[#1A1B23] mb-1">
                                 <span>{variant.name}</span>
                                 {isSelected && <Check className="w-3.5 h-3.5 text-[#1333c1]" />}
                               </div>
-                              <div className="text-[11px] text-[#444654]">{unavailable ? 'ناموجود' : formatMoney(variant.effective_price || product.effective_price || product.base_price, product.currency)}</div>
+                              <div className="ui-text-meta text-[#444654]">{unavailable ? 'ناموجود' : formatMoney(variant.effective_price || product.effective_price || product.base_price, product.currency)}</div>
                             </button>
                           );
                         })}
@@ -1128,8 +1128,8 @@ export const ProductDetailView: React.FC = () => {
                 {/* Pricing Card */}
                 <div className="mb-8 p-5 bg-white rounded-xl border border-[#c5c5d7]/30 shadow-sm">
                   <div className="flex justify-between items-center mb-4">
-                    <span className="text-[12px] font-bold text-[#444654]">قیمت نهایی</span>
-                    <span className={`text-[10px] font-bold px-2 py-1 rounded-md border flex items-center gap-1 ${
+                    <span className="ui-text-label text-[#444654]">قیمت نهایی</span>
+                    <span className={`ui-text-badge px-2 py-1 rounded-md border flex items-center gap-1 ${
                       isOutOfStock ? 'bg-red-50 text-red-700 border-red-100' : 'bg-emerald-50 text-emerald-700 border-emerald-100'
                     }`}>
                       <PackageX className="w-3.5 h-3.5" />
@@ -1138,34 +1138,34 @@ export const ProductDetailView: React.FC = () => {
                   </div>
                   <div className="flex items-baseline gap-1.5">
                     {product.discount_percentage ? (
-                      <span className="text-[14px] text-slate-400 line-through font-sans ml-2">
+                      <span className="ui-text-meta text-slate-400 line-through ui-numeric ml-2">
                         {(product.base_price || 0).toLocaleString('fa-IR')}
                       </span>
                     ) : null}
-                    <span className="text-[32px] font-bold text-[#1A1B23] tracking-tight font-sans">
+                    <span className="ui-price-hero text-[#1A1B23]">
                       {currentPrice.toLocaleString('fa-IR')}
                     </span>
-                    <span className="text-[13px] font-medium text-[#444654]">تومان</span>
+                    <span className="ui-text-meta text-[#444654]">تومان</span>
                   </div>
                 </div>
 
                 {/* Key Features List */}
                 <div className="mb-8">
-                  <h3 className="text-[13px] font-bold text-[#1A1B23] mb-4">ویژگی‌های کلیدی:</h3>
+                  <h3 className="ui-text-card-title text-[#1A1B23] mb-4">ویژگی‌های کلیدی:</h3>
                   <ul className="grid grid-cols-1 gap-3">
-                    <li className="flex items-center gap-3 text-[12px] text-[#444654]">
+                    <li className="flex items-center gap-3 ui-text-body text-[#444654]">
                       <span className="w-5 h-5 rounded-full bg-[#1333c1]/10 flex items-center justify-center text-[#1333c1] shrink-0">
                         <Check className="w-3.5 h-3.5" />
                       </span>
                       پشتیبانی از شبکه 5G و اینترنت پرسرعت
                     </li>
-                    <li className="flex items-center gap-3 text-[12px] text-[#444654]">
+                    <li className="flex items-center gap-3 ui-text-body text-[#444654]">
                       <span className="w-5 h-5 rounded-full bg-[#1333c1]/10 flex items-center justify-center text-[#1333c1] shrink-0">
                         <Check className="w-3.5 h-3.5" />
                       </span>
                       {product.technology || 'فناوری Wi-Fi دو بانده و پردازش قدرتمند'}
                     </li>
-                    <li className="flex items-center gap-3 text-[12px] text-[#444654]">
+                    <li className="flex items-center gap-3 ui-text-body text-[#444654]">
                       <span className="w-5 h-5 rounded-full bg-[#1333c1]/10 flex items-center justify-center text-[#1333c1] shrink-0">
                         <Check className="w-3.5 h-3.5" />
                       </span>
@@ -1179,7 +1179,7 @@ export const ProductDetailView: React.FC = () => {
                   
                   {/* Quantity Stepper */}
                   <div className="flex items-center justify-between p-2 bg-white border border-[#E3E1ED] rounded-xl mb-2">
-                    <span className="text-xs font-bold text-[#444654]">تعداد:</span>
+                    <span className="ui-text-label text-[#444654]">تعداد:</span>
                     <div dir="ltr" className="flex shrink-0 items-center gap-2" aria-label="تعداد سفارش">
                       <button 
                         type="button" 
@@ -1190,7 +1190,7 @@ export const ProductDetailView: React.FC = () => {
                       >
                         +
                       </button>
-                      <span className="w-8 text-center text-sm font-bold font-sans">{quantity}</span>
+                      <span className="w-8 text-center ui-numeric font-semibold text-slate-900">{quantity}</span>
                       <button 
                         type="button" 
                         aria-label="کاهش تعداد" 
@@ -1210,7 +1210,7 @@ export const ProductDetailView: React.FC = () => {
                       type="button"
                       onClick={() => { void handleAddToCart(); }} 
                       disabled={isOutOfStock || isAddingToCart}
-                      className="w-full h-[48px] bg-[#1333c1] text-white rounded-xl font-bold text-[14px] flex items-center justify-center gap-2 hover:bg-[#1333c1]/90 transition-all active:scale-[0.98] shadow-lg shadow-[#1333c1]/20 disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none cursor-pointer"
+                      className="w-full h-[48px] bg-[#1333c1] text-white rounded-xl ui-text-button flex items-center justify-center gap-2 hover:bg-[#1333c1]/90 transition-all active:scale-[0.98] shadow-lg shadow-[#1333c1]/20 disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none cursor-pointer"
                     >
                       <ShoppingCart className="w-5 h-5" />
                       <span>{isOutOfStock ? 'ناموجود در انبار' : isAddingToCart ? 'در حال افزودن…' : 'افزودن به سبد خرید'}</span>
@@ -1223,14 +1223,14 @@ export const ProductDetailView: React.FC = () => {
                       type="button"
                       onClick={() => { void handleQuickBuy(); }}
                       disabled={isOutOfStock || isAddingToCart}
-                      className="h-[44px] bg-white border border-[#c5c5d7]/50 text-[#1A1B23] rounded-xl font-bold text-[13px] hover:bg-[#FBF8FF] hover:border-[#1333c1]/30 transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50"
+                      className="h-[44px] bg-white border border-[#c5c5d7]/50 text-[#1A1B23] rounded-xl ui-text-button hover:bg-[#FBF8FF] hover:border-[#1333c1]/30 transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50"
                     >
                       خرید سریع
                     </button>
                     <button 
                       type="button"
                       onClick={() => toggleFavorite(product.id)}
-                      className="h-[44px] bg-white border border-[#c5c5d7]/50 text-[#444654] rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 hover:text-rose-500 hover:border-rose-200 hover:bg-rose-50 transition-all active:scale-[0.98] cursor-pointer"
+                      className="h-[44px] bg-white border border-[#c5c5d7]/50 text-[#444654] rounded-xl ui-text-button flex items-center justify-center gap-2 hover:text-rose-500 hover:border-rose-200 hover:bg-rose-50 transition-all active:scale-[0.98] cursor-pointer"
                     >
                       <Heart className={`w-4 h-4 ${favorite ? 'fill-red-500 text-red-500' : ''}`} />
                       <span>{favorite ? 'در علاقه‌مندی‌ها' : 'علاقه‌مندی'}</span>
@@ -1241,12 +1241,12 @@ export const ProductDetailView: React.FC = () => {
 
                 {/* Added Toast */}
                 {addedToast && (
-                  <div className="mt-4 p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-xs font-semibold flex items-center justify-between animate-in fade-in">
+                  <div className="mt-4 p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl ui-text-meta flex items-center justify-between animate-in fade-in">
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                       <span>محصول به سبد خرید اضافه شد!</span>
                     </div>
-                    <button onClick={() => setActiveView('cart')} className="text-emerald-800 font-bold underline text-[11px]">
+                    <button onClick={() => setActiveView('cart')} className="text-emerald-800 font-semibold underline ui-text-badge">
                       مشاهده سبد
                     </button>
                   </div>
@@ -1264,8 +1264,8 @@ export const ProductDetailView: React.FC = () => {
             <div className="flex flex-col gap-6 bg-[#fbf8ff] rounded-xl border border-[#E3E1ED] p-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                 <div>
-                  <h2 className="text-[22px] md:text-[24px] font-bold text-[#1A1B23] mb-4">معرفی محصول</h2>
-                  <div className="space-y-3 text-[14px] leading-[22px] text-[#444654] leading-relaxed">
+                  <h2 className="ui-text-section-title text-[#1A1B23] mb-4">معرفی محصول</h2>
+                  <div className="space-y-3 ui-text-body text-[#444654] leading-relaxed">
                     <p>
                       {product.description || 'مودم و تجهیزات شبکه با استانداردهای نوین اتصال به اینترنت پرسرعت، پایداری بالا در انتقال دیتا و پوشش‌دهی گسترده را برای کاربران خانگی و حرفه‌ای به ارمغان می‌آورد.'}
                     </p>
@@ -1281,15 +1281,15 @@ export const ProductDetailView: React.FC = () => {
                     <div className="w-8 h-8 rounded-full bg-[#1333c1]/10 flex items-center justify-center text-[#1333c1] mb-3">
                       <Cpu className="w-4 h-4" />
                     </div>
-                    <h4 className="font-bold text-[#1A1B23] mb-1 text-[14px]">اتصال هوشمند</h4>
-                    <p className="text-[12px] text-[#444654]">مدیریت خودکار ترافیک شبکه برای اولویت‌بندی برنامه‌های حساس و پایدار.</p>
+                    <h4 className="ui-text-card-title text-[#1A1B23] mb-1">اتصال هوشمند</h4>
+                    <p className="ui-text-meta text-[#444654]">مدیریت خودکار ترافیک شبکه برای اولویت‌بندی برنامه‌های حساس و پایدار.</p>
                   </div>
                   <div className="bg-white p-4 rounded-lg border border-[#E3E1ED]">
                     <div className="w-8 h-8 rounded-full bg-[#1333c1]/10 flex items-center justify-center text-[#1333c1] mb-3">
                       <Shield className="w-4 h-4" />
                     </div>
-                    <h4 className="font-bold text-[#1A1B23] mb-1 text-[14px]">امنیت پیشرفته</h4>
-                    <p className="text-[12px] text-[#444654]">بهره‌مندی از پروتکل‌های رمزنگاری پیشرفته برای حفاظت حداکثری از داده‌ها.</p>
+                    <h4 className="ui-text-card-title text-[#1A1B23] mb-1">امنیت پیشرفته</h4>
+                    <p className="ui-text-meta text-[#444654]">بهره‌مندی از پروتکل‌های رمزنگاری پیشرفته برای حفاظت حداکثری از داده‌ها.</p>
                   </div>
                 </div>
               </div>
@@ -1297,7 +1297,7 @@ export const ProductDetailView: React.FC = () => {
 
             {/* 2. مشخصات فنی (Technical Specifications) */}
             <div className="flex flex-col gap-6 bg-[#fbf8ff] rounded-xl border border-[#E3E1ED] p-6">
-              <h2 className="text-[22px] md:text-[24px] font-bold text-[#1A1B23] mb-2">مشخصات فنی</h2>
+              <h2 className="ui-text-section-title text-[#1A1B23] mb-2">مشخصات فنی</h2>
               
               {specGroups.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -1309,9 +1309,9 @@ export const ProductDetailView: React.FC = () => {
                           <div className="w-8 h-8 rounded bg-[#1333c1]/10 flex items-center justify-center text-[#1333c1]">
                             <GroupIcon className="w-4 h-4" />
                           </div>
-                          <h3 className="text-[16px] font-bold text-[#1A1B23]">{group.title}</h3>
+                          <h3 className="ui-text-card-title text-[#1A1B23]">{group.title}</h3>
                         </div>
-                        <dl className="space-y-2 text-[13px]">
+                        <dl className="space-y-2 ui-text-body">
                           {group.specs.map(([key, val]) => (
                             <div key={key} className="flex justify-between items-center py-1 border-b border-[#E3E1ED]/50 last:border-0">
                               <dt className="text-[#444654]">{key}</dt>
@@ -1324,7 +1324,7 @@ export const ProductDetailView: React.FC = () => {
                   })}
                 </div>
               ) : (
-                <div className="bg-white rounded-lg p-4 border border-[#E3E1ED] text-xs text-slate-500">
+                <div className="bg-white rounded-lg p-4 border border-[#E3E1ED] ui-text-meta text-slate-500">
                   مشخصات فنی برای این کالا ثبت نشده است.
                 </div>
               )}
@@ -1338,8 +1338,8 @@ export const ProductDetailView: React.FC = () => {
                     <ShieldCheck className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-[#1A1B23] mb-0.5 text-[14px]">گارانتی معتبر</h4>
-                    <p className="text-[12px] text-[#444654]">۱۸ ماه گارانتی شرکتی</p>
+                    <h4 className="ui-text-card-title text-[#1A1B23] mb-0.5">گارانتی معتبر</h4>
+                    <p className="ui-text-meta text-[#444654]">۱۸ ماه گارانتی شرکتی</p>
                   </div>
                 </div>
 
@@ -1348,8 +1348,8 @@ export const ProductDetailView: React.FC = () => {
                     <Truck className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-[#1A1B23] mb-0.5 text-[14px]">ارسال سریع</h4>
-                    <p className="text-[12px] text-[#444654]">تحویل به سراسر کشور</p>
+                    <h4 className="ui-text-card-title text-[#1A1B23] mb-0.5">ارسال سریع</h4>
+                    <p className="ui-text-meta text-[#444654]">تحویل به سراسر کشور</p>
                   </div>
                 </div>
 
@@ -1358,8 +1358,8 @@ export const ProductDetailView: React.FC = () => {
                     <Lock className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-[#1A1B23] mb-0.5 text-[14px]">پرداخت امن</h4>
-                    <p className="text-[12px] text-[#444654]">تضمین امنیت تراکنش</p>
+                    <h4 className="ui-text-card-title text-[#1A1B23] mb-0.5">پرداخت امن</h4>
+                    <p className="ui-text-meta text-[#444654]">تضمین امنیت تراکنش</p>
                   </div>
                 </div>
               </div>
@@ -1369,10 +1369,10 @@ export const ProductDetailView: React.FC = () => {
             {/* 3. نظرات کاربران (User Reviews Section) */}
             <div id="user-reviews-section" className="flex flex-col gap-6 bg-[#fbf8ff] rounded-xl border border-[#E3E1ED] p-6">
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
-                <h2 className="text-[22px] md:text-[24px] font-bold text-[#1A1B23]">نظرات کاربران</h2>
+                <h2 className="ui-text-section-title text-[#1A1B23]">نظرات کاربران</h2>
                 <button 
                   onClick={() => setShowReviewModal(true)}
-                  className="h-[40px] bg-[#1333c1] text-white rounded-lg font-bold px-5 hover:bg-[#1333c1]/90 transition-all active:scale-[0.98] flex items-center justify-center gap-2 text-[14px] cursor-pointer"
+                  className="h-[40px] bg-[#1333c1] text-white rounded-lg ui-text-button px-5 hover:bg-[#1333c1]/90 transition-all active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Edit3 className="w-4 h-4" />
                   <span>ثبت نظر</span>
@@ -1384,14 +1384,14 @@ export const ProductDetailView: React.FC = () => {
                 {/* Summary & Distribution */}
                 <div className="md:col-span-4 flex flex-col gap-4 bg-white p-4 rounded-lg border border-[#E3E1ED]">
                   <div className="flex items-center gap-4">
-                    <span className="text-[32px] text-[#1A1B23] font-bold font-sans">{product.rating}</span>
+                    <span className="ui-price-hero text-[#1A1B23]">{product.rating}</span>
                     <div className="flex flex-col gap-1">
                       <div className="flex text-[#F59E0B]">
                         {[1, 2, 3, 4, 5].map(st => (
                           <Star key={st} className="w-5 h-5 fill-[#F59E0B] text-[#F59E0B]" />
                         ))}
                       </div>
-                      <span className="text-[12px] text-[#444654]">
+                      <span className="ui-text-meta text-[#444654]">
                         از مجموع {commentsList.length > 0 ? commentsList.length : product.review_count} نظر
                       </span>
                     </div>
@@ -1399,7 +1399,7 @@ export const ProductDetailView: React.FC = () => {
 
                   <div className="flex flex-col gap-2 mt-2">
                     {/* 5 Stars */}
-                    <div className="flex items-center gap-2 text-[12px]">
+                    <div className="flex items-center gap-2 ui-text-meta">
                       <span className="w-8 flex gap-1 items-center font-bold text-[#1A1B23]">۵ <Star className="w-3.5 h-3.5 text-[#F59E0B] fill-[#F59E0B]" /></span>
                       <div className="flex-1 h-1.5 bg-[#eeedf8] rounded-full overflow-hidden">
                         <div className="h-full bg-[#1333c1] rounded-full w-[80%]"></div>
@@ -1407,7 +1407,7 @@ export const ProductDetailView: React.FC = () => {
                       <span className="w-8 text-left text-[#444654]">۸۰٪</span>
                     </div>
                     {/* 4 Stars */}
-                    <div className="flex items-center gap-2 text-[12px]">
+                    <div className="flex items-center gap-2 ui-text-meta">
                       <span className="w-8 flex gap-1 items-center font-bold text-[#1A1B23]">۴ <Star className="w-3.5 h-3.5 text-[#F59E0B] fill-[#F59E0B]" /></span>
                       <div className="flex-1 h-1.5 bg-[#eeedf8] rounded-full overflow-hidden">
                         <div className="h-full bg-[#1333c1] rounded-full w-[15%]"></div>
@@ -1415,7 +1415,7 @@ export const ProductDetailView: React.FC = () => {
                       <span className="w-8 text-left text-[#444654]">۱۵٪</span>
                     </div>
                     {/* 3 Stars */}
-                    <div className="flex items-center gap-2 text-[12px]">
+                    <div className="flex items-center gap-2 ui-text-meta">
                       <span className="w-8 flex gap-1 items-center font-bold text-[#1A1B23]">۳ <Star className="w-3.5 h-3.5 text-[#F59E0B] fill-[#F59E0B]" /></span>
                       <div className="flex-1 h-1.5 bg-[#eeedf8] rounded-full overflow-hidden">
                         <div className="h-full bg-[#1333c1] rounded-full w-[5%]"></div>
@@ -1423,7 +1423,7 @@ export const ProductDetailView: React.FC = () => {
                       <span className="w-8 text-left text-[#444654]">۵٪</span>
                     </div>
                     {/* 2 Stars */}
-                    <div className="flex items-center gap-2 text-[12px]">
+                    <div className="flex items-center gap-2 ui-text-meta">
                       <span className="w-8 flex gap-1 items-center font-bold text-[#1A1B23]">۲ <Star className="w-3.5 h-3.5 text-slate-300" /></span>
                       <div className="flex-1 h-1.5 bg-[#eeedf8] rounded-full overflow-hidden">
                         <div className="h-full bg-[#eeedf8] rounded-full w-[0%]"></div>
@@ -1431,7 +1431,7 @@ export const ProductDetailView: React.FC = () => {
                       <span className="w-8 text-left text-[#444654]">۰٪</span>
                     </div>
                     {/* 1 Star */}
-                    <div className="flex items-center gap-2 text-[12px]">
+                    <div className="flex items-center gap-2 ui-text-meta">
                       <span className="w-8 flex gap-1 items-center font-bold text-[#1A1B23]">۱ <Star className="w-3.5 h-3.5 text-slate-300" /></span>
                       <div className="flex-1 h-1.5 bg-[#eeedf8] rounded-full overflow-hidden">
                         <div className="h-full bg-[#eeedf8] rounded-full w-[0%]"></div>
@@ -1452,12 +1452,12 @@ export const ProductDetailView: React.FC = () => {
                         <div key={comment.id} className="flex flex-col gap-2 pb-4 border-b border-[#E3E1ED] last:border-0">
                           <div className="flex justify-between items-start">
                             <div className="flex items-center gap-3">
-                              <div className="w-8 h-8 rounded-full bg-[#1333c1]/10 flex items-center justify-center text-[#1333c1] font-bold text-[14px]">
+                              <div className="w-8 h-8 rounded-full bg-[#1333c1]/10 flex items-center justify-center text-[#1333c1] ui-text-card-title">
                                 {initial}
                               </div>
                               <div className="flex flex-col">
-                                <span className="font-bold text-[#1A1B23] text-[14px]">{comment.author}</span>
-                                <span className="text-[12px] text-[#444654]">{comment.date}</span>
+                                <span className="ui-text-card-title text-[#1A1B23]">{comment.author}</span>
+                                <span className="ui-text-meta text-[#444654]">{comment.date}</span>
                               </div>
                             </div>
                             <div className="flex flex-col items-end gap-1">
@@ -1467,7 +1467,7 @@ export const ProductDetailView: React.FC = () => {
                                 ))}
                               </div>
                               {comment.is_buyer && (
-                                <span className="flex items-center gap-1 px-1.5 py-0.5 bg-[#1333c1]/10 text-[#1333c1] rounded text-[11px] font-medium">
+                                <span className="flex items-center gap-1 px-1.5 py-0.5 bg-[#1333c1]/10 text-[#1333c1] rounded ui-text-badge font-medium">
                                   <Check className="w-3 h-3" />
                                   خرید تأیید شده
                                 </span>
@@ -1476,22 +1476,22 @@ export const ProductDetailView: React.FC = () => {
                           </div>
                           
                           {comment.title && (
-                            <h4 className="text-xs font-bold text-[#1A1B23] mt-1">{comment.title}</h4>
+                            <h4 className="ui-text-label font-semibold text-[#1A1B23] mt-1">{comment.title}</h4>
                           )}
-                          <p className="text-[#444654] leading-relaxed mt-1 text-[13px]">
+                          <p className="text-[#444654] leading-relaxed mt-1 ui-text-body">
                             {comment.content}
                           </p>
 
                           {/* Pros & Cons */}
                           {((comment.pros && comment.pros.length > 0) || (comment.cons && comment.cons.length > 0)) && (
-                            <div className="pt-2 flex flex-wrap gap-2 text-xs">
+                            <div className="pt-2 flex flex-wrap gap-2 ui-text-meta">
                               {comment.pros?.map((p, i) => (
-                                <span key={`pro-${p}-${i}`} className="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-[11px] font-medium">
+                                <span key={`pro-${p}-${i}`} className="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 ui-text-badge font-medium">
                                   + {p}
                                 </span>
                               ))}
                               {comment.cons?.map((c, i) => (
-                                <span key={`con-${c}-${i}`} className="px-2 py-0.5 rounded-md bg-red-50 text-red-700 text-[11px] font-medium">
+                                <span key={`con-${c}-${i}`} className="px-2 py-0.5 rounded-md bg-red-50 text-red-700 ui-text-badge font-medium">
                                   - {c}
                                 </span>
                               ))}
@@ -1499,8 +1499,8 @@ export const ProductDetailView: React.FC = () => {
                           )}
 
                           {/* Reaction voting */}
-                          <div className="flex items-center justify-end gap-3 text-xs text-slate-500 pt-1">
-                            <span className="text-[11px]">مفید بود؟</span>
+                          <div className="flex items-center justify-end gap-3 ui-text-meta text-slate-500 pt-1">
+                            <span className="ui-text-meta">مفید بود؟</span>
                             <button
                               onClick={() => handleReaction(comment.id, 'like')}
                               className={`flex items-center gap-1 px-2 py-0.5 rounded border text-xs transition ${
