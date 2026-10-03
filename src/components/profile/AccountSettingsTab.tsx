@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   User, 
   Phone, 
@@ -24,13 +24,23 @@ import { UserIdentityBadge } from '../common/UserIdentityBadge';
 import { isIranianMobile, normalizeIranianMobile } from '../../utils/phone';
 
 export const AccountSettingsTab: React.FC = () => {
-  const { user, updateUserProfile, logout, setActiveView, showToast } = useApp();
+  const { user, canAccessAdmin, updateUserProfile, logout, setActiveView, showToast } = useApp();
 
   const [formData, setFormData] = useState({
     name: user?.name || '',
     phone: user?.phone || '',
     email: user?.email || '',
   });
+
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        name: user.name || '',
+        phone: user.phone || '',
+        email: user.email || '',
+      });
+    }
+  }, [user?.name, user?.phone, user?.email]);
 
   // Notification Toggles (Matching Image 01 & Image 02)
   const [notifications, setNotifications] = useState({
@@ -147,7 +157,7 @@ export const AccountSettingsTab: React.FC = () => {
                 <label className="block font-bold text-slate-700 mb-1.5">نام و نام خانوادگی</label>
                 <input
                   type="text"
-                  value={formData.name}
+                  value={formData.name || ''}
                   onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                   required
                   placeholder="کاربر نوین‌نت"
@@ -161,7 +171,7 @@ export const AccountSettingsTab: React.FC = () => {
                 <input
                   type="tel"
                   dir="ltr"
-                  value={formData.phone}
+                  value={formData.phone || ''}
                   onChange={(e) => setFormData(prev => ({ ...prev, phone: normalizeIranianMobile(e.target.value) }))}
                   inputMode="tel"
                   autoComplete="tel-national"
@@ -177,7 +187,7 @@ export const AccountSettingsTab: React.FC = () => {
                 <input
                   type="email"
                   dir="ltr"
-                  value={formData.email}
+                  value={formData.email || ''}
                   onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                   placeholder="premium@noovinnet.ir"
                   className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 font-mono text-left focus:bg-white focus:border-blue-600 focus:outline-none transition"
@@ -335,8 +345,19 @@ export const AccountSettingsTab: React.FC = () => {
 
           </div>
 
-          {/* Logout Action Button (Matching Image 02 Red Button) */}
-          <div className="pt-4 border-t border-slate-100">
+          {/* Admin Panel & Logout Action Buttons */}
+          <div className="pt-4 border-t border-slate-100 space-y-2.5">
+            {canAccessAdmin && (
+              <button
+                id="account-settings-admin-link"
+                type="button"
+                onClick={() => setActiveView('admin')}
+                className="w-full py-3 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-2xl font-bold transition flex items-center justify-center gap-2 border border-amber-200/60"
+              >
+                <ShieldCheck className="w-4 h-4 text-amber-600" />
+                <span>ورود به پنل مدیریت</span>
+              </button>
+            )}
             <button
               type="button"
               onClick={() => setIsLogoutModalOpen(true)}

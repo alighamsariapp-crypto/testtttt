@@ -49,13 +49,13 @@ export const AddressModal: React.FC<AddressModalProps> = ({ isOpen, onClose, onS
 
     const initialDraft: AddressDraft = initialAddress
       ? {
-          title: initialAddress.title,
-          recipient_name: initialAddress.recipient_name,
-          phone: initialAddress.phone,
-          province: initialAddress.province,
-          city: initialAddress.city,
-          postal_code: initialAddress.postal_code,
-          address_line: initialAddress.address_line,
+          title: initialAddress.title || 'خانه',
+          recipient_name: initialAddress.recipient_name || '',
+          phone: initialAddress.phone || '',
+          province: initialAddress.province || '',
+          city: initialAddress.city || '',
+          postal_code: initialAddress.postal_code || '',
+          address_line: initialAddress.address_line || '',
           is_default: initialAddress.is_default,
         }
       : {
@@ -70,13 +70,13 @@ export const AddressModal: React.FC<AddressModalProps> = ({ isOpen, onClose, onS
         };
     const draft = readSessionState<AddressDraft | null>(draftKey, null) || initialDraft;
 
-    setTitle(draft.title);
-    setRecipientName(draft.recipient_name);
-    setPhone(draft.phone);
-    setSelectedProvince(draft.province);
-    setSelectedCity(draft.city);
-    setPostalCode(normalizeDigits(draft.postal_code).slice(0, 10));
-    setAddressLine(draft.address_line);
+    setTitle(draft.title || 'خانه');
+    setRecipientName(draft.recipient_name || '');
+    setPhone(draft.phone || '');
+    setSelectedProvince(draft.province || '');
+    setSelectedCity(draft.city || '');
+    setPostalCode(normalizeDigits(draft.postal_code || '').slice(0, 10));
+    setAddressLine(draft.address_line || '');
     setErrors({});
     setPickerSearch('');
     setIsDraftReady(true);

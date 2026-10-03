@@ -99,17 +99,18 @@ export const AdminAuthGuard: React.FC<{ children: React.ReactNode }> = ({ childr
             )}
 
             <div>
-              <label htmlFor="admin-login-email" className="block text-xs font-bold text-slate-300 mb-1.5">ایمیل سازمانی</label>
+              <label htmlFor="admin-login-email" className="block text-xs font-bold text-slate-300 mb-1.5">نام کاربری، ایمیل یا شماره موبایل</label>
               <input
                 id="admin-login-email"
-                type="email"
+                type="text"
                 required
                 autoComplete="username"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
-                placeholder="admin@noovinnet.ir"
+                placeholder="admin یا admin@apexstore.local یا 09120000000"
                 aria-invalid={Boolean(errorMessage)}
-                className="w-full min-h-11 bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus:border-blue-400 transition"
+                className="w-full min-h-11 bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus:border-blue-400 transition text-left"
+                dir="ltr"
               />
             </div>
 

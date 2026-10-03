@@ -17,7 +17,7 @@ import {
   Zap,
   Globe,
   Sliders,
-
+  Shield,
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { getStorefrontProducts } from '../utils/catalogQuality';
@@ -29,6 +29,7 @@ export const Header: React.FC = () => {
     cartSummary,
     favorites,
     user,
+    canAccessAdmin,
     setAuthModalOpen,
     setProfileSubTab,
     setMobileDrawerOpen,
@@ -1108,6 +1109,20 @@ export const Header: React.FC = () => {
                 {user ? user.name.split(' ')[0] : 'ورود / ثبت‌نام'}
               </span>
             </button>
+
+            {/* Quick Admin Entry Button */}
+            {canAccessAdmin && (
+              <button
+                id="header-admin-shortcut-btn"
+                type="button"
+                onClick={() => setActiveView('admin')}
+                className="hidden md:flex items-center gap-1.5 px-3 py-2 sm:py-2.5 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white ui-text-button shadow-md shadow-amber-500/20 transition active:scale-95 cursor-pointer"
+                title="ورود به پنل مدیریت"
+              >
+                <Shield className="w-4 h-4" />
+                <span>پنل مدیریت</span>
+              </button>
+            )}
 
           </div>
 

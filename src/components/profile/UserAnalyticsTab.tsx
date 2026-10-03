@@ -60,8 +60,8 @@ export const UserAnalyticsTab: React.FC = () => {
         </div>
         {latestOrder ? (
           <div className="mt-3 flex items-end justify-between gap-3">
-            <div className="min-w-0"><p className="text-xs font-bold text-slate-900 truncate">{latestOrder.order_number}</p><p className="text-[11px] text-slate-500 mt-1">{latestOrder.item_count.toLocaleString('fa-IR')} کالا · {latestOrder.date}</p></div>
-            <p className="text-xs font-black text-blue-700 font-sans shrink-0">{latestOrder.total_amount.toLocaleString('fa-IR')} {latestOrder.currency}</p>
+            <div className="min-w-0"><p className="text-xs font-bold text-slate-900 truncate">{latestOrder.order_number}</p><p className="text-[11px] text-slate-500 mt-1">{(latestOrder.item_count ?? 0).toLocaleString('fa-IR')} کالا · {latestOrder.date}</p></div>
+            <p className="text-xs font-black text-blue-700 font-sans shrink-0">{(latestOrder.total_amount ?? 0).toLocaleString('fa-IR')} {latestOrder.currency}</p>
           </div>
         ) : <p className="mt-3 text-xs text-slate-500">هنوز سفارشی در حساب شما ثبت نشده است.</p>}
       </article>

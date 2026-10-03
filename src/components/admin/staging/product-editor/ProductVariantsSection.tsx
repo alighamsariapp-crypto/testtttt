@@ -1244,7 +1244,7 @@ export const ProductVariantsSection: React.FC<Props> = ({
                             min="0"
                             className="admin-input"
                             style={{ minHeight: '30px', fontSize: '11px', padding: '0 6px', textAlign: 'center' }}
-                            value={v.stock}
+                            value={v.stock ?? 0}
                             onChange={(e) =>
                               handleUpdateVariant(targetKey, { stock: Math.max(0, parseNumber(e.target.value)) })
                             }
@@ -1386,7 +1386,7 @@ export const ProductVariantsSection: React.FC<Props> = ({
                           min="0"
                           inputMode="numeric"
                           className="flex-1 h-12 rounded-xl border border-slate-300 bg-white text-center text-base font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                          value={v.stock}
+                          value={v.stock ?? 0}
                           onChange={(e) =>
                             handleUpdateVariant(targetKey, { stock: Math.max(0, parseNumber(e.target.value)) })
                           }

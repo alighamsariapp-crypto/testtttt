@@ -1288,12 +1288,12 @@ export const initialCartItems: CartItem[] = [
 
 export const mockUserProfile: UserProfile = {
   id: 101,
-  name: 'علی احمدی',
-  email: 'user@example.com',
-  phone: '',
+  name: 'علی احمدی (مدیر سیستم)',
+  email: 'admin@apexstore.local',
+  phone: '09120000000',
   national_id: '0019876543',
   birth_date: '۱۳۷۲/۰۵/۱۴',
-  role: 'customer',
+  role: 'admin',
   status: 'active',
   loyalty_points: 1450,
   // A test customer has no settled wallet credit until a payment is verified.

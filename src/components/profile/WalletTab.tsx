@@ -147,7 +147,7 @@ export const WalletTab: React.FC = () => {
           <div className="relative z-10 space-y-1">
             <span className="ui-text-meta text-blue-200">موجودی فعلی قابل استفاده:</span>
             <div className="ui-price-hero text-white font-sans tracking-tight flex items-baseline gap-2">
-              {currentBalance.toLocaleString('fa-IR')} <span className="ui-text-body font-normal text-blue-200">تومان</span>
+              {(currentBalance ?? 0).toLocaleString('fa-IR')} <span className="ui-text-body font-normal text-blue-200">تومان</span>
             </div>
           </div>
 
@@ -179,7 +179,7 @@ export const WalletTab: React.FC = () => {
           <div className="space-y-1">
             <span className="ui-text-meta text-slate-400">مجموع دریافتی‌ها و بازگشت وجه:</span>
             <div className="ui-price-hero text-slate-900 font-sans">
-              {totalDeposits.toLocaleString('fa-IR')} <span className="ui-text-meta font-normal text-slate-500">تومان</span>
+              {(totalDeposits ?? 0).toLocaleString('fa-IR')} <span className="ui-text-meta font-normal text-slate-500">تومان</span>
             </div>
           </div>
 
@@ -321,7 +321,7 @@ export const WalletTab: React.FC = () => {
                           isFailed ? 'text-slate-400 line-through' :
                           isPending ? 'text-amber-700' : isPositive ? 'text-emerald-600' : 'text-slate-900'
                         }`}>
-                          {isPositive ? '+' : ''}{tx.amount.toLocaleString('fa-IR')} تومان
+                          {isPositive ? '+' : ''}{(tx.amount ?? 0).toLocaleString('fa-IR')} تومان
                         </span>
                       </td>
 
@@ -376,7 +376,7 @@ export const WalletTab: React.FC = () => {
                       isFailed ? 'text-slate-400 line-through' :
                       isPending ? 'text-amber-700' : isPositive ? 'text-emerald-600' : 'text-slate-900'
                     }`}>
-                      {isPositive ? '+' : ''}{tx.amount.toLocaleString('fa-IR')} ت
+                      {isPositive ? '+' : ''}{(tx.amount ?? 0).toLocaleString('fa-IR')} ت
                     </div>
                     <span className={`text-[10px] font-bold block mt-0.5 ${
                       isFailed ? 'text-rose-600' : isPending ? 'text-amber-700' : 'text-emerald-600'
@@ -432,7 +432,7 @@ export const WalletTab: React.FC = () => {
                           : 'border-slate-200 hover:bg-slate-50 text-slate-700'
                       }`}
                     >
-                      {amt.toLocaleString('fa-IR')} تومان
+                      {(amt ?? 0).toLocaleString('fa-IR')} تومان
                     </button>
                   ))}
                 </div>

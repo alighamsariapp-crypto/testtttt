@@ -179,11 +179,11 @@ export const OfficialInvoiceModal: React.FC<OfficialInvoiceModalProps> = ({ isOp
                         {item.variant_name && <span className="text-slate-500 text-[11px] block">{item.variant_name}</span>}
                       </td>
                       <td className="p-3 text-center font-bold text-slate-800">{item.quantity}</td>
-                      <td className="p-3 text-left">{item.unit_price.toLocaleString('fa-IR')}</td>
+                      <td className="p-3 text-left">{(item.unit_price ?? 0).toLocaleString('fa-IR')}</td>
                       <td className="p-3 text-left text-slate-400">۰</td>
-                      <td className="p-3 text-left text-slate-500">{lineVat.toLocaleString('fa-IR')}</td>
+                      <td className="p-3 text-left text-slate-500">{(lineVat ?? 0).toLocaleString('fa-IR')}</td>
                       <td className="p-3 text-left font-bold text-slate-900 font-mono">
-                        {lineTotal.toLocaleString('fa-IR')}
+                        {(lineTotal ?? 0).toLocaleString('fa-IR')}
                       </td>
                     </tr>
                   );
@@ -198,20 +198,20 @@ export const OfficialInvoiceModal: React.FC<OfficialInvoiceModalProps> = ({ isOp
             <div className="w-full sm:w-80 space-y-2 text-xs">
               <div className="flex items-center justify-between text-slate-600">
                 <span>جمع کل مبالغ:</span>
-                <span className="font-bold font-sans">{itemsTotal.toLocaleString('fa-IR')} تومان</span>
+                <span className="font-bold font-sans">{(itemsTotal ?? 0).toLocaleString('fa-IR')} تومان</span>
               </div>
               <div className="flex items-center justify-between text-slate-600">
                 <span>تخفیف اعمال شده:</span>
-                <span className="font-bold text-rose-600 font-sans">{discountTotal.toLocaleString('fa-IR')} تومان</span>
+                <span className="font-bold text-rose-600 font-sans">{(discountTotal ?? 0).toLocaleString('fa-IR')} تومان</span>
               </div>
               <div className="flex items-center justify-between text-slate-600">
                 <span>مالیات بر ارزش افزوده (۹٪):</span>
-                <span className="font-bold font-sans">{vatAmount.toLocaleString('fa-IR')} تومان</span>
+                <span className="font-bold font-sans">{(vatAmount ?? 0).toLocaleString('fa-IR')} تومان</span>
               </div>
 
               <div className="bg-blue-600 text-white rounded-2xl p-4 flex items-center justify-between mt-3 font-bold shadow-md shadow-blue-500/20">
                 <span>مبلغ نهایی قابل پرداخت:</span>
-                <span className="text-base font-black font-sans">{order.total_amount.toLocaleString('fa-IR')} تومان</span>
+                <span className="text-base font-black font-sans">{((order.total_amount) ?? 0).toLocaleString('fa-IR')} تومان</span>
               </div>
             </div>
 

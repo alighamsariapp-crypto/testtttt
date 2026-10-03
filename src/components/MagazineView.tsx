@@ -25,7 +25,7 @@ export const MagazineView: React.FC = () => {
               <div className="p-5 flex flex-col flex-1">
                 <div className="ui-text-meta flex items-center justify-between text-slate-400">
                   <span className="inline-flex items-center gap-1"><Clock className="w-3.5 h-3.5" />{article.readTime}</span>
-                  <span className="inline-flex items-center gap-1"><Eye className="w-3.5 h-3.5" />{article.views.toLocaleString('fa-IR')} بازدید</span>
+                  <span className="inline-flex items-center gap-1"><Eye className="w-3.5 h-3.5" />{(article.views ?? 0).toLocaleString('fa-IR')} بازدید</span>
                 </div>
                 <span className="ui-text-meta mt-3 w-fit px-2 py-0.5 rounded-md bg-blue-50 text-blue-700">{article.category}</span>
                 <h2 className="ui-text-card-title mt-3 text-slate-900 line-clamp-2">{article.title}</h2>

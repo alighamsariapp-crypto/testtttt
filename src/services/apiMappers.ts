@@ -46,24 +46,27 @@ export const mapAddress = (address: ApiRecord): UserAddress => ({
   is_default: Boolean(address.is_default),
 });
 
-export const mapUser = (user: ApiRecord): UserProfile => ({
-  id: Number(user.id),
-  name: user.name || 'کاربر نوین‌نت',
-  email: user.email || '',
-  phone: user.phone || undefined,
-  role: user.role,
-  status: user.status,
-  loyalty_points: user.loyalty_points ?? 0,
-  wallet_balance: user.wallet_balance ?? 0,
-  orders_count: Number(user.orders_count ?? 0),
-  open_tickets_count: Number(user.open_tickets_count ?? 0),
-  last_order_at: user.last_order_at ? formatDate(user.last_order_at) : null,
-  join_date: formatDate(user.created_at || user.join_date),
-  email_verified: Boolean(user.email_verified || user.email_verified_at),
-  phone_verified: Boolean(user.phone_verified || user.phone_verified_at),
-  has_password: Boolean(user.has_password),
-  addresses: Array.isArray(user.addresses) ? user.addresses.map(mapAddress) : undefined,
-});
+export const mapUser = (input: ApiRecord): UserProfile => {
+  const user = (input && typeof input === 'object' && 'user' in input && input.user) ? (input.user as ApiRecord) : input;
+  return {
+    id: Number(user.id || 0),
+    name: user.name || 'کاربر نوین‌نت',
+    email: user.email || '',
+    phone: user.phone || undefined,
+    role: user.role || 'customer',
+    status: user.status || 'active',
+    loyalty_points: user.loyalty_points ?? 0,
+    wallet_balance: user.wallet_balance ?? 0,
+    orders_count: Number(user.orders_count ?? 0),
+    open_tickets_count: Number(user.open_tickets_count ?? 0),
+    last_order_at: user.last_order_at ? formatDate(user.last_order_at) : null,
+    join_date: formatDate(user.created_at || user.join_date),
+    email_verified: Boolean(user.email_verified || user.email_verified_at),
+    phone_verified: Boolean(user.phone_verified || user.phone_verified_at),
+    has_password: Boolean(user.has_password),
+    addresses: Array.isArray(user.addresses) ? user.addresses.map(mapAddress) : undefined,
+  };
+};
 
 const orderStatus = (status: string): UserOrder['status'] => {
   const statuses: Record<string, UserOrder['status']> = {

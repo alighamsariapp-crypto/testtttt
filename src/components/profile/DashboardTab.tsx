@@ -290,7 +290,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({ onNavigateTab, onVie
                   </span>
 
                   <span className="font-bold font-sans text-slate-900 hidden sm:inline">
-                    {order.total_amount.toLocaleString('fa-IR')} تومان
+                    {(order.total_amount ?? 0).toLocaleString('fa-IR')} تومان
                   </span>
 
                   <button
@@ -342,7 +342,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({ onNavigateTab, onVie
                       <div className="space-y-0.5">
                         <h4 className="font-bold text-slate-900 line-clamp-1">{prod.name}</h4>
                         <div className="font-bold font-sans text-blue-700 text-[11px]">
-                          {(prod.effective_price || prod.base_price).toLocaleString('fa-IR')} تومان
+                          {((prod.effective_price || prod.base_price) ?? 0).toLocaleString('fa-IR')} تومان
                         </div>
                       </div>
                     </div>

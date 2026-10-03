@@ -65,7 +65,7 @@ export const ProductInfoSection: React.FC<Props> = ({
             type="text"
             className="admin-input font-medium"
             placeholder="مثال: گوشی موبایل سامسونگ مدل Galaxy S24 Ultra"
-            value={form.name}
+            value={form.name ?? ''}
             onChange={(e) => {
               const val = e.target.value;
               updateForm('name', val);
@@ -83,7 +83,7 @@ export const ProductInfoSection: React.FC<Props> = ({
           </label>
           <select
             className="admin-select"
-            value={form.category}
+            value={form.category ?? ''}
             onChange={(e) => {
               const selectedCat = categories.find((c) => c.name === e.target.value);
               updateForm('category', e.target.value);

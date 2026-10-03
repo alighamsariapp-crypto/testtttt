@@ -369,26 +369,26 @@ export const CartStep3Payment: React.FC = () => {
             <div className="flex items-center justify-between text-slate-600">
               <span>۱. مبلغ سفارش (کالاها):</span>
               <span className="ui-price text-slate-800 font-medium">
-                {cartSummary.subtotal.toLocaleString('fa-IR')} {cartSummary.currency}
+                {(cartSummary?.subtotal ?? 0).toLocaleString('fa-IR')} {cartSummary?.currency || 'تومان'}
               </span>
             </div>
 
             {/* 2. تخفیف محصولات */}
-            {cartSummary.discount_total > 0 && (
+            {(cartSummary?.discount_total ?? 0) > 0 && (
               <div className="flex items-center justify-between text-emerald-600">
                 <span>۲. تخفیف محصولات:</span>
                 <span className="ui-price text-emerald-600 font-medium">
-                  -{cartSummary.discount_total.toLocaleString('fa-IR')} {cartSummary.currency}
+                  -{(cartSummary?.discount_total ?? 0).toLocaleString('fa-IR')} {cartSummary?.currency || 'تومان'}
                 </span>
               </div>
             )}
 
             {/* 3. تخفیف کوپن */}
-            {cartSummary.coupon_discount > 0 && (
+            {(cartSummary?.coupon_discount ?? 0) > 0 && (
               <div className="flex items-center justify-between text-emerald-600 font-medium">
                 <span>۳. تخفیف کد تبلیغاتی:</span>
                 <span className="ui-price text-emerald-600 font-medium">
-                  -{cartSummary.coupon_discount.toLocaleString('fa-IR')} {cartSummary.currency}
+                  -{(cartSummary?.coupon_discount ?? 0).toLocaleString('fa-IR')} {cartSummary?.currency || 'تومان'}
                 </span>
               </div>
             )}
@@ -397,7 +397,7 @@ export const CartStep3Payment: React.FC = () => {
             <div className="flex items-center justify-between text-slate-600">
               <span>هزینه حمل و نقل:</span>
               <span className="ui-price text-slate-800 font-medium">
-                {shippingCost === 0 ? 'رایگان' : `${shippingCost.toLocaleString('fa-IR')} ${cartSummary.currency}`}
+                {shippingCost === 0 ? 'رایگان' : `${(shippingCost ?? 0).toLocaleString('fa-IR')} ${cartSummary?.currency || 'تومان'}`}
               </span>
             </div>
 
@@ -405,8 +405,8 @@ export const CartStep3Payment: React.FC = () => {
             <div className="pt-3 border-t-2 border-slate-100 flex items-center justify-between">
               <span className="ui-text-body font-bold text-slate-900">۴. مبلغ نهایی قابل پرداخت:</span>
               <div className="ui-price-hero text-blue-700 text-lg sm:text-xl">
-                {estimatedGrandTotal.toLocaleString('fa-IR')}{' '}
-                <span className="ui-text-meta font-normal text-slate-600">{cartSummary.currency}</span>
+                {(estimatedGrandTotal ?? 0).toLocaleString('fa-IR')}{' '}
+                <span className="ui-text-meta font-normal text-slate-600">{cartSummary?.currency || 'تومان'}</span>
               </div>
             </div>
 
@@ -447,9 +447,9 @@ export const CartStep3Payment: React.FC = () => {
           <span className="ui-text-meta text-slate-500 font-medium">مبلغ نهایی فاکتور</span>
           <div className="flex items-baseline gap-1 mt-0.5">
             <span className="ui-price-hero text-emerald-700 text-lg">
-              {estimatedGrandTotal.toLocaleString('fa-IR')}
+              {(estimatedGrandTotal ?? 0).toLocaleString('fa-IR')}
             </span>
-            <span className="ui-text-meta font-medium text-slate-600">{cartSummary.currency}</span>
+            <span className="ui-text-meta font-medium text-slate-600">{cartSummary?.currency || 'تومان'}</span>
           </div>
         </div>
 

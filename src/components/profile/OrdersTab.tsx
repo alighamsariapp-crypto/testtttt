@@ -228,7 +228,7 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({ onViewOrderDetail }) => {
                       <div className="flex items-center justify-between text-[11px]">
                         <span className="text-slate-400">تعداد: {item.quantity} عدد</span>
                         <span className="font-bold text-slate-800 font-sans">
-                          {item.unit_price.toLocaleString('fa-IR')} ت
+                          {(item.unit_price ?? 0).toLocaleString('fa-IR')} ت
                         </span>
                       </div>
                     </div>
@@ -240,7 +240,7 @@ export const OrdersTab: React.FC<OrdersTabProps> = ({ onViewOrderDetail }) => {
               <div className="pt-3 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
                 <div className="space-y-1">
                   <div className="text-slate-500">
-                    مبلغ کل فاکتور: <span className="font-black text-sm text-slate-900 font-sans">{order.total_amount.toLocaleString('fa-IR')} تومان</span>
+                    مبلغ کل فاکتور: <span className="font-black text-sm text-slate-900 font-sans">{(order.total_amount ?? 0).toLocaleString('fa-IR')} تومان</span>
                   </div>
                   {order.shipping_address && (
                     <p className="text-[11px] text-slate-400 line-clamp-1 flex items-center gap-1">

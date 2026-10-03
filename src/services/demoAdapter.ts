@@ -29,11 +29,11 @@ export interface CheckoutResult {
 
 export const demoCustomer = (email = 'demo-user@preview.local'): UserProfile => ({
   id: 1,
-  name: 'کاربر نمایشی نوین‌نت',
+  name: 'مدیر سیستم',
   email,
-  role: 'customer',
+  role: 'admin',
   status: 'active',
-  phone_verified: false,
+  phone_verified: true,
   has_password: true,
 });
 

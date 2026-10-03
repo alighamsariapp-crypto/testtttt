@@ -195,7 +195,7 @@ export const NewTicketModal: React.FC<NewTicketModalProps> = ({ isOpen, onClose,
                   <option value="">انتخاب سفارش...</option>
                   {userOrders.map(order => (
                     <option key={order.id} value={order.order_number}>
-                      {order.order_number} ({order.total_amount.toLocaleString('fa-IR')} تومان)
+                      {order.order_number} ({((order.total_amount) ?? 0).toLocaleString('fa-IR')} تومان)
                     </option>
                   ))}
                 </select>

@@ -162,11 +162,11 @@ export const WishlistTab: React.FC = () => {
                     <div>
                       {hasDiscount && (
                         <span className="text-[11px] text-slate-400 line-through block font-sans">
-                          {product.base_price.toLocaleString('fa-IR')}
+                          {(product.base_price ?? 0).toLocaleString('fa-IR')}
                         </span>
                       )}
                       <div className="font-black text-sm text-slate-900 font-sans">
-                        {price.toLocaleString('fa-IR')} <span className="text-[10px] font-normal text-slate-500">تومان</span>
+                        {(price ?? 0).toLocaleString('fa-IR')} <span className="text-[10px] font-normal text-slate-500">تومان</span>
                       </div>
                     </div>
 

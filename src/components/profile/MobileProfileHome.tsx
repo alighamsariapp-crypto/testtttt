@@ -28,7 +28,7 @@ interface MobileProfileHomeProps {
 }
 
 export const MobileProfileHome: React.FC<MobileProfileHomeProps> = ({ onSelectTab }) => {
-  const { user, logout, setActiveView, userOrders, supportTickets, favorites } = useApp();
+  const { user, canAccessAdmin, logout, setActiveView, userOrders, supportTickets, favorites } = useApp();
   
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
@@ -242,6 +242,24 @@ export const MobileProfileHome: React.FC<MobileProfileHomeProps> = ({ onSelectTa
             </div>
             <ChevronLeft className="w-4 h-4 text-slate-400" />
           </button>
+
+          {/* Admin Panel Direct Entry Button */}
+          {canAccessAdmin && (
+            <button
+              id="mobile-profile-admin-link"
+              type="button"
+              onClick={() => setActiveView('admin')}
+              className="w-full flex items-center justify-between p-3.5 hover:bg-amber-50 text-amber-700 rounded-2xl transition"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+                  <ShieldCheck className="w-4 h-4" />
+                </div>
+                <span className="font-bold">ورود به پنل مدیریت</span>
+              </div>
+              <ChevronLeft className="w-4 h-4 text-amber-500" />
+            </button>
+          )}
 
           <button
             onClick={() => setIsLogoutModalOpen(true)}

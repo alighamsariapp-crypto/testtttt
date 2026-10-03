@@ -239,7 +239,7 @@ export const ProductPricingSection: React.FC<Props> = ({
             min="0"
             className="admin-input"
             placeholder="مثال: ۱۰"
-            value={form.stock}
+            value={form.stock ?? ''}
             onChange={(e) => updateForm('stock', Math.max(0, parseNumber(e.target.value)))}
           />
         </div>

@@ -13,7 +13,9 @@ import {
   Laptop,
   Smartphone,
   Server,
-  Headphones
+  Headphones,
+  Shield,
+  ChevronLeft
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
@@ -28,6 +30,8 @@ export const MobileDrawer: React.FC = () => {
     categories,
     services,
     themeSettings,
+    user,
+    canAccessAdmin,
   } = useApp();
 
   useBodyScrollLock(isMobileDrawerOpen);
@@ -492,6 +496,23 @@ export const MobileDrawer: React.FC = () => {
             </div>
             {activeView === 'contact' && <span className="w-2 h-2 rounded-full bg-blue-600" />}
           </button>
+
+          {/* ورود به پنل مدیریت ویژه مدیران */}
+          {canAccessAdmin && (
+            <button
+              onClick={() => {
+                setActiveView('admin');
+                setMobileDrawerOpen(false);
+              }}
+              className="w-full flex items-center justify-between p-3.5 rounded-2xl transition text-xs font-bold bg-amber-500 hover:bg-amber-600 text-white shadow-md shadow-amber-500/20 mt-2"
+            >
+              <div className="flex items-center gap-3">
+                <Shield className="w-4 h-4 text-white" />
+                <span>ورود به پنل مدیریت</span>
+              </div>
+              <ChevronLeft className="w-4 h-4 text-white" />
+            </button>
+          )}
 
 
         </div>

@@ -455,7 +455,7 @@ export const ProductDetailView: React.FC = () => {
                   </div>
                   <div className="flex items-center justify-between pt-2 border-t border-slate-50">
                     <span className="ui-price text-slate-900">
-                      {(p.effective_price || p.base_price).toLocaleString('fa-IR')} {p.currency}
+                      {((p.effective_price || p.base_price) ?? 0).toLocaleString('fa-IR')} {p.currency}
                     </span>
                     <span className="ui-text-meta text-[#1333c1] group-hover:underline">
                       مشاهده جزئیات

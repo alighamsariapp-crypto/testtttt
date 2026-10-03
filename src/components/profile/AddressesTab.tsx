@@ -68,13 +68,13 @@ export const AddressesTab: React.FC = () => {
   const openEditModal = (addr: UserAddress) => {
     setEditingAddressId(addr.id);
     setFormData({
-      title: addr.title,
-      recipient_name: addr.recipient_name,
-      phone: addr.phone,
-      province: addr.province,
-      city: addr.city,
-      postal_code: addr.postal_code,
-      address_line: addr.address_line,
+      title: addr.title || '',
+      recipient_name: addr.recipient_name || '',
+      phone: addr.phone || '',
+      province: addr.province || '',
+      city: addr.city || '',
+      postal_code: addr.postal_code || '',
+      address_line: addr.address_line || '',
       is_default: !!addr.is_default,
     });
     setIsModalOpen(true);
@@ -273,7 +273,7 @@ export const AddressesTab: React.FC = () => {
                 <label className="block text-slate-700 font-bold mb-1.5">عنوان آدرس (مثال: خانه، دفتر کار)</label>
                 <input
                   type="text"
-                  value={formData.title}
+                  value={formData.title || ''}
                   onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
                   required
                   placeholder="مثلا: خانه، محل کار، شرکت"
@@ -287,7 +287,7 @@ export const AddressesTab: React.FC = () => {
                   <label className="block text-slate-700 font-bold mb-1.5">نام و نام خانوادگی تحویل‌گیرنده</label>
                   <input
                     type="text"
-                    value={formData.recipient_name}
+                    value={formData.recipient_name || ''}
                     onChange={(e) => setFormData(prev => ({ ...prev, recipient_name: e.target.value }))}
                     required
                     placeholder="مثال: علی احمدی"
@@ -298,7 +298,7 @@ export const AddressesTab: React.FC = () => {
                   <label className="block text-slate-700 font-bold mb-1.5">شماره موبایل تحویل‌گیرنده</label>
                   <input
                     type="tel"
-                    value={formData.phone}
+                    value={formData.phone || ''}
                     onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                     required
                     placeholder="09xxxxxxxxx"
@@ -312,7 +312,7 @@ export const AddressesTab: React.FC = () => {
                 <div>
                   <label className="block text-slate-700 font-bold mb-1.5">استان</label>
                   <select
-                    value={formData.province}
+                    value={formData.province || ''}
                     onChange={(e) => {
                       const newProv = e.target.value;
                       const cities = iranProvinces.find(p => p.name === newProv)?.cities || [];
@@ -329,7 +329,7 @@ export const AddressesTab: React.FC = () => {
                 <div>
                   <label className="block text-slate-700 font-bold mb-1.5">شهر</label>
                   <select
-                    value={formData.city}
+                    value={formData.city || ''}
                     onChange={(e) => setFormData(prev => ({ ...prev, city: e.target.value }))}
                     className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 focus:bg-white focus:border-blue-600 focus:outline-none"
                   >
@@ -346,7 +346,7 @@ export const AddressesTab: React.FC = () => {
                 <input
                   type="text"
                   maxLength={10}
-                  value={formData.postal_code}
+                  value={formData.postal_code || ''}
                   onChange={(e) => setFormData(prev => ({ ...prev, postal_code: e.target.value }))}
                   placeholder="مثال: 1234567890"
                   className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 focus:bg-white focus:border-blue-600 focus:outline-none font-mono"
@@ -358,7 +358,7 @@ export const AddressesTab: React.FC = () => {
                 <label className="block text-slate-700 font-bold mb-1.5">نشانی پستی دقیق (خیابان، کوچه، پلاک، واحد)</label>
                 <textarea
                   rows={3}
-                  value={formData.address_line}
+                  value={formData.address_line || ''}
                   onChange={(e) => setFormData(prev => ({ ...prev, address_line: e.target.value }))}
                   required
                   placeholder="تهران، خیابان ولیعصر، نرسیده به میدان ونک، پلاک ..."

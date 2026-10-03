@@ -404,7 +404,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ isModal = false, onCloseModa
                   ورود با رمز عبور
                 </h1>
                 <p className="text-xs sm:text-sm text-slate-500">
-                  ایمیل و کلمه عبور خود را وارد نمایید
+                  نام کاربری، ایمیل یا شماره موبایل و کلمه عبور خود را وارد نمایید
                 </p>
               </div>
 
@@ -417,15 +417,15 @@ export const AuthView: React.FC<AuthViewProps> = ({ isModal = false, onCloseModa
 
               <form onSubmit={handlePasswordSubmit} className="space-y-4 text-right">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">ایمیل</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">نام کاربری، ایمیل یا شماره موبایل</label>
                   <input
-                    type="email"
+                    type="text"
                     dir="ltr"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="name@example.com"
-                    autoComplete="email"
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs font-bold text-slate-900 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="admin یا admin@apexstore.local یا 09120000000"
+                    autoComplete="username"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs font-bold text-slate-900 focus:bg-white focus:border-blue-600 focus:outline-none text-left"
                   />
                 </div>
 

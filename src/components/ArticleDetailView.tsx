@@ -89,7 +89,7 @@ export const ArticleDetailView: React.FC = () => {
             <span className="inline-flex items-center gap-1"><UserRound className="w-3.5 h-3.5" />{article.author}</span>
             <span className="inline-flex items-center gap-1"><CalendarDays className="w-3.5 h-3.5" />{article.date}</span>
             <span className="inline-flex items-center gap-1"><Clock className="w-3.5 h-3.5" />{article.readTime}</span>
-            <span className="inline-flex items-center gap-1"><Eye className="w-3.5 h-3.5" />{article.views.toLocaleString('fa-IR')} بازدید</span>
+            <span className="inline-flex items-center gap-1"><Eye className="w-3.5 h-3.5" />{(article.views ?? 0).toLocaleString('fa-IR')} بازدید</span>
           </div>
 
           <h1 className="ui-text-page-title mt-5 text-slate-900">{article.title}</h1>

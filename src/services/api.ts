@@ -704,7 +704,8 @@ export class ApiService {
     if (isDemoMode) {
       return demoAdapter.getProfile();
     }
-    return mapUser(await this.request<Record<string, any>>('/users/me'));
+    const res = await this.request<Record<string, any>>('/users/me');
+    return mapUser(res?.user || res);
   }
 
   // --- Customer account, cart and operational data ---

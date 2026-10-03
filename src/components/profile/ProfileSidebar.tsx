@@ -24,14 +24,13 @@ interface ProfileSidebarProps {
 }
 
 export const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ activeTab, onSelectTab }) => {
-  const { user, logout, setActiveView, userOrders, supportTickets, favorites } = useApp();
+  const { user, canAccessAdmin, logout, setActiveView, userOrders, supportTickets, favorites } = useApp();
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   if (!user) return null;
 
   const openTicketsCount = supportTickets.filter(t => t.status === 'open' || t.status === 'investigating').length;
   const activeOrdersCount = userOrders.filter(o => o.status === 'processing' || o.status === 'preparing' || o.status === 'shipping').length;
-  const canAccessAdmin = user.role === 'admin' || user.role === 'staff';
 
   const navItems: Array<{
     id: ProfileSubView;
@@ -173,13 +172,13 @@ export const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ activeTab, onSel
                   id="profile-sidebar-admin-link"
                   type="button"
                   onClick={() => setActiveView('admin')}
-                  className="w-full flex items-center justify-between px-3.5 py-3 rounded-2xl text-xs font-bold text-blue-700 bg-blue-50/70 hover:bg-blue-100/80 border border-blue-200/60 transition-colors"
+                  className="w-full flex items-center justify-between px-3.5 py-3 rounded-2xl text-xs font-bold text-amber-700 bg-amber-50/70 hover:bg-amber-100/80 border border-amber-200/60 transition-colors"
                 >
                   <div className="flex items-center gap-3">
-                    <Sparkles className="w-4 h-4 text-blue-600" />
+                    <ShieldCheck className="w-4 h-4 text-amber-600" />
                     <span>ورود به پنل مدیریت</span>
                   </div>
-                  <ChevronLeft className="w-3.5 h-3.5 text-blue-500" />
+                  <ChevronLeft className="w-3.5 h-3.5 text-amber-500" />
                 </button>
               )}
 

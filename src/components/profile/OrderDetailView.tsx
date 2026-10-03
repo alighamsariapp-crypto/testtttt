@@ -220,14 +220,14 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ order, onBack 
                         <div className="flex items-center gap-3 text-xs text-slate-400">
                           <span>تعداد: <strong className="text-slate-700 font-sans">{item.quantity}</strong></span>
                           <span>•</span>
-                          <span>قیمت واحد: <strong className="text-slate-700 font-sans">{item.unit_price.toLocaleString('fa-IR')} ت</strong></span>
+                          <span>قیمت واحد: <strong className="text-slate-700 font-sans">{(item.unit_price ?? 0).toLocaleString('fa-IR')} ت</strong></span>
                         </div>
                       </div>
                     </div>
 
                     <div className="text-left shrink-0">
                       <span className="text-xs sm:text-sm font-black font-sans text-slate-900 block">
-                        {(item.unit_price * item.quantity).toLocaleString('fa-IR')} تومان
+                        {((item.unit_price || 0) * (item.quantity || 1)).toLocaleString('fa-IR')} تومان
                       </span>
                     </div>
                   </div>
@@ -297,7 +297,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ order, onBack 
               <div className="space-y-3 text-xs">
                 <div className="flex items-center justify-between text-slate-500">
                   <span>جمع اقلام ({order.items.length} کالا)</span>
-                  <span className="font-bold text-slate-800 font-sans">{itemsTotal.toLocaleString('fa-IR')} تومان</span>
+                  <span className="font-bold text-slate-800 font-sans">{(itemsTotal ?? 0).toLocaleString('fa-IR')} تومان</span>
                 </div>
 
                 <div className="flex items-center justify-between text-slate-500">
@@ -318,7 +318,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ order, onBack 
                 <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
                   <span className="text-sm font-black text-slate-900">مبلغ کل</span>
                   <div className="text-base sm:text-lg font-black text-blue-600 font-sans">
-                    {order.total_amount.toLocaleString('fa-IR')} <span className="text-xs font-bold text-slate-600">تومان</span>
+                    {(order.total_amount ?? 0).toLocaleString('fa-IR')} <span className="text-xs font-bold text-slate-600">تومان</span>
                   </div>
                 </div>
               </div>
